@@ -15,6 +15,10 @@ UnityGenerated/
 Library/
 Assets/AssetStoreTools*
 
+/CramMagear_oilshock/Logs/
+/CramMagear_oilshock/UserSettings
+/CramMagear_oilshock/ProjectSettings/ShaderGraphSettings.asset
+
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
 
@@ -56,6 +60,7 @@ ExportedObj/
 *.user
 *.unityproj
 *.booproj
+
 
 # Unity3D generated meta files
 *.pidb.meta
