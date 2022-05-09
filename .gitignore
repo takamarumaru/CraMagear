@@ -18,6 +18,7 @@ Assets/AssetStoreTools*
 /CramMagear_oilshock/Logs/
 /CramMagear_oilshock/UserSettings
 /CramMagear_oilshock/ProjectSettings/ShaderGraphSettings.asset
+/CramMagear_oilshock/ProjectSettings/EditorBuildSettings.asset
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
