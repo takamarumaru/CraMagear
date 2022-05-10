@@ -12,6 +12,9 @@ public class TurretController : MonoBehaviour
     [Tooltip("生成する弾")]
     [SerializeField] private GameObject _bulletPrefab;
 
+    [Tooltip("生成座標オフセット")]
+    [SerializeField] private float _createOffset;
+
     private float count;
 
     [Header("component reference")]
@@ -28,7 +31,7 @@ public class TurretController : MonoBehaviour
         count += Time.deltaTime;
         if(count > _createInterval)
         {
-            Instantiate(_bulletPrefab,transform.position,transform.rotation);
+            Instantiate(_bulletPrefab,transform.position, transform.rotation);
             count = 0.0f;
         }
     }
