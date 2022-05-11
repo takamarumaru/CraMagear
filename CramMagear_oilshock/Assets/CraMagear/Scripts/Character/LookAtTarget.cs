@@ -13,6 +13,9 @@ public class LookAtTarget : MonoBehaviour
     [Tooltip("一秒間に追従する角度")]
     [SerializeField] private float _followingSpeed;
 
+    [Tooltip("判定するタグ")]
+    [SerializeField] private string _collisionTag;
+
     [Header("component reference")]
 
     [Tooltip("判定するCollider")]
@@ -21,12 +24,6 @@ public class LookAtTarget : MonoBehaviour
     private Transform _targetTransform;
 
     private float _distanceToTarget = float.MaxValue;
-
-
-    void Awake()
-    {
-        _sphereCollider=GetComponent<SphereCollider>();
-    }
 
     void Update()
     {
@@ -39,6 +36,7 @@ public class LookAtTarget : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(vLook, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, _followingSpeed * Time.deltaTime);
 
+        //Debug.Log(vLook.magnitude);
         //標的としているTransformが範囲外に移動したらnullに
         isInTheRange = (vLook.magnitude <= _sphereCollider.radius);
         if (isInTheRange == false)
@@ -47,8 +45,10 @@ public class LookAtTarget : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    public void SearchNearObject(Collider other)
     {
+        if (other.gameObject.tag != _collisionTag) return;
+        
         //標的が既にいるならば距離を算出
         if (_targetTransform)
         {
