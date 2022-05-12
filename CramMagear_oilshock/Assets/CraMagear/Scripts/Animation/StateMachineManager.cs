@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace GameStateMachine
@@ -63,9 +61,9 @@ namespace GameStateMachine
 
             _nowState = state;
 
-            
+
             _nowState?.OnEnter();
-            
+
         }
 
         //XVˆ—
