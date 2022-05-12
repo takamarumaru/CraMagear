@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class SamplePlayerHP : MonoBehaviour
 {
+    //test
     public float life;
     public float maxLife;
     public float HP = 100;
