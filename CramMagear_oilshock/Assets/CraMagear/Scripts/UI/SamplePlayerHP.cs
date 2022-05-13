@@ -8,7 +8,7 @@ public class SamplePlayerHP : MonoBehaviour
     //test
     public float life;
     public float maxLife;
-    public float HP = 100;
+    //public float HP = 100;
     //åªç›ÇÃéûä‘
     private float currentTime = 0f;
     protected PlayerGauge playerGage;
@@ -19,7 +19,7 @@ public class SamplePlayerHP : MonoBehaviour
         playerGage = GameObject.FindObjectOfType<PlayerGauge>();
         playerGage.SetPlayer(this);
 
-        maxLife = HP;
+        //maxLife = HP;
     }
 
     void Update()

@@ -11,6 +11,9 @@ public class PlayerGauge : MonoBehaviour
     private Image RedGage;
 
     private SamplePlayerHP player;
+    private Tween redGaugeTween;
+
+    float _hp = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -25,10 +28,39 @@ public class PlayerGauge : MonoBehaviour
 
         // 緑ゲージ減少
         GreenGage.fillAmount = valueTo;
+
+        if (redGaugeTween != null)
+        {
+            redGaugeTween.Kill();
+        }
+
+        // 赤ゲージ減少
+        redGaugeTween = DOTween.To(
+            () => valueFrom,
+            x => {
+                RedGage.fillAmount = x;
+            },
+            valueTo,
+            time
+        );
     }
 
-    public void SetPlayer(SamplePlayerHP player)
+    public void Update()
     {
-        this.player = player;
+        
+        //// HP上昇
+        //_hp += 0.01f;
+        //if (_hp > 1)
+        //{
+        //    // 最大を超えたら0に戻す
+        //    _hp = 0;
+        //}
     }
+
+    public void HPDown(float current, int max)
+    {
+        //コンポーネントのfillAmountを取得して操作する
+        GreenGage.GetComponent<Image>().fillAmount = current / max;
+    }
+    
 }
