@@ -24,6 +24,9 @@ public class CharacterBrain : MonoBehaviour
     //速度（ベクトルなど）
     Vector3 _velocity;
 
+    float inputHorizontal;
+    float inputVertical;
+
     private void Awake()
     {
         //_transform = transform;
@@ -128,14 +131,24 @@ public class CharacterBrain : MonoBehaviour
             brain._animator.SetFloat("MoveSpeed", axisL.magnitude);
 
             float axisPower = axisL.magnitude;
+
+            // カメラの方向から、X-Z平面の単位ベクトルを取得
+            Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+
+            Vector3 forward = new Vector3(axisL.x, 0, axisL.y);
+            // 方向キーの入力値とカメラの向きから、移動方向を決定
+            forward = cameraForward * forward.z + Camera.main.transform.right * forward.x;
+            forward.Normalize();
+
             //--------------
             //向き
             //--------------
             if (axisPower > 0.01f)
             {
-                Vector3 vLook = new Vector3(axisL.x, 0, axisL.y);
-                Quaternion rotation = Quaternion.LookRotation(vLook, Vector3.up);
+                //入力した方向に回転
+                Quaternion rotation = Quaternion.LookRotation(forward, Vector3.up);
 
+                //キャラクターの回転にlerpして回転
                 brain.transform.rotation = Quaternion.RotateTowards
                     (
                     brain.transform.rotation,   //変化前の回転
@@ -147,12 +160,11 @@ public class CharacterBrain : MonoBehaviour
             //--------------
             //移動
             //--------------
-
-            Vector3 forward = new Vector3(axisL.x, 0, axisL.y);
-            forward.Normalize();
-
+            
+            //速度設定
             forward *= axisPower * brain._moveSpeed;
 
+            //移動方向をリアル時間に直してメインの移動に代入
             brain._velocity += forward * Time.deltaTime;
 
             //重力
