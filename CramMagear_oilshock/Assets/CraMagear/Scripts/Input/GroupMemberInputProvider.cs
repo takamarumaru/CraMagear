@@ -11,17 +11,24 @@ public class GroupMemberInputProvider : InputProvider
     //ç∂é≤éÊìæ
     public override Vector2 GetAxisL()
     {
-        Vector3 vectorToTheTarget  = _targetTransform.position - transform.position;
-        vectorToTheTarget.y = 0.0f;
+        //Vector3 vectorToTheTarget  = _targetTransform.position - transform.position;
+        //vectorToTheTarget.y = 0.0f;
 
-        if(vectorToTheTarget.magnitude <= 1.5f)
-        {
-            return new Vector2(0.0f, 0.0f);
-        }
+        //if(vectorToTheTarget.magnitude <= 1.5f)
+        //{
+        //    return new Vector2(0.0f, 0.0f);
+        //}
+        //vectorToTheTarget.Normalize();
 
-        vectorToTheTarget.Normalize();
+        //return new Vector2(vectorToTheTarget.x, vectorToTheTarget.z);
 
-        return new Vector2(vectorToTheTarget.x, vectorToTheTarget.z);
+        _navMeshAgent.SetDestination(_targetTransform.position);
+
+        Vector3 moveVec = _navMeshAgent.velocity;
+        moveVec.y = 0.0f;
+        moveVec.Normalize();
+
+        return new Vector2(moveVec.x, moveVec.z);
     }
 
     //âEé≤éÊìæ
