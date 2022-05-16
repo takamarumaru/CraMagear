@@ -15,7 +15,9 @@ public class CharacterBrain : MonoBehaviour
 
     OpenCharacterController _charaCtrl;
 
-    //
+
+
+    //入力
     InputProvider _inputProvider;
 
     [Header("[--Component参照--]")]
@@ -34,6 +36,7 @@ public class CharacterBrain : MonoBehaviour
 
         //自分以下の子のInputProviderを継承したコンポーネントを取得
         _inputProvider = GetComponentInChildren<InputProvider>();
+
     }
 
     // Update is called once per frame
@@ -57,12 +60,12 @@ public class CharacterBrain : MonoBehaviour
         public override void OnExit()
         {
             base.OnExit();
-            Debug.Log("Exit");
+            //Debug.Log("Exit");
         }
         public override void OnUpdate()
         {
             base.OnUpdate();
-            Debug.Log("Stand");
+            //Debug.Log("Stand");
 
             //var brain = StateMgr.GetComponentInParent<CharacterBrain>();
 
@@ -82,6 +85,14 @@ public class CharacterBrain : MonoBehaviour
             {
                 brain._animator.SetTrigger("DoAttack");
             }
+
+            //ジャンプ
+            if (brain._charaCtrl.isGrounded && brain._inputProvider.GetButtonJump())
+            {
+                brain._animator.SetBool("IsJump", true);
+
+                brain._velocity.y += 4.0f;
+            }
         }
         public override void OnFixedUpdate()
         {
@@ -93,10 +104,6 @@ public class CharacterBrain : MonoBehaviour
             if (brain._charaCtrl.isGrounded)
             {
                 brain._velocity *= 0.85f;
-            }
-            else
-            {
-                brain._velocity *= 0.98f;
             }
 
         }
@@ -111,21 +118,34 @@ public class CharacterBrain : MonoBehaviour
         public override void OnEnter()
         {
             base.OnEnter();
-            Debug.Log("Enter");
+            //Debug.Log("Enter");
         }
         public override void OnUpdate()
         {
             base.OnUpdate();
-            Debug.Log("Walk");
+           // Debug.Log("Walk");
 
             //var brain = StateMgr.GetComponentInParent<CharacterBrain>();
 
             var brain = StateMgr.CharaBrain;
 
+            //攻撃
+            if (brain._inputProvider.GetButtonAttack())
+            {
+                brain._animator.SetTrigger("DoAttack");
+            }
+
             Vector2 axisL = brain._inputProvider.GetAxisL();
             if (axisL.magnitude < 0.1f)
             {
                 brain._animator.SetBool("IsMoving", false);
+                return;
+            }
+
+            //ジャンプ
+            if (!brain._charaCtrl.isGrounded)
+            {
+                brain._animator.SetBool("IsJump", true);
             }
 
             brain._animator.SetFloat("MoveSpeed", axisL.magnitude);
@@ -160,12 +180,15 @@ public class CharacterBrain : MonoBehaviour
             //--------------
             //移動
             //--------------
-            
-            //速度設定
-            forward *= axisPower * brain._moveSpeed;
 
-            //移動方向をリアル時間に直してメインの移動に代入
-            brain._velocity += forward * Time.deltaTime;
+            if (brain._charaCtrl.isGrounded)
+            {
+                //速度設定
+                forward *= axisPower * brain._moveSpeed;
+
+                //移動方向をリアル時間に直してメインの移動に代入
+                brain._velocity += forward * Time.deltaTime;
+            }
 
             //重力
             brain._velocity.y += -9.8f * Time.deltaTime;
@@ -184,15 +207,13 @@ public class CharacterBrain : MonoBehaviour
             {
                 brain._velocity *= 0.85f;
             }
-            else
-            {
-                brain._velocity *= 0.98f;
-            }
         }
     }
 
+    /// <summary>
+    /// 攻撃状態クラス
+    /// </summary>
     [System.Serializable]
-
     public class ASAttack : GameStateMachine.StateNodeBase
     {
         public override void OnEnter()
@@ -207,6 +228,39 @@ public class CharacterBrain : MonoBehaviour
         public override void OnUpdate()
         {
             base.OnUpdate();
+        }
+    }
+
+    /// <summary>
+    /// ジャンプ状態クラス
+    /// </summary>
+    [System.Serializable]
+    public class ASJump : GameStateMachine.StateNodeBase
+    {
+        public override void OnEnter()
+        {
+            base.OnEnter();
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+        }
+        public override void OnUpdate()
+        {
+            base.OnUpdate();
+
+            Debug.Log("ジャンプ");
+
+            var brain = StateMgr.CharaBrain;
+
+            //重力
+            brain._velocity.y += -9.8f * Time.deltaTime;
+
+            if (brain._charaCtrl.isGrounded)
+            {
+                brain._animator.SetBool("IsJump", false);
+            }
         }
     }
 }

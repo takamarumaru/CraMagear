@@ -32,6 +32,8 @@ public class PlayerInputManager : MonoBehaviour
 
     public bool GamePlay_GetButtonAttack() => _actionMapGamePlay["Attack"].WasPerformedThisFrame();
 
+    public bool GamePlay_GetButtonJump() => _actionMapGamePlay["Jump"].WasPerformedThisFrame();
+
     public bool GamePlay_GetButtonMenu() => _actionMapUI["Menu"].WasPerformedThisFrame();
 
 }

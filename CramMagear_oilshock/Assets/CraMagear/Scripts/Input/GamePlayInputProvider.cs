@@ -19,4 +19,10 @@ public class GamePlayInputProvider : InputProvider
         return PlayerInputManager.Instance.GamePlay_GetButtonAttack();
     }
 
+    //ジャンプボタン
+    public override bool GetButtonJump()
+    {
+        return PlayerInputManager.Instance.GamePlay_GetButtonJump();
+    }
+
 }
