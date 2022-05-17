@@ -23,6 +23,6 @@ public class BulletShot : MonoBehaviour
         // ’e‚ğ”­Ë‚·‚éêŠ‚ğæ“¾
         Vector3 bulletPosition = firingPoint.transform.position;
         // ã‚Åæ“¾‚µ‚½êŠ‚ÉA"bullet"‚ÌPrefab‚ğoŒ»‚³‚¹‚é
-        Instantiate(bullet, bulletPosition, transform.rotation);
+        Instantiate(bullet, bulletPosition, firingPoint.transform.rotation);
     }
 }

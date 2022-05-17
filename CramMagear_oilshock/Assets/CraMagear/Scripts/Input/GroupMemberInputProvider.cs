@@ -8,6 +8,13 @@ public class GroupMemberInputProvider : InputProvider
     [SerializeField] private Transform _targetTransform;
     [SerializeField] private NavMeshAgent _navMeshAgent;
 
+    private void Awake()
+    {
+        //_navMeshAgent.updatePosition = false;
+        //_navMeshAgent.updateRotation = false;
+        
+    }
+
     //ç∂é≤éÊìæ
     public override Vector2 GetAxisL()
     {
