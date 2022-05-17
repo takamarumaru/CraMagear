@@ -12,7 +12,7 @@ public class PlayerGauge : MonoBehaviour
 
     private Tween redGaugeTween;
 
-    private Tween greenGaugeTween;
+    //private Tween greenGaugeTween;
 
     [SerializeField]
     public float life;
@@ -24,7 +24,7 @@ public class PlayerGauge : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Sequence sequence = DOTween.Sequence();
     }
 
     void Update()
@@ -52,12 +52,14 @@ public class PlayerGauge : MonoBehaviour
         }
 
         // 赤ゲージ減少
-        redGaugeTween = DOTween.To(             
-            () => valueFrom,                    //何を対象にするのか
-            x => { RedGage.fillAmount = x; },   //値の更新
-            valueTo,                            //最終的な値
-            time                                //アニメーション時間
-        );
+        //redGaugeTween = DOTween.To(             
+        //    () => valueFrom,                    //何を対象にするのか
+        //    x => { RedGage.fillAmount = x; },   //値の更新
+        //    valueTo,                            //最終的な値
+        //    time                                //アニメーション時間
+        //);
+
+        RedGage.DOFillAmount(valueTo, time);
     }
 
 }
