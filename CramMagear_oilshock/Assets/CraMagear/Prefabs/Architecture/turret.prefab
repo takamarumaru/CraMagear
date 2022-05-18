@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 44437126103813024}
   - component: {fileID: 44437126113600586}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: turret
   m_TagString: Architecture
   m_Icon: {fileID: 0}
@@ -67,7 +67,7 @@ GameObject:
   - component: {fileID: 44437126103813026}
   - component: {fileID: 44437126107204482}
   - component: {fileID: 44437126106106178}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Temperature
   m_TagString: Architecture
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 44437126107204488}
   - component: {fileID: 44437126106106184}
   - component: {fileID: 44437126106106187}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cannon_1
   m_TagString: Architecture
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa616a033f8f8e64eacc13dc40931408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _createInterval: 0.1
+  _createInterval: 0.5
   _bulletPrefab: {fileID: 507858147006154484, guid: 8074de6ccb6927a42822b161e82c3e5c,
     type: 3}
   _createOffset: 0
@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 44437126103813034}
   - component: {fileID: 44437126107204490}
   - component: {fileID: 44437126106106186}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Body
   m_TagString: Architecture
   m_Icon: {fileID: 0}
@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 44437126107204492}
   - component: {fileID: 44437126106106188}
   - component: {fileID: 44437126106106191}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Head
   m_TagString: Architecture
   m_Icon: {fileID: 0}
@@ -422,7 +422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInTheRange: 0
-  _followingSpeed: 720
+  _followingSpeed: 120
   _collisionTag: Enemy
   _sphereCollider: {fileID: 8627251590110762458}
 --- !u!1 &44437126104110990
@@ -436,7 +436,7 @@ GameObject:
   - component: {fileID: 44437126103813038}
   - component: {fileID: 44437126107204494}
   - component: {fileID: 44437126106106190}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cannon_2
   m_TagString: Architecture
   m_Icon: {fileID: 0}
@@ -519,7 +519,7 @@ GameObject:
   - component: {fileID: 8627251590110762459}
   - component: {fileID: 8627251590110762458}
   - component: {fileID: 8627251590110762437}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ReactiveArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}

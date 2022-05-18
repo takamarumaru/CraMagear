@@ -12,12 +12,17 @@ public class PlayerGauge : MonoBehaviour
 
     private Tween redGaugeTween;
 
+    [SerializeField]
+    private MainObjectParameter _playerParameter;
+
     //private Tween greenGaugeTween;
 
     [SerializeField]
-    public float life;
+    public int life;
     [SerializeField]
-    public float maxLife;
+    public  int maxLife;
+
+    private int _prevFrameLife = 0;
 
     //public Image image;
 
@@ -25,18 +30,19 @@ public class PlayerGauge : MonoBehaviour
     void Start()
     {
         Sequence sequence = DOTween.Sequence();
+        maxLife = _playerParameter.hp;
+        life = _playerParameter.hp;
     }
 
     void Update()
     {
-        float power = 10.0f;
-
-        if (Input.GetKeyDown(KeyCode.H))
+        if(_playerParameter.hp < _prevFrameLife)
         {
-            GaugeReduction(power);
-
-            life -= power;
+            GaugeReduction(_prevFrameLife - _playerParameter.hp);
+            life = _playerParameter.hp;
         }
+
+        _prevFrameLife = _playerParameter.hp;
     }
 
     public void GaugeReduction(float reducationValue = 0.0f, float time = 1.0f)

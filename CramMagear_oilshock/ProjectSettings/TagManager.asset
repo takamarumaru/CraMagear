@@ -15,16 +15,16 @@ TagManager:
   - Water
   - UI
   - 
-  - Player
-  - Enemy
-  - Bullet
   - 
   - 
   - 
+  - Character
+  - StageMap
   - 
   - 
   - 
-  - 
+  - Damage
+  - Attack
   - MiniMap
   - 
   - 

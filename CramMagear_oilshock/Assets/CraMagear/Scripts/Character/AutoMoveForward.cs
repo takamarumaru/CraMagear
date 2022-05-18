@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AutoMoveForward : MonoBehaviour
 {
-    private float speed = 10.0f;
+    [SerializeField] private float speed = 10.0f;
 
     // Update is called once per frame
     void Update()
