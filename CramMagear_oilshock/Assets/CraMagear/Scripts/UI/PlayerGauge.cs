@@ -32,7 +32,7 @@ public class PlayerGauge : MonoBehaviour
         float power = 10.0f;
 
         GaugeReduction(power);
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.H))
         {
             life -= power;
         }
