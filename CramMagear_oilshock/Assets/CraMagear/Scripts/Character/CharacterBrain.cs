@@ -24,6 +24,8 @@ public class CharacterBrain : MonoBehaviour
     [Header("[--Component参照--]")]
     [SerializeField] Animator _animator;
 
+    [SerializeField] GameObject _architecture;
+
     //速度（ベクトルなど）
     Vector3 _velocity;
 
@@ -84,6 +86,14 @@ public class CharacterBrain : MonoBehaviour
                 brain._animator.SetTrigger("DoAttack");
             }
 
+            //建築
+            if (brain._inputProvider.GetButtonArchitecture())
+            {
+                Vector3 instantiatePos = brain.transform.position;
+                instantiatePos.y = 0.15f;
+                Instantiate(brain._architecture,instantiatePos, brain.transform.rotation);
+            }
+
             //ジャンプ
             if (brain._charaCtrl.isGrounded && brain._inputProvider.GetButtonJump())
             {
@@ -134,6 +144,14 @@ public class CharacterBrain : MonoBehaviour
             {
                 brain._animator.SetBool("IsMoving", false);
                 return;
+            }
+
+            //建築
+            if (brain._inputProvider.GetButtonArchitecture())
+            {
+                Vector3 instantiatePos = brain.transform.position;
+                instantiatePos.y = 0.15f;
+                Instantiate(brain._architecture,instantiatePos,brain.transform.rotation);
             }
 
             //ジャンプ
