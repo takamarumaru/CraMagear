@@ -11,11 +11,12 @@ public class CharacterBrain : MonoBehaviour
 
     //[Tooltip("[--性能のパラメータ--]")]
     [Header("[--性能のパラメータ--]")]
-    [SerializeField] float _moveSpeed = 1.0f;
+    [Tooltip("速度")]        [SerializeField] float _moveSpeed    = 1.0f;
+    [Tooltip("重力")]        [SerializeField] float _gravity      = -9.8f;
+    [Tooltip("減衰")]        [SerializeField] float _attenuation  = 0.85f;
+    [Tooltip("ジャンプ力")]  [SerializeField] float _jumpPower    = 4.0f;
 
     OpenCharacterController _charaCtrl;
-
-
 
     //入力
     InputProvider _inputProvider;
@@ -25,9 +26,6 @@ public class CharacterBrain : MonoBehaviour
 
     //速度（ベクトルなど）
     Vector3 _velocity;
-
-    float inputHorizontal;
-    float inputVertical;
 
     private void Awake()
     {
@@ -78,7 +76,7 @@ public class CharacterBrain : MonoBehaviour
                 brain._animator.SetBool("IsMoving", true);
             }
             //重力
-            brain._velocity.y += -9.8f * Time.deltaTime;
+            brain._velocity.y += brain._gravity * Time.deltaTime;
 
             //攻撃
             if (brain._inputProvider.GetButtonAttack())
@@ -91,7 +89,7 @@ public class CharacterBrain : MonoBehaviour
             {
                 brain._animator.SetBool("IsJump", true);
 
-                brain._velocity.y += 4.0f;
+                brain._velocity.y += brain._jumpPower;
             }
         }
         public override void OnFixedUpdate()
@@ -100,10 +98,10 @@ public class CharacterBrain : MonoBehaviour
 
             var brain = StateMgr.GetComponentInParent<CharacterBrain>();
 
-            //重力
+            //減衰
             if (brain._charaCtrl.isGrounded)
             {
-                brain._velocity *= 0.85f;
+                brain._velocity *= brain._attenuation;
             }
 
         }
@@ -118,14 +116,10 @@ public class CharacterBrain : MonoBehaviour
         public override void OnEnter()
         {
             base.OnEnter();
-            //Debug.Log("Enter");
         }
         public override void OnUpdate()
         {
             base.OnUpdate();
-           // Debug.Log("Walk");
-
-            //var brain = StateMgr.GetComponentInParent<CharacterBrain>();
 
             var brain = StateMgr.CharaBrain;
 
@@ -185,7 +179,7 @@ public class CharacterBrain : MonoBehaviour
             }
 
             //重力
-            brain._velocity.y += -9.8f * Time.deltaTime;
+            brain._velocity.y += brain._gravity * Time.deltaTime;
 
         }
 
@@ -196,10 +190,10 @@ public class CharacterBrain : MonoBehaviour
 
             var brain = StateMgr.GetComponentInParent<CharacterBrain>();
 
-            //重力
+            //減衰
             if (brain._charaCtrl.isGrounded)
             {
-                brain._velocity *= 0.85f;
+                brain._velocity *= brain._attenuation;
             }
         }
     }
@@ -249,7 +243,7 @@ public class CharacterBrain : MonoBehaviour
             var brain = StateMgr.CharaBrain;
 
             //重力
-            brain._velocity.y += -9.8f * Time.deltaTime;
+            brain._velocity.y += brain._gravity * Time.deltaTime;
 
             if (brain._charaCtrl.isGrounded)
             {
