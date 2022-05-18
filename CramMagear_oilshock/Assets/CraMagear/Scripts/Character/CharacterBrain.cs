@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(OpenCharacterController))]
-public class CharacterBrain : MonoBehaviour
+public class CharacterBrain : MonoBehaviour,IDamageApplicable
 {
     //アンダーバー表記がメンバー
     //Transform _transform;
@@ -26,6 +26,8 @@ public class CharacterBrain : MonoBehaviour
 
     [SerializeField] GameObject _architecture;
 
+    MainObjectParameter _parameter;
+
     //速度（ベクトルなど）
     Vector3 _velocity;
 
@@ -36,6 +38,9 @@ public class CharacterBrain : MonoBehaviour
 
         //自分以下の子のInputProviderを継承したコンポーネントを取得
         _inputProvider = GetComponentInChildren<InputProvider>();
+
+        //parameterを取得
+        _parameter = GetComponent<MainObjectParameter>();
 
     }
 
@@ -49,6 +54,14 @@ public class CharacterBrain : MonoBehaviour
         {
             _velocity.y = 0;
         }
+
+    }
+
+    bool IDamageApplicable.ApplyDamage(ref DamageParam param)
+    {
+        _parameter.hp -= param.DamageValue;
+        Debug.Log("Hit"+_parameter.name);
+        return true;
     }
 
     /// <summary>
@@ -256,7 +269,7 @@ public class CharacterBrain : MonoBehaviour
         {
             base.OnUpdate();
 
-            Debug.Log("ジャンプ");
+            //Debug.Log("ジャンプ");
 
             var brain = StateMgr.CharaBrain;
 

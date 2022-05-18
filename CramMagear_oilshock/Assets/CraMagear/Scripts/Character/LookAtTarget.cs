@@ -28,7 +28,12 @@ public class LookAtTarget : MonoBehaviour
     void Update()
     {
         //標的がいなかったら実行しない
-        if (!_targetTransform) return;
+        if (!_targetTransform)
+        {
+            isInTheRange = false;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation,transform.parent.rotation, _followingSpeed * Time.deltaTime);
+            return;
+        }
 
         //自分からプレイヤーまでのベクトルを算出
         Vector3 vLook = _targetTransform.position - transform.position;
