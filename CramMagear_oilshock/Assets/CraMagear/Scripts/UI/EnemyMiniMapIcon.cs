@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class EnemyMiniMapIcon : MonoBehaviour
 {
+    Image EnemyIcon;
+    private Sprite EnemyIconSp;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,9 +17,11 @@ public class EnemyMiniMapIcon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(this.gameObject.CompareTag("Enemy"))
+        if(gameObject.layer == 10)  //CharacterÉåÉCÉÑÅ[ÇÃéû
         {
-
+            EnemyIconSp = Resources.Load<Sprite>("EnemyIcon");
+            EnemyIcon = this.GetComponent<Image>();
+            EnemyIcon.sprite = EnemyIconSp;
         }
     }
 }
