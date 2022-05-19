@@ -48,7 +48,7 @@ public class CharacterBrain : MonoBehaviour,IDamageApplicable
     void Update()
     {
         //ˆÚ“®(•b‘¬)
-        _charaCtrl.Move(_velocity * Time.deltaTime);
+        _charaCtrl.Move(_velocity);
 
         if (_charaCtrl.isGrounded)
         {
