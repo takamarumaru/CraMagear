@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 44437126103813024}
   - component: {fileID: 44437126113600586}
   m_Layer: 10
-  m_Name: turret
+  m_Name: turretGuide
   m_TagString: Architecture
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -115,7 +115,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ad3f6b282e620f74aba3db0688d67099, type: 2}
+  - {fileID: 2100000, guid: 54caaafa7f5bfe646898629928805a96, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -148,7 +148,6 @@ GameObject:
   - component: {fileID: 44437126103813032}
   - component: {fileID: 44437126107204488}
   - component: {fileID: 44437126106106184}
-  - component: {fileID: 44437126106106187}
   m_Layer: 10
   m_Name: Cannon_1
   m_TagString: Architecture
@@ -199,7 +198,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3f03fe22efa4c7c43b3033cb74a52b4e, type: 2}
+  - {fileID: 2100000, guid: 73305ed1614b50c46998272176361997, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -221,23 +220,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &44437126106106187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 44437126104110984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa616a033f8f8e64eacc13dc40931408, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _createInterval: 0.5
-  _bulletPrefab: {fileID: 507858147006154484, guid: 8074de6ccb6927a42822b161e82c3e5c,
-    type: 3}
-  _createOffset: 0
-  _lookAtTarget: {fileID: 44437126106106191}
 --- !u!1 &44437126104110986
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,7 +281,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3f03fe22efa4c7c43b3033cb74a52b4e, type: 2}
+  - {fileID: 2100000, guid: 73305ed1614b50c46998272176361997, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -332,7 +314,6 @@ GameObject:
   - component: {fileID: 44437126103813036}
   - component: {fileID: 44437126107204492}
   - component: {fileID: 44437126106106188}
-  - component: {fileID: 44437126106106191}
   m_Layer: 10
   m_Name: Head
   m_TagString: Architecture
@@ -385,7 +366,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3f03fe22efa4c7c43b3033cb74a52b4e, type: 2}
+  - {fileID: 2100000, guid: 73305ed1614b50c46998272176361997, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -407,22 +388,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &44437126106106191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 44437126104110988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2daa26dfabe676e4aacffee82bd7b93a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isInTheRange: 0
-  _followingSpeed: 120
-  _collisionTag: Enemy
-  _sphereCollider: {fileID: 8627251590110762458}
 --- !u!1 &44437126104110990
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,7 +449,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3f03fe22efa4c7c43b3033cb74a52b4e, type: 2}
+  - {fileID: 2100000, guid: 73305ed1614b50c46998272176361997, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -604,7 +569,7 @@ MonoBehaviour:
   _stayEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 44437126106106191}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: LookAtTarget, Assembly-CSharp
         m_MethodName: SearchNearObject
         m_Mode: 0
