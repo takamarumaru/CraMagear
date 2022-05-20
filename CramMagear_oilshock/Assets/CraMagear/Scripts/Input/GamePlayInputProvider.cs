@@ -27,9 +27,9 @@ public class GamePlayInputProvider : InputProvider
         return PlayerInputManager.Instance.GamePlay_GetButtonAttack();
     }
 
-    public override bool GetButtonArchitecture()
+    public override bool GetButtonArchitectureToggle()
     {
-        return PlayerInputManager.Instance.GamePlay_GetButtonArchitecture();
+        return PlayerInputManager.Instance.GamePlay_GetButtonArchitectureToggle();
     }
 
     //ジャンプボタン

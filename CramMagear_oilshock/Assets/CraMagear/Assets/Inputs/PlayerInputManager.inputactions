@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Architecture",
+                    "name": "ArchitectureToggle",
                     "type": "Button",
                     "id": "53419b0c-503b-4189-9196-106bfe928331",
                     "expectedControlType": "Button",
@@ -165,11 +165,11 @@
                 {
                     "name": "",
                     "id": "fc5f40e1-42a9-4eef-a9a0-28e66e43f3df",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Architecture",
+                    "action": "ArchitectureToggle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

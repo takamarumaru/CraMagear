@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(OpenCharacterController))]
+[RequireComponent(typeof(MainObjectParameter))]
 public class CharacterBrain : MonoBehaviour,IDamageApplicable
 {
     //アンダーバー表記がメンバー
@@ -24,7 +25,7 @@ public class CharacterBrain : MonoBehaviour,IDamageApplicable
     [Header("[--Component参照--]")]
     [SerializeField] Animator _animator;
 
-    [SerializeField] GameObject _architecture;
+    [SerializeField] ArchitectureCreator　_architectureCreator;
 
     MainObjectParameter _parameter;
 
@@ -53,6 +54,11 @@ public class CharacterBrain : MonoBehaviour,IDamageApplicable
         if (_charaCtrl.isGrounded)
         {
             _velocity.y = 0;
+        }
+
+        if(_architectureCreator)
+        {
+            _architectureCreator.ShowGuide();
         }
 
     }
@@ -93,27 +99,29 @@ public class CharacterBrain : MonoBehaviour,IDamageApplicable
             //重力
             brain._velocity.y += brain._gravity * Time.deltaTime;
 
+            //建築切り替え
+            if (brain._inputProvider.GetButtonArchitectureToggle())
+            {
+                brain._architectureCreator.EnableToggle();
+            }
+
             //攻撃
             if (brain._inputProvider.GetButtonAttack())
             {
-                brain._animator.SetTrigger("DoAttack");
+                //建築
+                brain._architectureCreator.Create();
+                //建築操作が無効なら攻撃
+                if(brain._architectureCreator._enable==false)
+                {
+                    brain._animator.SetTrigger("DoAttack");
 
-                // カメラの方向から、X-Z平面の単位ベクトルを取得
-                Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
-
-                //入力した方向に回転
-                Quaternion rotation = Quaternion.LookRotation(cameraForward, Vector3.up);
-
-                //キャラクターの回転にlerpして回転
-                brain.transform.rotation = rotation;
-            }
-
-            //建築
-            if (brain._inputProvider.GetButtonArchitecture())
-            {
-                Vector3 instantiatePos = brain.transform.position;
-                instantiatePos.y = 0.15f;
-                Instantiate(brain._architecture,instantiatePos, brain.transform.rotation);
+                    // カメラの方向から、X-Z平面の単位ベクトルを取得
+                    Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+                    //入力した方向に回転
+                    Quaternion rotation = Quaternion.LookRotation(cameraForward, Vector3.up);
+                    //キャラクターの回転にlerpして回転
+                    brain.transform.rotation = rotation;
+                }
             }
 
             //ジャンプ
@@ -155,10 +163,22 @@ public class CharacterBrain : MonoBehaviour,IDamageApplicable
 
             var brain = StateMgr.CharaBrain;
 
-            //攻撃
+            //建築切り替え
+            if (brain._inputProvider.GetButtonArchitectureToggle())
+            {
+                brain._architectureCreator.EnableToggle();
+            }
+
+            //決定ボタン
             if (brain._inputProvider.GetButtonAttack())
             {
-                brain._animator.SetTrigger("DoAttack");
+                //建築
+                brain._architectureCreator.Create();
+                //建築操作が無効なら攻撃
+                if (brain._architectureCreator._enable == false)
+                {
+                    brain._animator.SetTrigger("DoAttack");
+                }
             }
 
             Vector2 axisL = brain._inputProvider.GetAxisL();
@@ -166,14 +186,6 @@ public class CharacterBrain : MonoBehaviour,IDamageApplicable
             {
                 brain._animator.SetBool("IsMoving", false);
                 return;
-            }
-
-            //建築
-            if (brain._inputProvider.GetButtonArchitecture())
-            {
-                Vector3 instantiatePos = brain.transform.position;
-                instantiatePos.y = 0.15f;
-                Instantiate(brain._architecture,instantiatePos,brain.transform.rotation);
             }
 
             //ジャンプ
