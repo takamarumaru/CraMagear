@@ -865,6 +865,7 @@ GameObject:
   - component: {fileID: 123125599}
   - component: {fileID: 123125598}
   - component: {fileID: 123125597}
+  - component: {fileID: 123125602}
   m_Layer: 10
   m_Name: MemberTemplate
   m_TagString: Untagged
@@ -888,6 +889,7 @@ Transform:
   - {fileID: 1132453603}
   - {fileID: 1516903013}
   - {fileID: 1741442971}
+  - {fileID: 566725111}
   m_Father: {fileID: 1714193959}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1009,6 +1011,23 @@ MonoBehaviour:
   _teamID: 1
   _name: Members
   _hp: 100
+--- !u!114 &123125602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123125594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2daa26dfabe676e4aacffee82bd7b93a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInTheRange: 0
+  _followingSpeed: 360
+  _collisionTag: Enemy
+  _isReturnDefault: 0
+  _sphereCollider: {fileID: 566725113}
 --- !u!1 &132572122
 GameObject:
   m_ObjectHideFlags: 0
@@ -4262,6 +4281,85 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 41bacf8372bbc2d4f9922399b6a02d5c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3830182df19b9e419707c4a0cdcab46, type: 3}
+--- !u!1 &566725110
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 566725111}
+  - component: {fileID: 566725113}
+  - component: {fileID: 566725112}
+  m_Layer: 10
+  m_Name: LookArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &566725111
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566725110}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 123125595}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &566725112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566725110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5cc0ff4ec97a2143baa1b382c58f3af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _stayEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 123125602}
+        m_TargetAssemblyTypeName: LookAtTarget, Assembly-CSharp
+        m_MethodName: SearchNearObject
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  _exitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!135 &566725113
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566725110}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 6
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &588134750
 GameObject:
   m_ObjectHideFlags: 0
@@ -5151,7 +5249,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6815287, y: 1}
+    m_SensorSize: {x: 1.7073171, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -6745,6 +6843,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetTransform: {fileID: 5112448467230062675}
   _navMeshAgent: {fileID: 123125597}
+  lookAtTarget: {fileID: 123125602}
 --- !u!1 &1193523198
 GameObject:
   m_ObjectHideFlags: 0
@@ -8120,7 +8219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firingPoint: {fileID: 1132453602}
-  bullet: {fileID: 507858147006154484, guid: 8074de6ccb6927a42822b161e82c3e5c, type: 3}
+  bullet: {fileID: 507858147006154484, guid: f0aa990e5b10ffb4fa0f0bb333dde264, type: 3}
 --- !u!1773428102 &1516903012
 ParentConstraint:
   m_ObjectHideFlags: 0
@@ -8155,7 +8254,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1516903010}
   m_LocalRotation: {x: -0.66459185, y: 0.22276646, z: -0.2582128, w: 0.6648451}
-  m_LocalPosition: {x: 0.25027275, y: -0.0630936, z: 0.003708601}
+  m_LocalPosition: {x: 0.25027272, y: -0.06309375, z: 0.0037084196}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8677,7 +8776,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6815287, y: 1}
+    m_SensorSize: {x: 1.7073171, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -9265,7 +9364,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6815287, y: 1}
+    m_SensorSize: {x: 1.7073171, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -10153,7 +10252,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6815287, y: 1}
+    m_SensorSize: {x: 1.7073171, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -10743,7 +10842,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29520
+  m_Name: pb_Mesh29534
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

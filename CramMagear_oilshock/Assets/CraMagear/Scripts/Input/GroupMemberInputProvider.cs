@@ -10,6 +10,14 @@ public class GroupMemberInputProvider : InputProvider
 
     [SerializeField] private NavMeshAgent _navMeshAgent;
 
+    [SerializeField] private LookAtTarget lookAtTarget;
+
+    private void Awake()
+    {
+        //_navMeshAgent.updatePosition = false;
+        //_navMeshAgent.updateRotation = false;
+    }
+
     //ç∂é≤éÊìæ
     public override Vector2 GetAxisL()
     {
@@ -32,6 +40,6 @@ public class GroupMemberInputProvider : InputProvider
     //çUåÇÉ{É^Éì
     public override bool GetButtonAttack()
     {
-        return false;
+        return lookAtTarget.isInTheRange;
     }
 }

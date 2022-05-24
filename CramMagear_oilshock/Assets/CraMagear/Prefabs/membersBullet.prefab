@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -4768554137844535805}
   - component: {fileID: 5120588233957218073}
   m_Layer: 16
-  m_Name: bullet
+  m_Name: membersBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 507858147006154484}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.544, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4494000439656275857}
@@ -64,7 +64,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lifespan: 1
-  _damage: 10
   _damageRate: 0.1
   _hitInterval: 0.1
   _hitDuration: 0.5

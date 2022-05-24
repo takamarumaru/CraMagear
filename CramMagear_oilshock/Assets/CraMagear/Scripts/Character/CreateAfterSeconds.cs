@@ -16,6 +16,7 @@ public class CreateAfterSeconds : MonoBehaviour
         if (_count > _createTime)
         {
             Instantiate(_createObjPrefab,transform.position,transform.rotation);
+            _count = 0.0f;
         }
     }
 }
