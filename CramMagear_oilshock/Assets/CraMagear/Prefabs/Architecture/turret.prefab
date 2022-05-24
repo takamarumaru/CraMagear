@@ -439,6 +439,7 @@ MonoBehaviour:
   isInTheRange: 0
   _followingSpeed: 120
   _collisionTag: Enemy
+  _isReturnDefault: 1
   _sphereCollider: {fileID: 8627251590110762458}
 --- !u!1 &44437126104110990
 GameObject:

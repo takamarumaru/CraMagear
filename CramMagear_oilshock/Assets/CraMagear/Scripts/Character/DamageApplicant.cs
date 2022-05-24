@@ -23,6 +23,8 @@ public class DamageApplicant : MonoBehaviour
 {
     [Tooltip("攻撃判定持続時間")]
     [SerializeField] float _lifespan = 1.0f;
+    [Tooltip("ダメージ")]
+    [SerializeField] int _damage = 1;
     [Tooltip("ダメージ比率")]
     [SerializeField] float _damageRate = 0.1f;
     [Tooltip("ヒット間隔")]
@@ -57,7 +59,7 @@ public class DamageApplicant : MonoBehaviour
             if(dmgApp != null)
             {
                 DamageParam param = new DamageParam();
-                param.DamageValue = 10;
+                param.DamageValue = _damage;
                 param.HitStopDuration = 0;
                 param.Blow = new Vector3();
 
