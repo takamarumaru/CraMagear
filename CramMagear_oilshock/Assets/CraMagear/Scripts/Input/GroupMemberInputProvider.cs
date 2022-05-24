@@ -6,28 +6,25 @@ using UnityEngine.AI;
 public class GroupMemberInputProvider : InputProvider
 {
     [SerializeField] private Transform _targetTransform;
+    public Transform TargetTransform { set => _targetTransform = value; get => _targetTransform; }
+
     [SerializeField] private NavMeshAgent _navMeshAgent;
+
+    [SerializeField] private LookAtTarget lookAtTarget;
 
     private void Awake()
     {
         //_navMeshAgent.updatePosition = false;
         //_navMeshAgent.updateRotation = false;
-        
     }
 
     //ç∂é≤éÊìæ
     public override Vector2 GetAxisL()
     {
-        //Vector3 vectorToTheTarget = _targetTransform.position - transform.position;
-        //vectorToTheTarget.y = 0.0f;
-
-        //if (vectorToTheTarget.magnitude <= 1.5f)
-        //{
-        //    return new Vector2(0.0f, 0.0f);
-        //}
-        //vectorToTheTarget.Normalize();       
-
-        //return new Vector2(vectorToTheTarget.x, vectorToTheTarget.z);
+        if (_targetTransform == null)
+        {
+            return Vector2.zero;
+        }
 
         _navMeshAgent.SetDestination(_targetTransform.position);
 
@@ -35,7 +32,6 @@ public class GroupMemberInputProvider : InputProvider
         moveVec.Normalize();
 
         return moveVec;
-        //return Vector2.zero;
     }
 
     //âEé≤éÊìæ
@@ -44,6 +40,6 @@ public class GroupMemberInputProvider : InputProvider
     //çUåÇÉ{É^Éì
     public override bool GetButtonAttack()
     {
-        return false;
+        return lookAtTarget.isInTheRange;
     }
 }

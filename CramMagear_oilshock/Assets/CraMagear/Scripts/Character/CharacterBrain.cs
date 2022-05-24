@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(OpenCharacterController))]
-public class CharacterBrain : MonoBehaviour
+[RequireComponent(typeof(MainObjectParameter))]
+public class CharacterBrain : MonoBehaviour,IDamageApplicable
 {
     //アンダーバー表記がメンバー
     //Transform _transform;
@@ -24,7 +25,9 @@ public class CharacterBrain : MonoBehaviour
     [Header("[--Component参照--]")]
     [SerializeField] Animator _animator;
 
-    [SerializeField] GameObject _architecture;
+    [SerializeField] ArchitectureCreator　_architectureCreator;
+
+    MainObjectParameter _parameter;
 
     //速度（ベクトルなど）
     Vector3 _velocity;
@@ -37,18 +40,34 @@ public class CharacterBrain : MonoBehaviour
         //自分以下の子のInputProviderを継承したコンポーネントを取得
         _inputProvider = GetComponentInChildren<InputProvider>();
 
+        //parameterを取得
+        _parameter = GetComponent<MainObjectParameter>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
         //移動(秒速)
-        _charaCtrl.Move(_velocity * Time.deltaTime);
+        _charaCtrl.Move(_velocity);
 
         if (_charaCtrl.isGrounded)
         {
             _velocity.y = 0;
         }
+
+        if(_architectureCreator)
+        {
+            _architectureCreator.ShowGuide();
+        }
+
+    }
+
+    bool IDamageApplicable.ApplyDamage(ref DamageParam param)
+    {
+        _parameter.hp -= param.DamageValue;
+        Debug.Log("Hit"+_parameter.name);
+        return true;
     }
 
     /// <summary>
@@ -80,18 +99,32 @@ public class CharacterBrain : MonoBehaviour
             //重力
             brain._velocity.y += brain._gravity * Time.deltaTime;
 
+            //建築切り替え
+            if (brain._inputProvider.GetButtonArchitectureToggle())
+            {
+                brain._architectureCreator.EnableToggle();
+            }
+
             //攻撃
             if (brain._inputProvider.GetButtonAttack())
             {
-                brain._animator.SetTrigger("DoAttack");
-            }
+                //建築操作が有効なら建築
+                if (brain._architectureCreator && brain._architectureCreator._enable == true)
+                {
+                    brain._architectureCreator.Create();
+                }
+                else
+                //建築操作が無効なら攻撃
+                {
+                    brain._animator.SetTrigger("DoAttack");
 
-            //建築
-            if (brain._inputProvider.GetButtonArchitecture())
-            {
-                Vector3 instantiatePos = brain.transform.position;
-                instantiatePos.y = 0.15f;
-                Instantiate(brain._architecture,instantiatePos, brain.transform.rotation);
+                    //// カメラの方向から、X-Z平面の単位ベクトルを取得
+                    //Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+                    ////入力した方向に回転
+                    //Quaternion rotation = Quaternion.LookRotation(cameraForward, Vector3.up);
+                    ////キャラクターの回転にlerpして回転
+                    //brain.transform.rotation = rotation;
+                }
             }
 
             //ジャンプ
@@ -133,10 +166,25 @@ public class CharacterBrain : MonoBehaviour
 
             var brain = StateMgr.CharaBrain;
 
-            //攻撃
+            //建築切り替え
+            if (brain._inputProvider.GetButtonArchitectureToggle())
+            {
+                brain._architectureCreator.EnableToggle();
+            }
+
+            //決定ボタン
             if (brain._inputProvider.GetButtonAttack())
             {
-                brain._animator.SetTrigger("DoAttack");
+                //建築操作が有効なら建築
+                if (brain._architectureCreator && brain._architectureCreator._enable == true)
+                {
+                    brain._architectureCreator.Create();
+                }
+                else
+                //建築操作が無効なら攻撃
+                {
+                    brain._animator.SetTrigger("DoAttack");
+                }
             }
 
             Vector2 axisL = brain._inputProvider.GetAxisL();
@@ -144,14 +192,6 @@ public class CharacterBrain : MonoBehaviour
             {
                 brain._animator.SetBool("IsMoving", false);
                 return;
-            }
-
-            //建築
-            if (brain._inputProvider.GetButtonArchitecture())
-            {
-                Vector3 instantiatePos = brain.transform.position;
-                instantiatePos.y = 0.15f;
-                Instantiate(brain._architecture,instantiatePos,brain.transform.rotation);
             }
 
             //ジャンプ
@@ -256,7 +296,7 @@ public class CharacterBrain : MonoBehaviour
         {
             base.OnUpdate();
 
-            Debug.Log("ジャンプ");
+            //Debug.Log("ジャンプ");
 
             var brain = StateMgr.CharaBrain;
 

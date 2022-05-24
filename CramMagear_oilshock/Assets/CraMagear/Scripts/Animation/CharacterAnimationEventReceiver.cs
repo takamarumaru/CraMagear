@@ -14,6 +14,6 @@ public class CharacterAnimationEventReceiver : MonoBehaviour
         //íeê∂ê¨
         _bulletShot.LauncherShot();
 
-        Debug.Log("íeî≠éÀÅI");
+        //Debug.Log("íeî≠éÀÅI");
     }
 }

@@ -16,6 +16,9 @@ public class LookAtTarget : MonoBehaviour
     [Tooltip("判定するタグ")]
     [SerializeField] private string _collisionTag;
 
+    [Tooltip("タゲットがいないときにデフォルトの回転角度に戻るか")]
+    [SerializeField] private bool _isReturnDefault;
+
     [Header("component reference")]
 
     [Tooltip("判定するCollider")]
@@ -28,7 +31,15 @@ public class LookAtTarget : MonoBehaviour
     void Update()
     {
         //標的がいなかったら実行しない
-        if (!_targetTransform) return;
+        if (!_targetTransform)
+        {
+            isInTheRange = false;
+            if (_isReturnDefault)
+            {
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, transform.parent.rotation, _followingSpeed * Time.deltaTime);
+            }
+            return;
+        }
 
         //自分からプレイヤーまでのベクトルを算出
         Vector3 vLook = _targetTransform.position - transform.position;
