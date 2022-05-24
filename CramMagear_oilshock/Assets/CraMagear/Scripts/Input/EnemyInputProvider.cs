@@ -5,6 +5,11 @@ using UnityEngine;
 public class EnemyInputProvider : InputProvider
 {
     [SerializeField] private Transform _targetTransform;
+
+    //
+    [Header("拠点に攻撃を開始するまでの距離")]
+    [SerializeField] float _distance = 0;
+
     //左軸取得
     public override Vector2 GetAxisL()
     {
@@ -21,5 +26,20 @@ public class EnemyInputProvider : InputProvider
     }
 
     //攻撃ボタン
-    public override bool GetButtonAttack(){return false;}
+    public override bool GetButtonAttack()
+    {
+        //拠点までのベクトル
+        Vector3 vectorToTheTarget = _targetTransform.position - transform.position;
+        vectorToTheTarget.y = 0.0f;
+
+        //攻撃範囲内だったら
+        if (vectorToTheTarget.magnitude < _distance)
+        {
+            Debug.Log("攻撃開始");
+            return true;
+        }
+
+
+        return false;
+    }
 }
