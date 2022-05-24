@@ -10,9 +10,16 @@ public class EnemyInputProvider : InputProvider
     [Header("拠点に攻撃を開始するまでの距離")]
     [SerializeField] float _distance = 0;
 
+    bool _isHitRange = false;
+
     //左軸取得
     public override Vector2 GetAxisL()
     {
+        if(_isHitRange)
+        {
+            return Vector2.zero;
+        }
+
         Vector3 vectorToTheTarget = _targetTransform.position - transform.position;
         vectorToTheTarget.y = 0.0f;
 
@@ -33,7 +40,7 @@ public class EnemyInputProvider : InputProvider
         vectorToTheTarget.y = 0.0f;
 
         //攻撃範囲内だったら
-        if (vectorToTheTarget.magnitude < _distance)
+        if (_isHitRange = (vectorToTheTarget.magnitude < _distance)) 
         {
             Debug.Log("攻撃開始");
             return true;
