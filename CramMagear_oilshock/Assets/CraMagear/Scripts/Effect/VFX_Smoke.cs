@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
+[RequireComponent(typeof(VFX_Common))]
+
 public class VFX_Smoke : MonoBehaviour
 {
     [System.Serializable]
@@ -12,7 +14,7 @@ public class VFX_Smoke : MonoBehaviour
         [SerializeField] public float _time;
     }
 
-    [SerializeField] VisualEffect _effect;
+    private VFX_Common _vfxCommon;
 
     [Header("RGBAÇ∆éûä‘(0Å`1ÇÃäÑçá)\nè„Ç©ÇÁèáÇ…")]
     [SerializeField] List<_Gradient> _gradients;
@@ -22,28 +24,18 @@ public class VFX_Smoke : MonoBehaviour
 
     private float _verocityY;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        _vfxCommon = GameObject.Find("Smoke").GetComponent<VFX_Common>();
+
         SetGradient(_gradients);
 
-        _verocityY = _effect.GetFloat("VelocityY");
+        _verocityY = _vfxCommon.Effect.GetFloat("VelocityY");
     }
 
-    // Update is called once per frame
     void Update()
     {
-
-    }
-
-    public void Play()
-    {
-        _effect.SendEvent("Play");
-    }
-
-    public void Stop()
-    {
-        _effect.SendEvent("Stop");
+        
     }
 
     /// <summary>
@@ -74,7 +66,7 @@ public class VFX_Smoke : MonoBehaviour
         Gradient _gradient = new Gradient();
 
         _gradient.SetKeys(_colorKeys, _alphaKeys);
-        _effect.SetGradient("Color", _gradient);
+        _vfxCommon.Effect.SetGradient("Color", _gradient);
     }
 
     /// <summary>
@@ -104,17 +96,12 @@ public class VFX_Smoke : MonoBehaviour
         }
 
         gradient.SetKeys(colorKeys, alphaKeys);
-        _effect.SetGradient("Color", gradient);
-    }
-
-    public void SetPlayRate(float rate)
-    {
-        _effect.playRate = rate;
+        _vfxCommon.Effect.SetGradient("Color", gradient);
     }
 
     public void SetVectorYPower(float pow)
     {
-        _effect.SetFloat("VelocityY", _verocityY * pow);
+        _vfxCommon.Effect.SetFloat("VelocityY", _verocityY * pow);
     }
 
     /// <summary>
