@@ -27,6 +27,7 @@ public class VFX_Smoke : MonoBehaviour
     void Awake()
     {
         _vfxCommon = GameObject.Find("Smoke").GetComponent<VFX_Common>();
+        _vfxCommon.Play();
 
         SetGradient(_gradients);
 
