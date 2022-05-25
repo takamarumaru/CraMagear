@@ -22,4 +22,9 @@ public class VFX_Common : MonoBehaviour
     {
         _effect.playRate = rate;
     }
+
+    public void SetGradient(Gradient gradient)
+    {
+        _effect.SetGradient("Gradient", gradient);
+    }
 }

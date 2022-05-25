@@ -7,29 +7,18 @@ using UnityEngine.VFX;
 
 public class VFX_Smoke : MonoBehaviour
 {
-    [System.Serializable]
-    public struct _Gradient
-    {
-        [SerializeField] public Color _color;
-        [SerializeField] public float _time;
-    }
-
     private VFX_Common _vfxCommon;
 
-    [Header("RGBA‚ÆŠÔ(0`1‚ÌŠ„‡)\nã‚©‚ç‡‚É")]
-    [SerializeField] List<_Gradient> _gradients;
-
-    private GradientColorKey[] _colorKeys;
-    private GradientAlphaKey[] _alphaKeys;
+    [SerializeField] Gradient _gradient;
 
     private float _verocityY;
 
     void Awake()
     {
-        _vfxCommon = GameObject.Find("Smoke").GetComponent<VFX_Common>();
+        _vfxCommon = transform.gameObject.GetComponent<VFX_Common>();
         _vfxCommon.Play();
 
-        SetGradient(_gradients);
+        _vfxCommon.SetGradient(_gradient);
 
         _verocityY = _vfxCommon.Effect.GetFloat("VelocityY");
     }
@@ -37,37 +26,6 @@ public class VFX_Smoke : MonoBehaviour
     void Update()
     {
         
-    }
-
-    /// <summary>
-    /// Gradient‚ÌÚ×‚Èİ’è
-    /// </summary>
-    /// <param name="gradients"></param>
-    public void SetGradient(List<_Gradient> gradients)
-    {
-        int keyNum = gradients.Count;
-
-        if (!IsRightKeyNum(keyNum))
-        {
-            return;
-        }
-
-        _colorKeys = new GradientColorKey[keyNum];
-        _alphaKeys = new GradientAlphaKey[keyNum];
-
-        for (int i = 0; i < keyNum; i++)
-        {
-            _colorKeys[i].color = gradients[i]._color;
-            _colorKeys[i].time = gradients[i]._time;
-
-            _alphaKeys[i].alpha = gradients[i]._color.a;
-            _alphaKeys[i].time = gradients[i]._time;
-        }
-
-        Gradient _gradient = new Gradient();
-
-        _gradient.SetKeys(_colorKeys, _alphaKeys);
-        _vfxCommon.Effect.SetGradient("Color", _gradient);
     }
 
     /// <summary>
@@ -97,31 +55,11 @@ public class VFX_Smoke : MonoBehaviour
         }
 
         gradient.SetKeys(colorKeys, alphaKeys);
-        _vfxCommon.Effect.SetGradient("Color", gradient);
+        _vfxCommon.Effect.SetGradient("Gradient", gradient);
     }
 
     public void SetVectorYPower(float pow)
     {
         _vfxCommon.Effect.SetFloat("VelocityY", _verocityY * pow);
-    }
-
-    /// <summary>
-    /// keyNum‚ª³‚µ‚¢”ÍˆÍ“à‚©
-    /// </summary>
-    /// <param name="keyNum"></param>
-    /// <returns></returns>
-    bool IsRightKeyNum(int keyNum)
-    {
-        if (keyNum <= 0)
-        {
-            return false;
-        }
-        if (keyNum >= 8)
-        {
-            Debug.LogError("Gradient‚ÌÅ‘å”‚Í 8 ŒÂ‚Å‚·BŒ»İ " + keyNum + " ŒÂİ’è‚³‚ê‚Ä‚¢‚Ü‚·B");
-            return false;
-        }
-
-        return true;
     }
 }
