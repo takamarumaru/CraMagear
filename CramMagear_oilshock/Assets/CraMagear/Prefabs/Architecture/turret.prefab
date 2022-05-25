@@ -251,7 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _createInterval: 0.5
-  _bulletPrefab: {fileID: 507858147006154484, guid: 8074de6ccb6927a42822b161e82c3e5c,
+  _bulletPrefab: {fileID: 6162723787568201129, guid: 0f9bda5aeedbd1f489f0e72505622e57,
     type: 3}
   _createOffset: 0
   _lookAtTarget: {fileID: 44437126106106191}
