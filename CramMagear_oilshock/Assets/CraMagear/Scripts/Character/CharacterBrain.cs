@@ -63,6 +63,12 @@ public class CharacterBrain : MonoBehaviour,IDamageApplicable
 
     }
 
+    //v‚¾‚¯ˆÚ“®‚·‚é
+    public void Move(Vector3 v)
+    {
+        _charaCtrl.Move(v);
+    }
+
     bool IDamageApplicable.ApplyDamage(ref DamageParam param)
     {
         _parameter.hp -= param.DamageValue;
