@@ -51,8 +51,8 @@ MonoBehaviour:
   m_UISuperCollapsed: 0
   m_UIInfos: {fileID: 114340500867371532}
   m_ParameterInfo:
-  - name: Color
-    path: Color
+  - name: Gradient
+    path: Gradient
     tooltip: 
     sheetType: m_Gradient
     realType: Gradient
@@ -4375,7 +4375,7 @@ MonoBehaviour:
   m_InputSlots: []
   m_OutputSlots:
   - {fileID: 8926484042661615479}
-  m_ExposedName: Color
+  m_ExposedName: Gradient
   m_Exposed: 1
   m_Order: 0
   m_Category: 

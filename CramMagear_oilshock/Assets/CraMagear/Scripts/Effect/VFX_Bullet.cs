@@ -8,11 +8,11 @@ public class VFX_Bullet : MonoBehaviour
 {
     private VFX_Common _vfxCommon;
 
-    //[SerializeField] GameObject _obj;
-    Vector3 _localPos;
-
     [SerializeField] Vector3 _forward;
     [SerializeField] float _speed;
+
+    //[SerializeField] GameObject _obj;
+    Vector3 _localPos;
 
     void Awake()
     {
@@ -45,7 +45,7 @@ public class VFX_Bullet : MonoBehaviour
         Vector3 localPos = _vfxCommon.Effect.GetVector3("LocalPos");
         localPos += _forward * _speed * Time.deltaTime;
 
-        _vfxCommon.Effect.SetVector3("LocalPos",localPos);
+        _vfxCommon.Effect.SetVector3("LocalPos", localPos);
     }
 
     //void FixTransform()
