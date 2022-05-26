@@ -103,7 +103,7 @@ public class CharacterBrain : MonoBehaviour,IDamageApplicable
                 brain._animator.SetBool("IsMoving", true);
             }
             //重力
-            brain._velocity.y += brain._gravity * Time.deltaTime;
+            //brain._velocity.y += brain._gravity * Time.deltaTime;
 
             //建築切り替え
             if (brain._inputProvider.GetButtonArchitectureToggle())
@@ -124,12 +124,12 @@ public class CharacterBrain : MonoBehaviour,IDamageApplicable
                 {
                     brain._animator.SetTrigger("DoAttack");
 
-                    //// カメラの方向から、X-Z平面の単位ベクトルを取得
-                    //Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
-                    ////入力した方向に回転
-                    //Quaternion rotation = Quaternion.LookRotation(cameraForward, Vector3.up);
-                    ////キャラクターの回転にlerpして回転
-                    //brain.transform.rotation = rotation;
+                    // カメラの方向から、X-Z平面の単位ベクトルを取得
+                    Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+                    //入力した方向に回転
+                    Quaternion rotation = Quaternion.LookRotation(cameraForward, Vector3.up);
+                    //キャラクターの回転にlerpして回転
+                    brain.transform.rotation = rotation;
                 }
             }
 
