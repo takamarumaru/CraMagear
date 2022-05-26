@@ -184,7 +184,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 7
     m_NumAlphaKeys: 2
-  _playRate: 6
+  _playRate: 20
 --- !u!114 &6822799985342197613
 MonoBehaviour:
   m_ObjectHideFlags: 0
