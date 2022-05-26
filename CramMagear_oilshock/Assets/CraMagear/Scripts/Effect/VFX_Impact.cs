@@ -15,6 +15,7 @@ public class VFX_Impact : MonoBehaviour
     {
         _vfxCommon = transform.gameObject.GetComponent<VFX_Common>();
         _vfxCommon.SetGradient(_gradient);
+        _vfxCommon.Play();
     }
 
     void Update()
