@@ -8,17 +8,8 @@ public class RandomBorn : MonoBehaviour
     [Header("ランダム生成するキャラ")]
     [SerializeField] GameObject PrefabChara;
 
-    [Header("ランダム出現座標：X")]
-    [SerializeField] float minRandPos_x = 0;
-    [SerializeField] float MaxRandPos_x = 0;
-
-    [Header("ランダム出現座標：Y")]
-    [SerializeField] float minRandPos_y = 0;
-    [SerializeField] float MaxRandPos_y = 0;
-
-    [Header("ランダム出現座標：Z")]
-    [SerializeField] float minRandPos_z = 0;
-    [SerializeField] float MaxRandPos_z = 0;
+    [Header("ランダム出現範囲")]
+    [SerializeField] float RandRange = 0;
 
     [Header("何秒毎に出現させるか")]
     [SerializeField] float BornTime = 0;
@@ -42,10 +33,9 @@ public class RandomBorn : MonoBehaviour
         if (Timer >= BornTime)
         {
             // プレハブの位置をランダムで設定
-            float x = Random.Range(minRandPos_x, MaxRandPos_x);
-            float y = Random.Range(minRandPos_y, MaxRandPos_y);
-            float z = Random.Range(minRandPos_z, MaxRandPos_z);
-            Vector3 pos = new Vector3(x, y, z);
+            float range = Random.Range(-RandRange, RandRange);
+            
+            Vector3 pos = new Vector3(range+ transform.position.x, transform.position.y, range+ transform.position.z);
 
             //時間リセット
             Timer = 0;
