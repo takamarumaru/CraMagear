@@ -20,9 +20,17 @@ public class GameAadministrator : MonoBehaviour
 
     [Tooltip("Phase1の時間")]
     [SerializeField] private float _firstPhaseTime;
-    private float _phaseCount;
+    public float FirstPhaseTime { get => _firstPhaseTime; }
+    public float FirstPhaseCount { get; private set; }
     [Tooltip("敵を生成するオブジェクト")]
     [SerializeField] private Transform _enemyCreator;
+    private List<Transform> _enemyCreatorList = new();
+    private int _enableIdx = 0;
+    public Transform EnableEnemyCreator()
+    {
+        if(_enemyCreatorList.Count <= _enableIdx)return null;
+        return _enemyCreatorList [_enableIdx]; 
+    }
 
     [Tooltip("クリア時に読み込むシーン")]
     [SerializeField] private string _clearScene;
@@ -51,14 +59,28 @@ public class GameAadministrator : MonoBehaviour
     //1stPhaseの処理
     void EnterFirstPhase()
     {
-        _enemyCreator.gameObject.SetActive(false);
+        //カウンターに時間をセット
+        FirstPhaseCount = FirstPhaseTime;
+
+        //指定オブジェクトの子供リストを作る
+        for (int childIdx = 0; childIdx < _enemyCreator.childCount; childIdx++)
+        {
+            Transform child = _enemyCreator.GetChild(childIdx);
+            child.gameObject.SetActive(false);
+            _enemyCreatorList.Add(child);
+        }
+
+        //有効になる敵湧き地点を決定
+        _enableIdx = Random.Range(0, _enemyCreatorList.Count);
+
         State = GameState.FirstPhase;
     }
     void FirstPhaseUpdate()
     {
-        _phaseCount += Time.deltaTime;
-        if(_phaseCount >= _firstPhaseTime)
+        FirstPhaseCount -= Time.deltaTime;
+        if(FirstPhaseCount <= 0.0f)
         {
+            FirstPhaseCount = 0.0f;
             EnterSecondPhase();
         }
     }
@@ -67,7 +89,9 @@ public class GameAadministrator : MonoBehaviour
     //2ndPhaseの処理
     void EnterSecondPhase()
     {
-        _enemyCreator.gameObject.SetActive(true);
+        
+        _enemyCreatorList[_enableIdx].gameObject.SetActive(true);
+
         State = GameState.SecondPhase;
     }
     void SecondPhaseUpdate()
