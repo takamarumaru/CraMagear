@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class EHPBarRotate : MonoBehaviour
 {
+    //List<GameObject> list = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
