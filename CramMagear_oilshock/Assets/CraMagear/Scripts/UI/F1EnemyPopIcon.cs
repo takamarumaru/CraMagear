@@ -29,13 +29,15 @@ public class F1EnemyPopIcon : MonoBehaviour
         minimapRangeRadius = minimapCamera.orthographicSize;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         defaultPosY = transform.position.y;
+
+        GameObject.Find("Enemy").transform.position = EnemyVec;
+
     }
 
     // Update is called once per frame
     void Update()
     {
         DispIcon();
-        GameObject.Find("Enemy").transform.position = EnemyVec;
     }
 
     /// <summary>
