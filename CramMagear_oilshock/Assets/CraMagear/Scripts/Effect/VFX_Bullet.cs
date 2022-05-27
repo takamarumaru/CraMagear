@@ -42,10 +42,9 @@ public class VFX_Bullet : MonoBehaviour
 
         //FixTransform();
         //SetLocalPos(transform.forward);
-        Vector3 localPos = _vfxCommon.Effect.GetVector3("LocalPos");
-        localPos += _forward * _speed * Time.deltaTime;
-
-        _vfxCommon.Effect.SetVector3("LocalPos", localPos);
+        //Vector3 localPos = _vfxCommon.Effect.GetVector3("LocalPos");
+        //localPos += _forward * _speed * Time.deltaTime;
+        //_vfxCommon.Effect.SetVector3("LocalPos", localPos);
     }
 
     //void FixTransform()
