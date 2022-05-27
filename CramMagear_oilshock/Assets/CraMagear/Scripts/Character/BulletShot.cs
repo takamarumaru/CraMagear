@@ -27,10 +27,19 @@ public class BulletShot : MonoBehaviour
         // 弾を発射する場所を取得
         Vector3 bulletPosition = firingPoint.transform.position;
 
-        //最大距離までのベクトル
-        Vector3 shotDir = MaxShotPoint.transform.position - bulletPosition;
+        Quaternion shotRot;
 
-        Quaternion shotRot = Quaternion.LookRotation(shotDir, Vector3.right);
+        if (MaxShotPoint)
+        {
+            //最大距離までのベクトル
+            Vector3 shotDir = MaxShotPoint.transform.position - bulletPosition;
+
+            shotRot = Quaternion.LookRotation(shotDir, Vector3.right);
+        }
+        else
+        {
+            shotRot = firingPoint.transform.rotation;
+        }
 
         // 上で取得した場所に、"bullet"のPrefabを出現させる
         Instantiate(bullet, bulletPosition, shotRot);
