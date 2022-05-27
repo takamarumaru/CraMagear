@@ -15985,7 +15985,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9033159665718119340}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.815946, y: -0.9758589, z: -3.4202588}
+  m_LocalPosition: {x: 0, y: 0.5, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16005,13 +16005,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PrefabChara: {fileID: 24225140}
-  minRandPos_x: -20
-  MaxRandPos_x: 20
-  minRandPos_y: 2
-  MaxRandPos_y: 2
-  minRandPos_z: 20
-  MaxRandPos_z: 30
-  BornTime: 5
+  RandRange: 5
+  BornTime: 1
 --- !u!1 &9077438395123784222
 GameObject:
   m_ObjectHideFlags: 0
