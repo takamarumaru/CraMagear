@@ -140,6 +140,9 @@ public class CharacterBrain : MonoBehaviour,IDamageApplicable
 
                 brain._velocity.y += brain._jumpPower;
             }
+
+            //重力
+            brain._velocity.y += brain._gravity * Time.deltaTime;
         }
         public override void OnFixedUpdate()
         {
@@ -190,6 +193,13 @@ public class CharacterBrain : MonoBehaviour,IDamageApplicable
                 //建築操作が無効なら攻撃
                 {
                     brain._animator.SetTrigger("DoAttack");
+
+                    // カメラの方向から、X-Z平面の単位ベクトルを取得
+                    Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+                    //入力した方向に回転
+                    Quaternion rotation = Quaternion.LookRotation(cameraForward, Vector3.up);
+                    //キャラクターの回転にlerpして回転
+                    brain.transform.rotation = rotation;
                 }
             }
 
