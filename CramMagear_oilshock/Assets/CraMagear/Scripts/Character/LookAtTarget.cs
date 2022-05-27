@@ -34,6 +34,7 @@ public class LookAtTarget : MonoBehaviour
         if (!_targetTransform)
         {
             isInTheRange = false;
+            _distanceToTarget=float.MaxValue;
             if (_isReturnDefault)
             {
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, transform.parent.rotation, _followingSpeed * Time.deltaTime);
@@ -41,7 +42,7 @@ public class LookAtTarget : MonoBehaviour
             return;
         }
 
-        //自分からプレイヤーまでのベクトルを算出
+        //自分からターゲットまでのベクトルを算出
         Vector3 vLook = _targetTransform.position - transform.position;
         //自身を回転
         Quaternion rotation = Quaternion.LookRotation(vLook, Vector3.up);

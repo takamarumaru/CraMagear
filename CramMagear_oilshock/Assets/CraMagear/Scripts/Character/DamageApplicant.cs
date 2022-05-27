@@ -55,7 +55,16 @@ public class DamageApplicant : MonoBehaviour
     {
         foreach(var contact in collision.contacts)
         {
-            var dmgApp = collision.rigidbody.GetComponent<IDamageApplicable>();
+            var rigidbody = collision.rigidbody;
+            if (rigidbody == null)
+            {
+                Debug.Log("aaa");
+                Debug.Log(collision.gameObject.name);
+
+                continue;
+            }
+
+            var dmgApp = rigidbody.GetComponent<IDamageApplicable>();
             if(dmgApp != null)
             {
                 DamageParam param = new DamageParam();
@@ -68,6 +77,10 @@ public class DamageApplicant : MonoBehaviour
                     //ìñÇΩÇ¡ÇΩéûÇ…Ç‚ÇËÇΩÇ¢èàóù
                 }
             }
+            //else
+            //{
+            //    collision.rigidbody.
+            //}
         }
     }
 }
