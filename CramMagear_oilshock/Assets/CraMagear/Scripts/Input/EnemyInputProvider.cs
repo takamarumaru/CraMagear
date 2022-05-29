@@ -15,7 +15,7 @@ public class EnemyInputProvider : InputProvider
     //¶²æ“¾
     public override Vector2 GetAxisL()
     {
-        if(_isHitRange)
+        if (_isHitRange)
         {
             return Vector2.zero;
         }

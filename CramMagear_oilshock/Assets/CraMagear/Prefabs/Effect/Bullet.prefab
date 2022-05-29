@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1592936678747673551}
   - component: {fileID: 4409703365343938822}
   - component: {fileID: 2636580137275285296}
+  - component: {fileID: 3068105313430547758}
   m_Layer: 16
   m_Name: Bullet
   m_TagString: Untagged
@@ -46,7 +47,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6162723787568201129}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 4624c5ba26ea6bb4bb786b2a943592a4, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: 3dc3278a82b1a86468df5408f5931eea, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 3724520751
@@ -160,7 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ee40ae380cd8f74ab6d2b4d7e587337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lifespan: 1
+  _parameter: {fileID: 3068105313430547758}
+  _lifespan: 3
   _damage: 10
   _damageRate: 0.1
   _hitInterval: 0.1
@@ -198,3 +200,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
+--- !u!114 &3068105313430547758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6162723787568201129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16ad8b89e7d0f1740aff00a3ce8b7ef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _teamID: 1
+  _name: 
+  _hp: 1000

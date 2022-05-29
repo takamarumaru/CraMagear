@@ -15,12 +15,15 @@ public struct DamageParam
 
 public interface IDamageApplicable
 {
+    MainObjectParameter MainObjectParam { get; }
     bool ApplyDamage(ref DamageParam param);
 }
 
 
 public class DamageApplicant : MonoBehaviour
 {
+    [SerializeField] MainObjectParameter _parameter;
+
     [Tooltip("UŒ‚”»’è‘±ŠÔ")]
     [SerializeField] float _lifespan = 1.0f;
     [Tooltip("ƒ_ƒ[ƒW")]
@@ -67,6 +70,7 @@ public class DamageApplicant : MonoBehaviour
             var dmgApp = rigidbody.GetComponent<IDamageApplicable>();
             if(dmgApp != null)
             {
+                if (_parameter.TeamID == dmgApp.MainObjectParam.TeamID) continue;
                 DamageParam param = new DamageParam();
                 param.DamageValue = _damage;
                 param.HitStopDuration = 0;
