@@ -21,6 +21,11 @@ public class GamePlayInputProvider : InputProvider
     //‰E²æ“¾
     public override Vector2 GetAxisR() => Vector2.zero;
 
+    public override Vector2 GetMouse()
+    {
+        return PlayerInputManager.Instance.GamePlay_GetMouse();
+    }
+
     //UŒ‚ƒ{ƒ^ƒ“
     public override bool GetButtonAttack()
     {
@@ -31,6 +36,12 @@ public class GamePlayInputProvider : InputProvider
     public override bool GetButtonAim()
     {
         return PlayerInputManager.Instance.GamePlay_GetButtonAim();
+    }
+
+    //’·‰Ÿ‚µ
+    public override bool GetButtonPressedAim()
+    {
+        return PlayerInputManager.Instance.GamePlay_GetButtonPressedAim();
     }
 
     public override bool GetButtonArchitectureToggle()

@@ -8,12 +8,15 @@ public class InputProvider : MonoBehaviour
     public virtual Vector2 GetAxisL() => Vector2.zero;
     //右軸取得
     public virtual Vector2 GetAxisR() => Vector2.zero;
+    //マウス移動量
+    public virtual Vector2 GetMouse() => Vector2.zero;
 
     //攻撃ボタン
     public virtual bool GetButtonAttack() => false;
 
     //Aim切り替えボタン
     public virtual bool GetButtonAim() => false;
+    public virtual bool GetButtonPressedAim() => false;
 
     //建築ボタン
     public virtual bool GetButtonArchitectureToggle() => false;
