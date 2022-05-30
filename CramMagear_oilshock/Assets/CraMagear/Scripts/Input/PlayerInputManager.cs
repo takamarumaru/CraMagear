@@ -32,6 +32,8 @@ public class PlayerInputManager : MonoBehaviour
 
     public bool GamePlay_GetButtonAttack() => _actionMapGamePlay["Attack"].WasPerformedThisFrame();
 
+    public bool GamePlay_GetButtonAim() => _actionMapGamePlay["Aim"].WasPerformedThisFrame();
+
     public bool GamePlay_GetButtonJump() => _actionMapGamePlay["Jump"].WasPerformedThisFrame();
 
     public bool GamePlay_GetButtonArchitectureToggle() => _actionMapGamePlay["ArchitectureToggle"].WasPerformedThisFrame();
