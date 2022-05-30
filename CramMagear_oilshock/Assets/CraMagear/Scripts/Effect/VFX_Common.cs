@@ -23,8 +23,13 @@ public class VFX_Common : MonoBehaviour
         _effect.playRate = rate;
     }
 
-    public void SetGradient(Gradient gradient)
+    public void SetVector3(Vector3 vec, string name = "Vector3")
     {
-        _effect.SetGradient("Gradient", gradient);
+        _effect.SetVector3(name, vec);
+    }
+
+    public void SetGradient(Gradient gradient, string name = "Gradient")
+    {
+        _effect.SetGradient(name, gradient);
     }
 }

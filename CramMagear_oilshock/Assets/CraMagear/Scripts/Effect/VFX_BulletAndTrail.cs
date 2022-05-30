@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(VFX_Common))]
 
-public class VFX_Bullet : MonoBehaviour
+public class VFX_BulletAndTrail : MonoBehaviour
 {
     private VFX_Common _vfxCommon;
 
@@ -14,10 +14,18 @@ public class VFX_Bullet : MonoBehaviour
     //[SerializeField] GameObject _obj;
     Vector3 _localPos;
 
+    [SerializeField] Gradient _bulletGradient;
+    [SerializeField] Gradient _trailGradient;
+
+
+    //[SerializeField] float _degPerSec;
+    //[SerializeField] float _radius;
+    //private float _angle;
+
     void Awake()
     {
         _vfxCommon = transform.gameObject.GetComponent<VFX_Common>();
-        // _vfxCommon.Play();
+        //_vfxCommon.Play();
     }
 
     void Update()
@@ -33,7 +41,7 @@ public class VFX_Bullet : MonoBehaviour
 
         //if (Input.GetKeyDown(KeyCode.W))
         //{
-        //    _vfxCommon.SetPlayRate(2);
+        //    _vfxCommon.SetPlayRate(5);
         //}
         //if (Input.GetKeyDown(KeyCode.S))
         //{
@@ -42,9 +50,16 @@ public class VFX_Bullet : MonoBehaviour
 
         //FixTransform();
         //SetLocalPos(transform.forward);
-        Vector3 localPos = _vfxCommon.Effect.GetVector3("LocalPos");
-        localPos += _forward * _speed * Time.deltaTime;
-        _vfxCommon.Effect.SetVector3("LocalPos", localPos);
+        //Vector3 localPos = _vfxCommon.Effect.GetVector3("LocalPos");
+        //localPos += _forward * _speed * Time.deltaTime;
+        //_vfxCommon.Effect.SetVector3("LocalPos", localPos);
+
+        _vfxCommon.SetGradient(_bulletGradient, "BulletGradient");
+        _vfxCommon.SetGradient(_trailGradient, "TrailGradient");
+
+
+        //_vfxCommon.SetVector3(new Vector3(Mathf.Cos(_angle), 0, Mathf.Sin(_angle)) * _radius, "LocalPos");
+        //_angle += _degPerSec * Mathf.Deg2Rad * Time.deltaTime;
     }
 
     //void FixTransform()
