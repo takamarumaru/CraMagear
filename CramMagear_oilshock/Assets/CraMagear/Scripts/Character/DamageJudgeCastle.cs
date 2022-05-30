@@ -5,6 +5,7 @@ using UnityEngine;
 public class DamageJudgeCastle : MonoBehaviour, IDamageApplicable
 {
     MainObjectParameter _parameter;
+    public MainObjectParameter MainObjectParam => _parameter;
 
     void Awake()
     {

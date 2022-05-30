@@ -28,6 +28,7 @@ public class CharacterBrain : MonoBehaviour,IDamageApplicable
     [SerializeField] ArchitectureCreator　_architectureCreator;
 
     MainObjectParameter _parameter;
+    public MainObjectParameter MainObjectParam => _parameter;
 
     //速度（ベクトルなど）
     Vector3 _velocity;
