@@ -2,20 +2,21 @@ using StandardAssets.Characters.Physics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 [RequireComponent(typeof(OpenCharacterController))]
 [RequireComponent(typeof(MainObjectParameter))]
-public class CharacterBrain : MonoBehaviour,IDamageApplicable
+public class CharacterBrain : MonoBehaviour, IDamageApplicable
 {
     //アンダーバー表記がメンバー
     //Transform _transform;
 
     //[Tooltip("[--性能のパラメータ--]")]
     [Header("[--性能のパラメータ--]")]
-    [Tooltip("速度")]        [SerializeField] float _moveSpeed    = 1.0f;
-    [Tooltip("重力")]        [SerializeField] float _gravity      = -9.8f;
-    [Tooltip("減衰")]        [SerializeField] float _attenuation  = 0.85f;
-    [Tooltip("ジャンプ力")]  [SerializeField] float _jumpPower    = 4.0f;
+    [Tooltip("速度")][SerializeField] float _moveSpeed = 1.0f;
+    [Tooltip("重力")][SerializeField] float _gravity = -9.8f;
+    [Tooltip("減衰")][SerializeField] float _attenuation = 0.85f;
+    [Tooltip("ジャンプ力")][SerializeField] float _jumpPower = 4.0f;
 
     OpenCharacterController _charaCtrl;
 
@@ -25,7 +26,11 @@ public class CharacterBrain : MonoBehaviour,IDamageApplicable
     [Header("[--Component参照--]")]
     [SerializeField] Animator _animator;
 
-    [SerializeField] ArchitectureCreator　_architectureCreator;
+    [SerializeField] ArchitectureCreator _architectureCreator;
+
+    [Header("[--Cinemachine参照--]")]
+    [SerializeField] CinemachineVirtualCamera _virtualCamera;
+    [SerializeField] CinemachineVirtualCamera _aimCamera;
 
     MainObjectParameter _parameter;
     public MainObjectParameter MainObjectParam => _parameter;
@@ -49,6 +54,8 @@ public class CharacterBrain : MonoBehaviour,IDamageApplicable
     // Update is called once per frame
     void Update()
     {
+        SelectUseCamera();
+
         //移動(秒速)
         _charaCtrl.Move(_velocity);
 
@@ -57,7 +64,7 @@ public class CharacterBrain : MonoBehaviour,IDamageApplicable
             _velocity.y = 0;
         }
 
-        if(_architectureCreator)
+        if (_architectureCreator)
         {
             _architectureCreator.ShowGuide();
         }
@@ -70,10 +77,67 @@ public class CharacterBrain : MonoBehaviour,IDamageApplicable
         _charaCtrl.Move(v);
     }
 
+    //プレイヤーの向き
+    void PlayerRotation(Vector3 forward, float axisPower)
+    {
+        if (_parameter.Name != "Player") { return; }
+
+        //VirtualカメラよりAimカメラの方が優先度が低かったらカメラ方向に撃つ
+        if (_aimCamera.Priority < _virtualCamera.Priority)
+        {
+            if (axisPower > 0.01f)
+            {
+                //入力した方向に回転
+                Quaternion rotation = Quaternion.LookRotation(forward, Vector3.up);
+
+                //キャラクターの回転にlerpして回転
+                transform.rotation = Quaternion.RotateTowards
+                     (
+                     transform.rotation,   //変化前の回転
+                     rotation,                   //変化後の回転
+                     720 * Time.deltaTime        //変化する角度
+                     );
+            }
+        }
+        else
+        {
+            // カメラの方向から、X-Z平面の単位ベクトルを取得
+            Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+            //入力した方向に回転
+            Quaternion rotation = Quaternion.LookRotation(cameraForward, Vector3.up);
+            //キャラクターの回転にlerpして回転
+            transform.rotation = rotation;
+        }
+        
+    }
+
+    //カメラ切り替え
+    void SelectUseCamera()
+    {
+        if (_parameter.Name != "Player") { return; }
+
+        //カメラの優先順位
+        int _EnablePriority = 10;
+        int _DisablePriority = 9;
+
+        //右クリック（カメラ切り替え）
+        if (_inputProvider.GetButtonAim())
+        {
+            _virtualCamera.Priority = _DisablePriority;
+            _aimCamera.Priority = _EnablePriority;
+        }
+        else
+        {
+            _virtualCamera.Priority = _EnablePriority;
+            _aimCamera.Priority = _DisablePriority;
+        }
+
+    }
+
     bool IDamageApplicable.ApplyDamage(ref DamageParam param)
     {
         _parameter.hp -= param.DamageValue;
-        Debug.Log("Hit"+_parameter.name);
+        Debug.Log("Hit" + _parameter.name);
         return true;
     }
 
@@ -125,14 +189,22 @@ public class CharacterBrain : MonoBehaviour,IDamageApplicable
                 {
                     brain._animator.SetTrigger("DoAttack");
 
-                    // カメラの方向から、X-Z平面の単位ベクトルを取得
-                    Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
-                    //入力した方向に回転
-                    Quaternion rotation = Quaternion.LookRotation(cameraForward, Vector3.up);
-                    //キャラクターの回転にlerpして回転
-                    brain.transform.rotation = rotation;
+                    //VirtualカメラよりAimカメラの方が優先度が低かったらカメラ方向に撃つ
+                    if (brain._aimCamera.Priority < brain._virtualCamera.Priority)
+                    {
+                        // カメラの方向から、X-Z平面の単位ベクトルを取得
+                        Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+                        //入力した方向に回転
+                        Quaternion rotation = Quaternion.LookRotation(cameraForward, Vector3.up);
+                        //キャラクターの回転にlerpして回転
+                        brain.transform.rotation = rotation;
+                    }
+
                 }
             }
+
+            //プレイヤーの向き
+            brain.PlayerRotation(new Vector3(0, 0, 0), 0.0f);
 
             //ジャンプ
             if (brain._charaCtrl.isGrounded && brain._inputProvider.GetButtonJump())
@@ -195,12 +267,16 @@ public class CharacterBrain : MonoBehaviour,IDamageApplicable
                 {
                     brain._animator.SetTrigger("DoAttack");
 
-                    // カメラの方向から、X-Z平面の単位ベクトルを取得
-                    Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
-                    //入力した方向に回転
-                    Quaternion rotation = Quaternion.LookRotation(cameraForward, Vector3.up);
-                    //キャラクターの回転にlerpして回転
-                    brain.transform.rotation = rotation;
+                    //VirtualカメラよりAimカメラの方が優先度が低かったらカメラ方向に撃つ
+                    if (brain._aimCamera.Priority < brain._virtualCamera.Priority)
+                    {
+                        // カメラの方向から、X-Z平面の単位ベクトルを取得
+                        Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+                        //入力した方向に回転
+                        Quaternion rotation = Quaternion.LookRotation(cameraForward, Vector3.up);
+                        //キャラクターの回転にlerpして回転
+                        brain.transform.rotation = rotation;
+                    }
                 }
             }
 
@@ -226,19 +302,7 @@ public class CharacterBrain : MonoBehaviour,IDamageApplicable
             //--------------
             //向き
             //--------------
-            if (axisPower > 0.01f)
-            {
-                //入力した方向に回転
-                Quaternion rotation = Quaternion.LookRotation(forward, Vector3.up);
-
-                //キャラクターの回転にlerpして回転
-                brain.transform.rotation = Quaternion.RotateTowards
-                    (
-                    brain.transform.rotation,   //変化前の回転
-                    rotation,                   //変化後の回転
-                    720 * Time.deltaTime        //変化する角度
-                    );
-            }
+            brain.PlayerRotation(forward, axisPower);
 
             //--------------
             //移動
