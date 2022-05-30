@@ -27,6 +27,12 @@ public class GamePlayInputProvider : InputProvider
         return PlayerInputManager.Instance.GamePlay_GetButtonAttack();
     }
 
+    //AimØ‚è‘Ö‚¦ƒ{ƒ^ƒ“
+    public override bool GetButtonAim()
+    {
+        return PlayerInputManager.Instance.GamePlay_GetButtonAim();
+    }
+
     public override bool GetButtonArchitectureToggle()
     {
         return PlayerInputManager.Instance.GamePlay_GetButtonArchitectureToggle();

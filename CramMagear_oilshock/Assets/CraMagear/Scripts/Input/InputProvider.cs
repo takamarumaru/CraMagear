@@ -12,6 +12,9 @@ public class InputProvider : MonoBehaviour
     //攻撃ボタン
     public virtual bool GetButtonAttack() => false;
 
+    //Aim切り替えボタン
+    public virtual bool GetButtonAim() => false;
+
     //建築ボタン
     public virtual bool GetButtonArchitectureToggle() => false;
 
