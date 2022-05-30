@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MembersAdministrator : MonoBehaviour
 {
@@ -8,12 +9,13 @@ public class MembersAdministrator : MonoBehaviour
 
     [SerializeField] private Transform _createMember;
 
-    class MemberInfo
+    public class MemberInfo
     {
        public Transform _memberTransform;
        public GroupMemberInputProvider _input;
        public Transform _owner;
        public bool _isDispatch;
+       public bool _isArrival;
     }
 
     private List<MemberInfo> _memberInfo = new ();
@@ -32,6 +34,7 @@ public class MembersAdministrator : MonoBehaviour
             info._input = info._memberTransform.GetComponentInChildren<GroupMemberInputProvider>();
             info._owner = newMember.GetComponentInChildren<GroupMemberInputProvider>().TargetTransform;
             info._isDispatch = false;
+            info._isArrival = false;
 
             //ƒŠƒXƒg‚É’Ç‰Á
             _memberInfo.Add(info);
@@ -47,11 +50,20 @@ public class MembersAdministrator : MonoBehaviour
                 _memberInfo[memberIdx]._input.TargetTransform = _memberInfo[memberIdx]._owner;
                 _memberInfo[memberIdx]._isDispatch = false;
             }
+            else
+            {
+                Transform memberTransform = _memberInfo[memberIdx]._memberTransform;
+                Transform targetTransform = _memberInfo[memberIdx]._input.TargetTransform;
+                var nav = memberTransform.GetComponent<NavMeshAgent>();
+                _memberInfo[memberIdx]._isArrival = ((memberTransform.position - targetTransform.position).magnitude <= 5.0f);
+                //Debug.Log(memberIdx.ToString()+":" + _memberInfo[memberIdx]._isArrival);
+            }
         }
     }
 
-    public void Dispatch(int dispatchNum,Transform dispatchTransform)
+    public bool Dispatch(int dispatchNum,Transform dispatchTransform)
     {
+        var architectureGuideManager = dispatchTransform.GetComponent<ArchitectureWhenMembersCome>();
         int createCount = 0;
         for (int memberIdx = 0 ; createCount < dispatchNum; memberIdx++)
         {
@@ -61,8 +73,15 @@ public class MembersAdministrator : MonoBehaviour
                 _memberInfo[memberIdx]._input.TargetTransform = dispatchTransform;
 
                 _memberInfo[memberIdx]._isDispatch = true;
+
+                architectureGuideManager.SetMember(_memberInfo[memberIdx]);
                 createCount++;
             }
         }
+        if(createCount < dispatchNum)
+        {
+            return false;
+        }
+        return true;
     }
 }

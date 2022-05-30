@@ -57,7 +57,10 @@ public class ArchitectureCreator : MonoBehaviour
         //Œš’z•¨‚ğ¶¬
         Transform transform = Instantiate(_architecturePrefab, _guide.position, _guide.rotation).transform;
         //member‚ğŒš’z•¨‚ÌêŠ‚É”hŒ­‚·‚é
-        _membersAdministrator.Dispatch(3,transform);
+        if(_membersAdministrator.Dispatch(3,transform)==false)
+        {
+            Destroy(transform.gameObject);
+        }
 
         return true;
     }
