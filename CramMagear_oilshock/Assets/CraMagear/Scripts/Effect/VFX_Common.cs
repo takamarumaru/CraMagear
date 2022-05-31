@@ -28,6 +28,11 @@ public class VFX_Common : MonoBehaviour
         _effect.SetVector3(name, vec);
     }
 
+    public Vector3 GetVector3(string name = "Vector3")
+    {
+        return _effect.GetVector3(name);
+    }
+
     public void SetGradient(Gradient gradient, string name = "Gradient")
     {
         _effect.SetGradient(name, gradient);
