@@ -26,9 +26,12 @@ public class MainObjectParameter : MonoBehaviour
 
     private void Update()
     {
-        if(_hp <= 0)
+        if (_name != "Enemy")
         {
-            Destroy(gameObject);
+            if (_hp <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
