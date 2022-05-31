@@ -304,6 +304,8 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
                         Quaternion rotation = Quaternion.LookRotation(cameraForward, Vector3.up);
                         //キャラクターの回転にlerpして回転
                         brain.transform.rotation = rotation;
+
+                        return;
                     }
                 }
             }
@@ -316,9 +318,12 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
             }
 
             //ジャンプ
-            if (!brain._charaCtrl.isGrounded)
+            if (brain._charaCtrl.isGrounded && brain._inputProvider.GetButtonJump())
             {
                 brain._animator.SetBool("IsJump", true);
+
+                brain._velocity.y += brain._jumpPower;
+                return;
             }
 
             brain._animator.SetFloat("MoveSpeed", axisL.magnitude);
