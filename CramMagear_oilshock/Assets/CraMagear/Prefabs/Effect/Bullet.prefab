@@ -170,6 +170,8 @@ MonoBehaviour:
   _hitSlow: 1
   _hitSlowDuration: 0.5
   _hitSlowStartDelayTime: 0
+  _prefabHitEffectObject: {fileID: 6822799985342197616, guid: ae040ae06ebf08544b7f4a0331ee17c6,
+    type: 3}
 --- !u!136 &4409703365343938822
 CapsuleCollider:
   m_ObjectHideFlags: 0

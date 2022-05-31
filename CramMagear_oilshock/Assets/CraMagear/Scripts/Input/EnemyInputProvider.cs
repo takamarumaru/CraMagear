@@ -34,8 +34,6 @@ public class EnemyInputProvider : InputProvider
 
         _navMeshAgent.SetDestination(_targetTransform.position);
 
-        NavMesh.CalculatePath(transform.position, _targetTransform.position, NavMesh.AllAreas, _navMeshAgent.path);
-
         Vector3 target = new();
         if (_navMeshAgent.path.corners.Length > 2)
         {
@@ -51,7 +49,7 @@ public class EnemyInputProvider : InputProvider
         moveVec.Normalize();
 
         _navMeshAgent.nextPosition = transform.position;
-
+        
         return new Vector2(moveVec.x, moveVec.z);
     }
 
