@@ -31,6 +31,12 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
     [Header("[--Cinemachine参照--]")]
     [SerializeField] CinemachineVirtualCamera _virtualCamera;
     [SerializeField] CinemachineVirtualCamera _aimCamera;
+    [SerializeField] GameObject _cameraLookPoint;
+
+    [Header("[--カメラの上下制御--]")]
+    [SerializeField] float _MaxCamRotateY = 0;
+    [SerializeField] float _minCamRotateY = 0;
+    float _camRotateY = 0;
 
     MainObjectParameter _parameter;
     public MainObjectParameter MainObjectParam => _parameter;
@@ -101,14 +107,36 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
         }
         else
         {
-            // カメラの方向から、X-Z平面の単位ベクトルを取得
-            Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
-            //入力した方向に回転
-            Quaternion rotation = Quaternion.LookRotation(cameraForward, Vector3.up);
-            //キャラクターの回転にlerpして回転
-            transform.rotation = rotation;
+            //カメラの向いている方にプレイヤーも向く（押された時だけ）
+            if(_inputProvider.GetButtonAim())
+            {
+                // カメラの方向から、X-Z平面の単位ベクトルを取得
+                Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+                //入力した方向に回転
+                Quaternion rotation = Quaternion.LookRotation(cameraForward, Vector3.up);
+                //キャラクターの回転にlerpして回転
+                transform.rotation = rotation;
+            }
+
+            //プレイヤーの回転
+            transform.Rotate(0.0f, _inputProvider.GetMouse().x, 0.0f);
+
+            //LookPointの回転
+            _cameraLookPoint.transform.Rotate(-_inputProvider.GetMouse().y, 0.0f, 0.0f);
+
+            var localAngle = _cameraLookPoint.transform.localEulerAngles;
+
+            //カメラ制御
+            if (_MaxCamRotateY < localAngle.x && localAngle.x < 180)
+                localAngle.x = _MaxCamRotateY;
+            if (_minCamRotateY > localAngle.x && localAngle.x > 180)
+                localAngle.x = _minCamRotateY;
+
+            //値を代入する
+            _cameraLookPoint.transform.localEulerAngles= localAngle;
+
         }
-        
+
     }
 
     //カメラ切り替え
@@ -121,7 +149,7 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
         int _DisablePriority = 9;
 
         //右クリック（カメラ切り替え）
-        if (_inputProvider.GetButtonAim())
+        if (_inputProvider.GetButtonPressedAim())
         {
             _virtualCamera.Priority = _DisablePriority;
             _aimCamera.Priority = _EnablePriority;
