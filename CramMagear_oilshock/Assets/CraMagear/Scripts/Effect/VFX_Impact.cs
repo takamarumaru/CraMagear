@@ -8,6 +8,7 @@ public class VFX_Impact : MonoBehaviour
 {
     private VFX_Common _vfxCommon;
 
+    [Header("‰Šú’l")]
     [SerializeField] Gradient _gradient;
     [SerializeField] float _playRate;
 
