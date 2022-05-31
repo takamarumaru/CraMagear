@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 686920017321180096}
   - component: {fileID: 686920017321180098}
+  - component: {fileID: 9015556193515803306}
   - component: {fileID: 2794533951755128159}
   - component: {fileID: 686920017321180099}
-  - component: {fileID: 9015556193515803306}
   m_Layer: 0
   m_Name: Smoke
   m_TagString: Untagged
@@ -106,6 +106,19 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
+--- !u!114 &9015556193515803306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686920017321180097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bc31be937937e41aa7d4dfc5bcd22d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _effect: {fileID: 686920017321180098}
 --- !u!114 &2794533951755128159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,16 +200,3 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &9015556193515803306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 686920017321180097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4bc31be937937e41aa7d4dfc5bcd22d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _effect: {fileID: 686920017321180098}
