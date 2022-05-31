@@ -13,6 +13,10 @@ GameObject:
   - component: {fileID: 3021037291751278089}
   - component: {fileID: 3021037291751278093}
   - component: {fileID: 3021037291751278092}
+  - component: {fileID: -7927802487415781368}
+  - component: {fileID: 442318895391875920}
+  - component: {fileID: 84202992665253791}
+  - component: {fileID: -357326153932209279}
   m_Layer: 0
   m_Name: BulletAndTrail
   m_TagString: Untagged
@@ -29,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 3021037291751278087}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -74,7 +78,38 @@ VisualEffect:
       - m_Value:
           serializedVersion: 2
           key0: {r: 0, g: 0, b: 766.9961, a: 1}
-          key1: {r: 95.87451, g: 95.87451, b: 95.87451, a: 1}
+          key1: {r: 766.9961, g: 766.9961, b: 766.9961, a: 0}
+          key2: {r: 0, g: 63.49804, b: 12.047059, a: 0}
+          key3: {r: 1.0039216, g: 59.231373, b: 64, a: 0}
+          key4: {r: 0, g: 2.509804, b: 64, a: 0}
+          key5: {r: 63.49804, g: 0, b: 64, a: 0}
+          key6: {r: 64, g: 0, b: 0, a: 0}
+          key7: {r: 0, g: 0, b: 0, a: 0}
+          ctime0: 0
+          ctime1: 65535
+          ctime2: 17348
+          ctime3: 40092
+          ctime4: 48959
+          ctime5: 59560
+          ctime6: 65535
+          ctime7: 0
+          atime0: 0
+          atime1: 65535
+          atime2: 0
+          atime3: 0
+          atime4: 0
+          atime5: 0
+          atime6: 0
+          atime7: 0
+          m_Mode: 0
+          m_NumColorKeys: 2
+          m_NumAlphaKeys: 2
+        m_Name: BulletGradient
+        m_Overridden: 1
+      - m_Value:
+          serializedVersion: 2
+          key0: {r: 1, g: 1, b: 1, a: 1}
+          key1: {r: 1, g: 1, b: 1, a: 1}
           key2: {r: 0, g: 0, b: 0, a: 0}
           key3: {r: 0, g: 0, b: 0, a: 0}
           key4: {r: 0, g: 0, b: 0, a: 0}
@@ -90,18 +125,18 @@ VisualEffect:
           ctime6: 0
           ctime7: 0
           atime0: 0
-          atime1: 65535
-          atime2: 0
-          atime3: 0
+          atime1: 50693
+          atime2: 65535
+          atime3: 65535
           atime4: 0
           atime5: 0
           atime6: 0
           atime7: 0
           m_Mode: 0
           m_NumColorKeys: 2
-          m_NumAlphaKeys: 2
-        m_Name: BulletGradient
-        m_Overridden: 0
+          m_NumAlphaKeys: 3
+        m_Name: TrailGradient
+        m_Overridden: 1
     m_NamedObject:
       m_Array: []
     m_Bool:
@@ -171,29 +206,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30b58ca3ed5144549a680abbe3c0d85e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _forward: {x: 0, y: 0, z: 0}
-  _speed: 0
+  _forward: {x: 0, y: 0, z: 1}
+  _speed: 100
   _bulletGradient:
     serializedVersion: 2
     key0: {r: 0, g: 0, b: 766.9961, a: 1}
     key1: {r: 15.999998, g: 15.999998, b: 15.999998, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
+    key2: {r: 15.999998, g: 15.999998, b: 15.999998, a: 0}
+    key3: {r: 1.0039216, g: 59.231373, b: 64, a: 0}
+    key4: {r: 0, g: 2.509804, b: 64, a: 0}
+    key5: {r: 63.49804, g: 0, b: 64, a: 0}
+    key6: {r: 64, g: 0, b: 0, a: 0}
+    key7: {r: 64, g: 0, b: 0, a: 0}
     ctime0: 0
     ctime1: 65535
-    ctime2: 0
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
+    ctime2: 65535
+    ctime3: 40092
+    ctime4: 48959
+    ctime5: 59560
+    ctime6: 65535
+    ctime7: 65535
     atime0: 0
     atime1: 65535
-    atime2: 0
+    atime2: 65535
     atime3: 0
     atime4: 0
     atime5: 0
@@ -231,3 +266,70 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+--- !u!114 &-7927802487415781368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3021037291751278087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ee40ae380cd8f74ab6d2b4d7e587337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parameter: {fileID: -357326153932209279}
+  _lifespan: 3
+  _damage: 10
+  _damageRate: 0.1
+  _hitInterval: 0.1
+  _hitDuration: 0.5
+  _hitSlow: 1
+  _hitSlowDuration: 0.5
+  _hitSlowStartDelayTime: 0
+  _prefabHitEffectObject: {fileID: 0}
+--- !u!136 &442318895391875920
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3021037291751278087}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.5
+  m_Height: 100
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 50}
+--- !u!54 &84202992665253791
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3021037291751278087}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
+--- !u!114 &-357326153932209279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3021037291751278087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16ad8b89e7d0f1740aff00a3ce8b7ef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _teamID: 1
+  _name: 
+  _hp: 1000

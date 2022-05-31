@@ -251,7 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _createInterval: 0.5
-  _bulletPrefab: {fileID: 6162723787568201129, guid: 0f9bda5aeedbd1f489f0e72505622e57,
+  _bulletPrefab: {fileID: 5856858181157451952, guid: cdcb40564d62a994fbcab5fb233b58eb,
     type: 3}
   _createOffset: 0
   _lookAtTarget: {fileID: 44437126106106191}
@@ -452,6 +452,7 @@ GameObject:
   - component: {fileID: 44437126103813038}
   - component: {fileID: 44437126107204494}
   - component: {fileID: 44437126106106190}
+  - component: {fileID: 3769578694085133707}
   m_Layer: 10
   m_Name: Cannon_2
   m_TagString: Architecture
@@ -524,6 +525,23 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3769578694085133707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44437126104110990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa616a033f8f8e64eacc13dc40931408, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _createInterval: 0.5
+  _bulletPrefab: {fileID: 5856858181157451952, guid: cdcb40564d62a994fbcab5fb233b58eb,
+    type: 3}
+  _createOffset: 0
+  _lookAtTarget: {fileID: 44437126106106191}
 --- !u!1 &7920840269689202603
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,7 +620,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 15
+  m_Radius: 2000
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8627251590110762437
 MonoBehaviour:
