@@ -257,6 +257,11 @@ MonoBehaviour:
   _jumpPower: 4
   _animator: {fileID: 398588320}
   _architectureCreator: {fileID: 0}
+  _virtualCamera: {fileID: 0}
+  _aimCamera: {fileID: 0}
+  _cameraLookPoint: {fileID: 0}
+  _MaxCamRotateY: 0
+  _minCamRotateY: 0
 --- !u!114 &24225143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5898,7 +5903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b005f66f61cda6b4da75727f7a221000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 2060281962}
+  target: {fileID: 398588319}
   player: {fileID: 5112448467230062671}
   arrow: {fileID: 661384669}
 --- !u!64 &661384672
@@ -8832,7 +8837,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-52962
+  m_Name: pb_Mesh87660
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -12581,7 +12586,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1874595432}
-  m_LocalRotation: {x: 0.14142133, y: 0.0006726065, z: -0.00009608666, w: 0.9899493}
+  m_LocalRotation: {x: 0.14142132, y: 0.0006726406, z: -0.000096091506, w: 0.9899493}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14832,6 +14837,11 @@ MonoBehaviour:
   _jumpPower: 0.075
   _animator: {fileID: 1032647149}
   _architectureCreator: {fileID: 7924674304205582056}
+  _virtualCamera: {fileID: 0}
+  _aimCamera: {fileID: 0}
+  _cameraLookPoint: {fileID: 0}
+  _MaxCamRotateY: 0
+  _minCamRotateY: 0
 --- !u!114 &5112448467230062677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15485,6 +15495,11 @@ MonoBehaviour:
   _jumpPower: 0.075
   _animator: {fileID: 6667538997754197537}
   _architectureCreator: {fileID: 0}
+  _virtualCamera: {fileID: 0}
+  _aimCamera: {fileID: 0}
+  _cameraLookPoint: {fileID: 0}
+  _MaxCamRotateY: 0
+  _minCamRotateY: 0
 --- !u!114 &6667538996151256801
 MonoBehaviour:
   m_ObjectHideFlags: 0
