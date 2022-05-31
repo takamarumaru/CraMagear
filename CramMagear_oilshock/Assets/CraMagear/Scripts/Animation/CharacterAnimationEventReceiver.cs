@@ -33,6 +33,7 @@ public class CharacterAnimationEventReceiver : MonoBehaviour
         //Debug.Log("’e”­ËI");
     }
 
+    //“G‚ÌUŒ‚
     public void Tread_Attack(string objName)
     {
         Transform obj = _templateObjects.Find(objName);
@@ -42,5 +43,11 @@ public class CharacterAnimationEventReceiver : MonoBehaviour
             var newObj = Instantiate(original: obj.gameObject, parent: _brain.transform);
         }
         // Debug.Log("UŒ‚”»’èI");
+    }
+
+    //ƒLƒƒƒ‰ƒNƒ^[‚ª“|‚ê‚Ä‚©‚çÁ‚¦‚é
+    public void CharacterDown()
+    {
+        Destroy(_brain.transform.gameObject);
     }
 }

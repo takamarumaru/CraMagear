@@ -75,6 +75,12 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
             _architectureCreator.ShowGuide();
         }
 
+        //倒れるアニメーション
+        if(_parameter.hp<=0)
+        {
+            _animator.SetBool("IsDown", true);
+        }
+
     }
 
     //vだけ移動する
