@@ -44,6 +44,9 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
     //速度（ベクトルなど）
     Vector3 _velocity;
 
+    //input系のバグによりごり押しプログラムフラグ
+    bool _inputPushButton = false;
+
     private void Awake()
     {
         //_transform = transform;
@@ -60,6 +63,15 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
     // Update is called once per frame
     void Update()
     {
+        //常に偽
+        _inputPushButton = false;
+
+        //何らかのバグでPlayerRotate関数の中で書くと実行されないのでupdateに書いた
+        if (_inputProvider.GetButtonAim() && _parameter.Name == "Player")
+        {
+            _inputPushButton = true;
+        }
+
         SelectUseCamera();
 
         //移動(秒速)
@@ -76,7 +88,7 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
         }
 
         //倒れるアニメーション
-        if(_parameter.hp<=0)
+        if (_parameter.hp <= 0)
         {
             _animator.SetBool("IsDown", true);
         }
@@ -113,7 +125,7 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
         else
         {
             //カメラの向いている方にプレイヤーも向く（押された時だけ）
-            if(_inputProvider.GetButtonAim())
+            if (_inputPushButton == true)
             {
                 // カメラの方向から、X-Z平面の単位ベクトルを取得
                 Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
@@ -325,10 +337,16 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
                 {
                     brain._animator.SetTrigger("DoAttack");
 
-                    if (brain._parameter.Name == "Player")
+                    //プレイヤーと見方だけ判定
+                    if (brain._parameter.Name != "Enemy")
                     {
+
+                        //攻撃時動かないようにした
+                        brain._velocity.x = 0;
+                        brain._velocity.z = 0;
+
                         //VirtualカメラよりAimカメラの方が優先度が低かったらカメラ方向に撃つ
-                        if (brain._aimCamera.Priority < brain._virtualCamera.Priority)
+                        if (brain._aimCamera.Priority < brain._virtualCamera.Priority&& brain._parameter.Name == "Player")
                         {
                             // カメラの方向から、X-Z平面の単位ベクトルを取得
                             Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
@@ -390,7 +408,7 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
                 }
             }
 
-            if(brain.transform.name == "PreEnemy")
+            if (brain.transform.name == "PreEnemy")
             {
                 Debug.Log(forward);
             }
