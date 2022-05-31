@@ -7,6 +7,8 @@ public class LookAtTarget : MonoBehaviour
 
     //標的が範囲内にいるか
     public bool isInTheRange = true;
+    //標的が範囲内にいるか
+    [SerializeField] bool _isEnableY = true;
 
     [Header("parameter")]
 
@@ -44,11 +46,12 @@ public class LookAtTarget : MonoBehaviour
 
         //自分からターゲットまでのベクトルを算出
         Vector3 vLook = _targetTransform.position - transform.position;
+        if (_isEnableY==false) vLook.y = 0.0f;
         //自身を回転
         Quaternion rotation = Quaternion.LookRotation(vLook, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, _followingSpeed * Time.deltaTime);
 
-        //Debug.Log(vLook.magnitude);
+        Debug.Log(vLook.magnitude);
         //標的としているTransformが範囲外に移動したらnullに
         isInTheRange = (vLook.magnitude <= _sphereCollider.radius);
         if (isInTheRange == false)
@@ -60,7 +63,8 @@ public class LookAtTarget : MonoBehaviour
     public void SearchNearObject(Collider other)
     {
         if (other.gameObject.tag != _collisionTag) return;
-        
+
+        //Debug.Log(other.gameObject.tag);
         //標的が既にいるならば距離を算出
         if (_targetTransform)
         {
