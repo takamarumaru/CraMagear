@@ -10,8 +10,8 @@ public class VFX_TurretBullet : MonoBehaviour
 
     [SerializeField] Gradient _gradient;
 
-    //[SerializeField] Vector3 _forward;
-    //[SerializeField] float _speed;
+    [SerializeField] Vector3 _forward;
+    [SerializeField] float _speed;
 
     void Awake()
     {

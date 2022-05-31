@@ -44,6 +44,8 @@ public class DamageApplicant : MonoBehaviour
     [Tooltip("ŠJnŠÔ")]
     [SerializeField] float _hitSlowStartDelayTime;
 
+    [SerializeField] GameObject _prefabHitEffectObject;
+
     public void Update()
     {
         //õ–½
@@ -79,6 +81,7 @@ public class DamageApplicant : MonoBehaviour
                 if(dmgApp.ApplyDamage(ref param))
                 {
                     //“–‚½‚Á‚½‚É‚â‚è‚½‚¢ˆ—
+                    Instantiate(_prefabHitEffectObject, contact.point, transform.rotation);
                 }
             }
             //else
