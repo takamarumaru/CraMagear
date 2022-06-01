@@ -181,6 +181,12 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
 
     bool IDamageApplicable.ApplyDamage(ref DamageParam param)
     {
+        //攻撃食らったアニメーション
+        if(_parameter.Name=="Player")
+        {
+            _animator.SetTrigger("DoStagger");
+        }
+
         _parameter.hp -= param.DamageValue;
         Debug.Log("Hit" + _parameter.name);
         return true;
