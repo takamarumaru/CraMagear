@@ -82,12 +82,10 @@ public class DamageApplicant : MonoBehaviour
                 {
                     //“–‚½‚Á‚½‚É‚â‚è‚½‚¢ˆ—
                     Instantiate(_prefabHitEffectObject, contact.point, transform.rotation);
+
+                    Destroy(transform.parent.gameObject);
                 }
             }
-            //else
-            //{
-            //    collision.rigidbody.
-            //}
         }
     }
 }
