@@ -36,11 +36,10 @@ public class PlayerLookEnemy : MonoBehaviour
         float angle = Mathf.Floor(r * 360 / ( 2 * Mathf.PI));
         //gameObject.transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z);
         arrow.transform.rotation = Quaternion.Euler(0, 90 - angle, 0);
-
         //Vector3 _PlayerP = transform.parent.transform.localRotation.eulerAngles;
         //Vector3 result = transform.localRotation.eulerAngles;
 
-        
+
     }
 
     
