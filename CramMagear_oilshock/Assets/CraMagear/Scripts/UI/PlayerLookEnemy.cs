@@ -28,7 +28,7 @@ public class PlayerLookEnemy : MonoBehaviour
     void Update()
     {
 
-        transform.position = player.transform.position + player.transform.forward * 1.2f + Vector3.up * 0.1f;
+        //transform.position = player.transform.position + player.transform.forward * 1.0f + Vector3.up * 0.1f;
         Vector2 vec3 = new Vector2(target.transform.position.x - player.transform.position.x,
                                    target.transform.position.z - player.transform.position.z);
 
