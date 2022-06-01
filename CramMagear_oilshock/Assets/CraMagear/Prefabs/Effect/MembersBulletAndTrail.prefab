@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3021037291751278092}
   - component: {fileID: 7056510289320425295}
   m_Layer: 16
-  m_Name: BulletAndTrail
+  m_Name: MembersBulletAndTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -277,37 +277,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _aliveTime: 3
---- !u!1 &3184546763923382075
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6174098315665628456}
-  m_Layer: 16
-  m_Name: Attack
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6174098315665628456
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3184546763923382075}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4633406006300097898}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6872623215648369864
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,8 +309,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
-  m_Children:
-  - {fileID: 6174098315665628456}
+  m_Children: []
   m_Father: {fileID: 3021037291751278088}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -359,7 +327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parameter: {fileID: 8506524782102597279}
   _lifespan: 3
-  _damage: 10
+  _damage: 3
   _damageRate: 0.1
   _hitInterval: 0.1
   _hitDuration: 0.5
