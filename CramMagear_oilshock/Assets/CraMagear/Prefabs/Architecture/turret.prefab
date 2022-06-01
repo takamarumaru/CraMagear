@@ -438,7 +438,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInTheRange: 0
   _isEnableY: 1
-  _followingSpeed: 120
+  _followingSpeed: 360
   _collisionTag: Enemy
   _isReturnDefault: 1
   _sphereCollider: {fileID: 8627251590110762458}
@@ -621,7 +621,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 15
+  m_Radius: 20
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8627251590110762437
 MonoBehaviour:
