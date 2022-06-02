@@ -14,51 +14,55 @@ public class GroupMemberInputProvider : InputProvider
 
     private void Awake()
     {
-        _navMeshAgent.updatePosition = false;
-        _navMeshAgent.updateRotation = false;
+        //_navMeshAgent.updatePosition = false;
+        //_navMeshAgent.updateRotation = false;
     }
 
     //¶Ž²Žæ“¾
     public override Vector2 GetAxisL()
     {
         if (_targetTransform == null) return Vector2.zero;
-
         _navMeshAgent.SetDestination(_targetTransform.position);
-
-        Vector3 target = new();
-        if (_navMeshAgent.path.corners.Length > 2)
-        {
-            target = _navMeshAgent.path.corners[1];
-        }
-        else
-        {
-            target = _targetTransform.position;
-        }
-
-        Vector3 moveVec = target - transform.position;
-        moveVec.y = 0.0f;
-        if(moveVec.magnitude <= _navMeshAgent.stoppingDistance)
-        {
-            return Vector2.zero;
-        }
+        Vector2 moveVec = new Vector2(_navMeshAgent.velocity.x, _navMeshAgent.velocity.z);
         moveVec.Normalize();
+        return moveVec;
 
-        _navMeshAgent.nextPosition = transform.position;
+        //_navMeshAgent.SetDestination(_targetTransform.position);
 
-        return new Vector2(moveVec.x, moveVec.z);
+        //Vector3 target = new();
+        //if (_navMeshAgent.path.corners.Length > 2)
+        //{
+        //    target = _navMeshAgent.path.corners[1];
+        //}
+        //else
+        //{
+        //    target = _targetTransform.position;
+        //}
+
+        //Vector3 moveVec = target - transform.position;
+        //moveVec.y = 0.0f;
+        //if(moveVec.magnitude <= _navMeshAgent.stoppingDistance)
+        //{
+        //    return Vector2.zero;
+        //}
+        //moveVec.Normalize();
+
+        //_navMeshAgent.nextPosition = transform.position;
+
+        //return new Vector2(moveVec.x, moveVec.z);
     }
 
     private void OnDrawGizmos()
     {
-        if (!_navMeshAgent) return;
+        //if (!_navMeshAgent) return;
 
-        Gizmos.color = Color.red;
-        Vector3 prepos = transform.position;
-        foreach (Vector3 pos in _navMeshAgent.path.corners)
-        {
-            Gizmos.DrawLine(prepos, pos);
-            prepos = pos;
-        }
+        //Gizmos.color = Color.red;
+        //Vector3 prepos = transform.position;
+        //foreach (Vector3 pos in _navMeshAgent.path.corners)
+        //{
+        //    Gizmos.DrawLine(prepos, pos);
+        //    prepos = pos;
+        //}
     }
 
     //‰EŽ²Žæ“¾
