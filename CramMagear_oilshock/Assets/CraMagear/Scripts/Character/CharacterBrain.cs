@@ -348,8 +348,8 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
                     {
 
                         //攻撃時動かないようにした
-                        brain._velocity.x = 0;
-                        brain._velocity.z = 0;
+                        //brain._velocity.x = 0;
+                        //brain._velocity.z = 0;
 
                         //VirtualカメラよりAimカメラの方が優先度が低かったらカメラ方向に撃つ
                         if (brain._aimCamera.Priority < brain._virtualCamera.Priority&& brain._parameter.Name == "Player")
