@@ -1009,6 +1009,7 @@ GameObject:
   - component: {fileID: 6162646534782391052}
   - component: {fileID: 6162646534782391091}
   - component: {fileID: 6162646534782391048}
+  - component: {fileID: 6299651491070020303}
   m_Layer: 0
   m_Name: GroupMember
   m_TagString: Untagged
@@ -1110,7 +1111,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 0
+  _gravity: -9.8
+  _attenuation: 0.85
+  _jumpPower: 4
   _animator: {fileID: 6162646535003763491}
+  _architectureCreator: {fileID: 0}
+  _virtualCamera: {fileID: 0}
+  _aimCamera: {fileID: 0}
+  _cameraLookPoint: {fileID: 0}
+  _MaxCamRotateY: 0
+  _minCamRotateY: 0
 --- !u!195 &6162646534782391048
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1133,6 +1143,21 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &6299651491070020303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6162646534782391090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16ad8b89e7d0f1740aff00a3ce8b7ef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _teamID: 0
+  _name: 
+  _hp: 0
 --- !u!1 &6162646534846816977
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,6 +1536,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetTransform: {fileID: 0}
   _navMeshAgent: {fileID: 6162646534782391048}
+  lookAtTarget: {fileID: 0}
 --- !u!1 &6162646535425471458
 GameObject:
   m_ObjectHideFlags: 0
@@ -1584,7 +1610,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firingPoint: {fileID: 6162646535426936816}
+  firingPointOffset: {x: 0, y: 0, z: 0}
+  MaxShotPoint: {fileID: 0}
   bullet: {fileID: 507858147006154484, guid: 8074de6ccb6927a42822b161e82c3e5c, type: 3}
+  effect: {fileID: 4530951753886053254, guid: 207c914d88ca69447a3bf1bd823e22ed, type: 3}
 --- !u!1 &6162646535426936816
 GameObject:
   m_ObjectHideFlags: 0

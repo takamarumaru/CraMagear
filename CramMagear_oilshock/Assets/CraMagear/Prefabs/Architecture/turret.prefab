@@ -253,7 +253,8 @@ MonoBehaviour:
   _createInterval: 0.5
   _bulletPrefab: {fileID: 5856858181157451952, guid: cdcb40564d62a994fbcab5fb233b58eb,
     type: 3}
-  _createOffset: 0
+  _effect: {fileID: 2660679472432803061, guid: b43255dcf01301c4db3a1f65adeea298, type: 3}
+  _createOffset: {x: 0, y: 0, z: 0.4}
   _lookAtTarget: {fileID: 44437126106106191}
 --- !u!1 &44437126104110986
 GameObject:
@@ -541,7 +542,8 @@ MonoBehaviour:
   _createInterval: 0.5
   _bulletPrefab: {fileID: 5856858181157451952, guid: cdcb40564d62a994fbcab5fb233b58eb,
     type: 3}
-  _createOffset: 0
+  _effect: {fileID: 2660679472432803061, guid: b43255dcf01301c4db3a1f65adeea298, type: 3}
+  _createOffset: {x: 0, y: 0, z: 0.4}
   _lookAtTarget: {fileID: 44437126106106191}
 --- !u!1 &7920840269689202603
 GameObject:

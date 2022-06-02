@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 1308478296846659294}
   - component: {fileID: 1308478296846659295}
   - component: {fileID: 1308478296846659291}
+  - component: {fileID: 1093193146184362756}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -281,7 +282,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 120
+  _gravity: -9.8
+  _attenuation: 0.85
+  _jumpPower: 4
   _animator: {fileID: 1308478297927094898}
+  _architectureCreator: {fileID: 0}
+  _virtualCamera: {fileID: 0}
+  _aimCamera: {fileID: 0}
+  _cameraLookPoint: {fileID: 0}
+  _MaxCamRotateY: 0
+  _minCamRotateY: 0
+--- !u!114 &1093193146184362756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308478296846659264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16ad8b89e7d0f1740aff00a3ce8b7ef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _teamID: 0
+  _name: 
+  _hp: 0
 --- !u!1 &1308478298069627273
 GameObject:
   m_ObjectHideFlags: 0
@@ -1809,7 +1834,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firingPoint: {fileID: 3140335655629828102}
+  firingPointOffset: {x: 0, y: 0, z: 0}
+  MaxShotPoint: {fileID: 0}
   bullet: {fileID: 507858147006154484, guid: 8074de6ccb6927a42822b161e82c3e5c, type: 3}
+  effect: {fileID: 4530951753886053254, guid: 207c914d88ca69447a3bf1bd823e22ed, type: 3}
 --- !u!1 &8845651931895012974
 GameObject:
   m_ObjectHideFlags: 0

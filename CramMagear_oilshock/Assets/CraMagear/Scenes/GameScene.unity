@@ -1351,7 +1351,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh72636
+  m_Name: pb_Mesh41812
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3205,7 +3205,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.8388659, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -4414,9 +4414,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc6e93fbcbb6d7a4bb37389bf37e1ab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firingPoint: {fileID: 1870615152}
+  firingPoint: {fileID: 1639578934}
+  firingPointOffset: {x: 0, y: -0.05, z: 0.2}
   MaxShotPoint: {fileID: 1396844524}
   bullet: {fileID: 3021037291751278087, guid: 6a098affc83a52549b3269493ffb742b, type: 3}
+  effect: {fileID: 4530951753886053254, guid: 207c914d88ca69447a3bf1bd823e22ed, type: 3}
 --- !u!1773428102 &444298893
 ParentConstraint:
   m_ObjectHideFlags: 0
@@ -4457,7 +4459,7 @@ Transform:
   m_Children:
   - {fileID: 638019772}
   m_Father: {fileID: 1060640215}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -50.234, y: 86.807, z: -91.497}
 --- !u!1 &444309578
 GameObject:
@@ -7967,7 +7969,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.8388659, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -7984,7 +7986,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1027554361}
   m_LocalRotation: {x: -0.16418684, y: 0, z: 0, w: 0.9864293}
-  m_LocalPosition: {x: 0.03962185, y: -0.078451864, z: -4.637896}
+  m_LocalPosition: {x: 0.040983334, y: -0.078451864, z: -4.637896}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8117,11 +8119,10 @@ Transform:
   - {fileID: 289802886}
   - {fileID: 891856475}
   - {fileID: 1611148116}
-  - {fileID: 1870615153}
   - {fileID: 444298894}
   - {fileID: 1939403044}
-  - {fileID: 62736106}
   - {fileID: 1691587285}
+  - {fileID: 62736106}
   m_Father: {fileID: 1765618140}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13378,7 +13379,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh73086
+  m_Name: pb_Mesh42262
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13665,7 +13666,7 @@ Transform:
   m_Children:
   - {fileID: 2142315076}
   m_Father: {fileID: 1060640215}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1693117400
 GameObject:
@@ -14928,37 +14929,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1853041204}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1870615152
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1870615153}
-  m_Layer: 0
-  m_Name: MuzzlePoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1870615153
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1870615152}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.15, y: 0.15, z: 0.6}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1060640215}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1872732945 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 455957966157736352, guid: decec03a9de484948b79da6219847d52,
@@ -15397,7 +15367,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1060640215}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!212 &1939403045
 SpriteRenderer:
@@ -16043,7 +16013,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2032280007}
   m_LocalRotation: {x: -0.16418684, y: 0, z: 0, w: 0.9864293}
-  m_LocalPosition: {x: 0.03962185, y: -0.078451864, z: -4.637896}
+  m_LocalPosition: {x: 0.040983334, y: -0.078451864, z: -4.637896}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17730,8 +17700,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firingPoint: {fileID: 6667538997155227489}
+  firingPointOffset: {x: 0, y: 0, z: 0}
   MaxShotPoint: {fileID: 0}
   bullet: {fileID: 3021037291751278087, guid: 874791c56c38e7342b612dd2654f9360, type: 3}
+  effect: {fileID: 4530951753886053254, guid: 207c914d88ca69447a3bf1bd823e22ed, type: 3}
 --- !u!1 &6667538997274059745
 GameObject:
   m_ObjectHideFlags: 0

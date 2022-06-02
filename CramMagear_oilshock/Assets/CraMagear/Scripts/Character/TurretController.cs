@@ -12,8 +12,11 @@ public class TurretController : MonoBehaviour
     [Tooltip("生成する弾")]
     [SerializeField] private GameObject _bulletPrefab;
 
+    [Tooltip("マズルフラッシュ")]
+    [SerializeField] private GameObject _effect;
+
     [Tooltip("生成座標オフセット")]
-    [SerializeField] private float _createOffset;
+    [SerializeField] private Vector3 _createOffset;
 
     private float count;
 
@@ -28,10 +31,18 @@ public class TurretController : MonoBehaviour
     {
         if (_lookAtTarget.isInTheRange == false) { return; }
 
+        Vector3 offset = new Vector3();
+        offset += transform.right * _createOffset.x;
+        offset += transform.up * _createOffset.y;
+        offset += transform.forward * _createOffset.z;
+
         count += Time.deltaTime;
-        if(count > _createInterval)
+        if (count > _createInterval)
         {
-            Instantiate(_bulletPrefab,transform.position, transform.rotation);
+            Instantiate(_bulletPrefab, transform.position, transform.rotation);
+
+            // マズルフラッシュを出す
+            Instantiate(_effect, transform.position + offset, transform.rotation);
             count = 0.0f;
         }
     }
