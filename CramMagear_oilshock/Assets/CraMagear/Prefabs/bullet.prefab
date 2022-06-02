@@ -29,7 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 507858147006154484}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.19936793, z: 0, w: 0.9799247}
   m_LocalPosition: {x: 0, y: 1.544, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
@@ -63,6 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ee40ae380cd8f74ab6d2b4d7e587337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _parameter: {fileID: 0}
   _lifespan: 1
   _damage: 10
   _damageRate: 0.1
@@ -71,6 +72,7 @@ MonoBehaviour:
   _hitSlow: 1
   _hitSlowDuration: 0.5
   _hitSlowStartDelayTime: 0
+  _prefabHitEffectObject: {fileID: 0}
 --- !u!33 &1491164442433006316
 MeshFilter:
   m_ObjectHideFlags: 0
