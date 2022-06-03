@@ -36,7 +36,9 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
     [Header("[--カメラの上下制御--]")]
     [SerializeField] float _MaxCamRotateY = 0;
     [SerializeField] float _minCamRotateY = 0;
-    float _camRotateY = 0;
+
+    [Header("[--レティクルのアクティブ非アクティブ制御--]")]
+    [SerializeField] GameObject _reticleObject;
 
     MainObjectParameter _parameter;
     public MainObjectParameter MainObjectParam => _parameter;
@@ -170,11 +172,14 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
         {
             _virtualCamera.Priority = _DisablePriority;
             _aimCamera.Priority = _EnablePriority;
+
+            _reticleObject.SetActive(true);
         }
         else
         {
             _virtualCamera.Priority = _EnablePriority;
             _aimCamera.Priority = _DisablePriority;
+            _reticleObject.SetActive(false);
         }
 
     }
