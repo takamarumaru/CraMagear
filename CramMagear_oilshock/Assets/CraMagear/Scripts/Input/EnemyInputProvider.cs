@@ -5,6 +5,11 @@ using UnityEngine.AI;
 
 public class EnemyInputProvider : InputProvider
 {
+    //AIからセットされるデータ
+    public Vector2 AxisL { get; set; }
+    public Vector2 AxisR { get; set; }
+    public bool Attack { get; set; } = false;
+
     [SerializeField] private Transform _targetTransform;
 
     //
@@ -27,10 +32,13 @@ public class EnemyInputProvider : InputProvider
     }
 
     //左軸取得
-    public override Vector2 GetAxisL()
+    public override Vector2 GetAxisL() => AxisL;
+
+    //移動方向を探す
+    public Vector2 SearchTargetDirection()
     {
         if (_isHitRange == true) return Vector2.zero;
-        if (_targetTransform == null)return Vector2.zero;
+        if (_targetTransform == null) return Vector2.zero;
 
         _navMeshAgent.SetDestination(_targetTransform.position);
 
@@ -49,7 +57,7 @@ public class EnemyInputProvider : InputProvider
         moveVec.Normalize();
 
         _navMeshAgent.nextPosition = transform.position;
-        
+
         return new Vector2(moveVec.x, moveVec.z);
     }
 
