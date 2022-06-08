@@ -40,16 +40,7 @@ public class MemberAIStateIdle : GameStateMachine.StateNodeBase
         Vector3 forward = new Vector3(axisL.x, 0, axisL.y);
         if (axisPower > 0.01f)
         {
-            //入力した方向に回転
-            Quaternion rotation = Quaternion.LookRotation(forward, Vector3.up);
-
-            //キャラクターの回転にlerpして回転
-            input.transform.rotation = Quaternion.RotateTowards
-                 (
-                 input.transform.rotation,   //変化前の回転
-                 rotation,                   //変化後の回転
-                 720 * Time.deltaTime        //変化する角度
-                 );
+            input.RotateAxis(forward, StateMgr.transform);
         }
 
         //ジャンプ
@@ -94,7 +85,7 @@ public class MemberAIStateChase : GameStateMachine.StateNodeBase
             //入力した方向に回転
             Quaternion rotation = Quaternion.LookRotation(cameraForward, Vector3.up);
             //キャラクターの回転にlerpして回転
-            input.transform.rotation = rotation;
+            StateMgr.CharaBrain.transform.rotation = rotation;
 
             return;
         }
@@ -126,16 +117,7 @@ public class MemberAIStateChase : GameStateMachine.StateNodeBase
         //--------------
         if (axisPower > 0.01f)
         {
-            //入力した方向に回転
-            Quaternion rotation = Quaternion.LookRotation(forward, Vector3.up);
-
-            //キャラクターの回転にlerpして回転
-            input.transform.rotation = Quaternion.RotateTowards
-                 (
-                 input.transform.rotation,   //変化前の回転
-                 rotation,                   //変化後の回転
-                 720 * Time.deltaTime        //変化する角度
-                 );
+            input.RotateAxis(forward, StateMgr.transform);
         }
 
         //--------------

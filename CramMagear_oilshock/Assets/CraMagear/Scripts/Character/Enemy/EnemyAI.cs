@@ -9,7 +9,6 @@ public class EnemyAIStateIdle : GameStateMachine.StateNodeBase
     public override void OnExit()
     {
         base.OnExit();
-        //Debug.Log("Exit");
     }
     public override void OnUpdate()
     {
@@ -23,8 +22,6 @@ public class EnemyAIStateIdle : GameStateMachine.StateNodeBase
         {
             Animator.SetBool("IsMoving", true);
         }
-        //d—Í
-        //brain._velocity.y += brain._gravity * Time.deltaTime;
 
         //UŒ‚
         if (input.GetButtonAttack())
@@ -37,16 +34,7 @@ public class EnemyAIStateIdle : GameStateMachine.StateNodeBase
         Vector3 forward = new Vector3(axisL.x, 0, axisL.y);
         if (axisPower > 0.01f)
         {
-            //“ü—Í‚µ‚½•ûŒü‚É‰ñ“]
-            Quaternion rotation = Quaternion.LookRotation(forward, Vector3.up);
-
-            //ƒLƒƒƒ‰ƒNƒ^[‚Ì‰ñ“]‚Élerp‚µ‚Ä‰ñ“]
-            input.transform.rotation = Quaternion.RotateTowards
-                 (
-                 input.transform.rotation,   //•Ï‰»‘O‚Ì‰ñ“]
-                 rotation,                   //•Ï‰»Œã‚Ì‰ñ“]
-                 720 * Time.deltaTime        //•Ï‰»‚·‚éŠp“x
-                 );
+            input.RotateAxis(forward, StateMgr.transform);
         }
     }
     public override void OnFixedUpdate()
@@ -96,19 +84,10 @@ public class EnemyAIStateChase : GameStateMachine.StateNodeBase
         //--------------
         if (axisPower > 0.01f)
         {
-            //“ü—Í‚µ‚½•ûŒü‚É‰ñ“]
-            Quaternion rotation = Quaternion.LookRotation(forward, Vector3.up);
-
-            //ƒLƒƒƒ‰ƒNƒ^[‚Ì‰ñ“]‚Élerp‚µ‚Ä‰ñ“]
-            input.transform.rotation = Quaternion.RotateTowards
-                 (
-                 input.transform.rotation,   //•Ï‰»‘O‚Ì‰ñ“]
-                 rotation,                   //•Ï‰»Œã‚Ì‰ñ“]
-                 720 * Time.deltaTime        //•Ï‰»‚·‚éŠp“x
-                 );
+            input.RotateAxis(forward, StateMgr.transform);
         }
 
-       
+
         //--------------
         //ˆÚ“®
         //--------------

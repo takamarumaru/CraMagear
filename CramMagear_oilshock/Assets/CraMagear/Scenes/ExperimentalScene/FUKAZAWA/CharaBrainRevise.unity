@@ -258,14 +258,8 @@ MonoBehaviour:
   _gravity: -0.2
   _attenuation: 0.85
   _jumpPower: 0
+  _charaCtrl: {fileID: 0}
   _animator: {fileID: 398588320}
-  _architectureCreator: {fileID: 0}
-  _virtualCamera: {fileID: 1027554362}
-  _aimCamera: {fileID: 289477369}
-  _cameraLookPoint: {fileID: 0}
-  _MaxCamRotateY: 0
-  _minCamRotateY: 0
-  _reticleObject: {fileID: 0}
 --- !u!114 &24225143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1352,7 +1346,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29638
+  m_Name: pb_Mesh29644
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7176,6 +7170,9 @@ GameObject:
   m_Component:
   - component: {fileID: 891856475}
   - component: {fileID: 891856476}
+  - component: {fileID: 891856479}
+  - component: {fileID: 891856478}
+  - component: {fileID: 891856477}
   m_Layer: 0
   m_Name: InputProvider
   m_TagString: Untagged
@@ -7210,6 +7207,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c579432230eaa9448937574e4f818b72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _virtualCamera: {fileID: 1027554362}
+  _aimCamera: {fileID: 289477369}
+  _cameraLookPoint: {fileID: 1611148115}
+  _MaxCamRotateY: 20
+  _minCamRotateY: 335
+  _reticleObject: {fileID: 1342480651}
+  _architectureCreator: {fileID: 7924674304205582056}
+--- !u!114 &891856477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891856474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05acb36c234a1304ab861e4275fc859f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bulletShot: {fileID: 444298892}
+  _brain: {fileID: 1060640216}
+  _templateObjects: {fileID: 1060640215}
+--- !u!114 &891856478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891856474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8a69c1261e0e7c4b8ce2fd0e2b0f58b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _charaBrain: {fileID: 1060640216}
+--- !u!95 &891856479
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891856474}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b50189d7cf4f3e740966de54952c15fc, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &901223954
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8162,14 +8214,8 @@ MonoBehaviour:
   _gravity: -0.2
   _attenuation: 0.85
   _jumpPower: 0.075
+  _charaCtrl: {fileID: 0}
   _animator: {fileID: 62736109}
-  _architectureCreator: {fileID: 7924674304205582056}
-  _virtualCamera: {fileID: 1027554362}
-  _aimCamera: {fileID: 289477369}
-  _cameraLookPoint: {fileID: 1611148115}
-  _MaxCamRotateY: 20
-  _minCamRotateY: 335
-  _reticleObject: {fileID: 1342480651}
 --- !u!114 &1060640217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13401,7 +13447,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30090
+  m_Name: pb_Mesh30096
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16766,14 +16812,8 @@ MonoBehaviour:
   _gravity: -0.2
   _attenuation: 0.85
   _jumpPower: 0.075
+  _charaCtrl: {fileID: 0}
   _animator: {fileID: 6667538997754197537}
-  _architectureCreator: {fileID: 0}
-  _virtualCamera: {fileID: 1027554362}
-  _aimCamera: {fileID: 289477369}
-  _cameraLookPoint: {fileID: 0}
-  _MaxCamRotateY: 0
-  _minCamRotateY: 0
-  _reticleObject: {fileID: 0}
 --- !u!114 &6667538996151256801
 MonoBehaviour:
   m_ObjectHideFlags: 0

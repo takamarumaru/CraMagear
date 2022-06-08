@@ -1,11 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class GamePlayInputProvider : InputProvider
 {
-   //左軸取得
-   public override Vector2 GetAxisL()
+    [Header("[--Cinemachine参照--]")]
+    [SerializeField] public CinemachineVirtualCamera _virtualCamera;
+    [SerializeField] public CinemachineVirtualCamera _aimCamera;
+    [SerializeField] GameObject _cameraLookPoint;
+
+    [Header("[--カメラの上下制御--]")]
+    [SerializeField] float _MaxCamRotateY = 0;
+    [SerializeField] float _minCamRotateY = 0;
+
+    [Header("[--レティクルのアクティブ非アクティブ制御--]")]
+    [SerializeField] GameObject _reticleObject;
+
+    [Header("[--建築--]")]
+    [SerializeField] public ArchitectureCreator _architectureCreator;
+
+    //AIからセットされるデータ
+    public Vector2 AxisL { get; set; }
+    public Vector2 AxisR { get; set; }
+    public bool Attack { get; set; } = false;
+
+    //左軸取得
+    public override Vector2 GetAxisL() => AxisL;
+
+    public Vector2 PlayerMoveCameraDirection()
     {
         Vector2 axisL = PlayerInputManager.Instance.GamePlay_GetAxisL();
         // カメラの方向から、X-Z平面の単位ベクトルを取得
@@ -55,4 +78,79 @@ public class GamePlayInputProvider : InputProvider
         return PlayerInputManager.Instance.GamePlay_GetButtonJump();
     }
 
+    public void PlayerRotation(Vector3 forward, float axisPower,Transform playerTrans)
+    {
+
+        //VirtualカメラよりAimカメラの方が優先度が低かったらカメラ方向に撃つ
+        if (_aimCamera.Priority < _virtualCamera.Priority)
+        {
+            if (axisPower > 0.01f)
+            {
+                //入力した方向に回転
+                Quaternion rotation = Quaternion.LookRotation(forward, Vector3.up);
+
+                //キャラクターの回転にlerpして回転
+                playerTrans.rotation = Quaternion.RotateTowards
+                     (
+                     transform.rotation,   //変化前の回転
+                     rotation,                   //変化後の回転
+                     720 * Time.deltaTime        //変化する角度
+                     );
+            }
+        }
+        else
+        {
+
+            // カメラの方向から、X-Z平面の単位ベクトルを取得
+            Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+            //入力した方向に回転
+            Quaternion rotation = Quaternion.LookRotation(cameraForward, Vector3.up);
+            //キャラクターの回転にlerpして回転
+            playerTrans.rotation = rotation;
+
+            //プレイヤーの回転
+            playerTrans.Rotate(0.0f, GetMouse().x, 0.0f);
+
+            //LookPointの回転
+            _cameraLookPoint.transform.Rotate(-GetMouse().y, 0.0f, 0.0f);
+
+            var localAngle = _cameraLookPoint.transform.localEulerAngles;
+
+            //カメラ制御
+            if (_MaxCamRotateY < localAngle.x && localAngle.x < 180)
+                localAngle.x = _MaxCamRotateY;
+            if (_minCamRotateY > localAngle.x && localAngle.x > 180)
+                localAngle.x = _minCamRotateY;
+
+            //値を代入する
+            _cameraLookPoint.transform.localEulerAngles = localAngle;
+
+        }
+
+    }
+
+
+    //カメラ切り替え
+    public void SelectUseCamera()
+    {
+        //カメラの優先順位
+        int _EnablePriority = 10;
+        int _DisablePriority = 9;
+
+        //右クリック（カメラ切り替え）
+        if (GetButtonPressedAim())
+        {
+            _virtualCamera.Priority = _DisablePriority;
+            _aimCamera.Priority = _EnablePriority;
+
+            _reticleObject.SetActive(true);
+        }
+        else
+        {
+            _virtualCamera.Priority = _EnablePriority;
+            _aimCamera.Priority = _DisablePriority;
+            _reticleObject.SetActive(false);
+        }
+
+    }
 }
