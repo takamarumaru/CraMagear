@@ -18,7 +18,7 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
     [Tooltip("減衰")][SerializeField] float _attenuation = 0.85f;
     [Tooltip("ジャンプ力")][SerializeField] float _jumpPower = 4.0f;
 
-    OpenCharacterController _charaCtrl;
+    public OpenCharacterController _charaCtrl;
 
     //入力
     InputProvider _inputProvider;
@@ -26,28 +26,14 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
     [Header("[--Component参照--]")]
     [SerializeField] Animator _animator;
 
-    [SerializeField] ArchitectureCreator _architectureCreator;
-
-    [Header("[--Cinemachine参照--]")]
-    [SerializeField] CinemachineVirtualCamera _virtualCamera;
-    [SerializeField] CinemachineVirtualCamera _aimCamera;
-    [SerializeField] GameObject _cameraLookPoint;
-
-    [Header("[--カメラの上下制御--]")]
-    [SerializeField] float _MaxCamRotateY = 0;
-    [SerializeField] float _minCamRotateY = 0;
-
-    [Header("[--レティクルのアクティブ非アクティブ制御--]")]
-    [SerializeField] GameObject _reticleObject;
-
     MainObjectParameter _parameter;
     public MainObjectParameter MainObjectParam => _parameter;
 
+    //建築の情報を取得するため
+    ArchitectureCreator _architectureCreator;
+
     //速度（ベクトルなど）
     Vector3 _velocity;
-
-    //input系のバグによりごり押しプログラムフラグ
-    bool _inputPushButton = false;
 
     private void Awake()
     {
@@ -60,33 +46,20 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
         //parameterを取得
         _parameter = GetComponent<MainObjectParameter>();
 
+        //建築取得
+        _architectureCreator = GetComponentInChildren<ArchitectureCreator>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        //常に偽
-        _inputPushButton = false;
-
-        //何らかのバグでPlayerRotate関数の中で書くと実行されないのでupdateに書いた
-        if (_inputProvider.GetButtonAim() && _parameter.Name == "Player")
-        {
-            _inputPushButton = true;
-        }
-
-        SelectUseCamera();
-
         //移動(秒速)
         _charaCtrl.Move(_velocity);
 
         if (_charaCtrl.isGrounded)
         {
             _velocity.y = 0;
-        }
-
-        if (_architectureCreator)
-        {
-            _architectureCreator.ShowGuide();
         }
 
         //倒れるアニメーション
@@ -100,94 +73,13 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
     //vだけ移動する
     public void Move(Vector3 v)
     {
-        _charaCtrl.Move(v);
-    }
-
-    //プレイヤーの向き
-    void PlayerRotation(Vector3 forward, float axisPower)
-    {
-
-        //VirtualカメラよりAimカメラの方が優先度が低かったらカメラ方向に撃つ
-        if (_aimCamera.Priority < _virtualCamera.Priority)
-        {
-            if (axisPower > 0.01f)
-            {
-                //入力した方向に回転
-                Quaternion rotation = Quaternion.LookRotation(forward, Vector3.up);
-
-                //キャラクターの回転にlerpして回転
-                transform.rotation = Quaternion.RotateTowards
-                     (
-                     transform.rotation,   //変化前の回転
-                     rotation,                   //変化後の回転
-                     720 * Time.deltaTime        //変化する角度
-                     );
-            }
-        }
-        else
-        {
-            //カメラの向いている方にプレイヤーも向く（押された時だけ）
-            if (_inputPushButton == true)
-            {
-                // カメラの方向から、X-Z平面の単位ベクトルを取得
-                Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
-                //入力した方向に回転
-                Quaternion rotation = Quaternion.LookRotation(cameraForward, Vector3.up);
-                //キャラクターの回転にlerpして回転
-                transform.rotation = rotation;
-            }
-
-            //プレイヤーの回転
-            transform.Rotate(0.0f, _inputProvider.GetMouse().x, 0.0f);
-
-            //LookPointの回転
-            _cameraLookPoint.transform.Rotate(-_inputProvider.GetMouse().y, 0.0f, 0.0f);
-
-            var localAngle = _cameraLookPoint.transform.localEulerAngles;
-
-            //カメラ制御
-            if (_MaxCamRotateY < localAngle.x && localAngle.x < 180)
-                localAngle.x = _MaxCamRotateY;
-            if (_minCamRotateY > localAngle.x && localAngle.x > 180)
-                localAngle.x = _minCamRotateY;
-
-            //値を代入する
-            _cameraLookPoint.transform.localEulerAngles = localAngle;
-
-        }
-
-    }
-
-    //カメラ切り替え
-    void SelectUseCamera()
-    {
-        if (_parameter.Name != "Player") { return; }
-
-        //カメラの優先順位
-        int _EnablePriority = 10;
-        int _DisablePriority = 9;
-
-        //右クリック（カメラ切り替え）
-        if (_inputProvider.GetButtonPressedAim())
-        {
-            _virtualCamera.Priority = _DisablePriority;
-            _aimCamera.Priority = _EnablePriority;
-
-            _reticleObject.SetActive(true);
-        }
-        else
-        {
-            _virtualCamera.Priority = _EnablePriority;
-            _aimCamera.Priority = _DisablePriority;
-            _reticleObject.SetActive(false);
-        }
-
+        //_charaCtrl.Move(v);
     }
 
     bool IDamageApplicable.ApplyDamage(ref DamageParam param)
     {
         //攻撃食らったアニメーション
-        if(_parameter.Name=="Player")
+        if (_parameter.Name == "Player")
         {
             _animator.SetTrigger("DoStagger");
         }
@@ -223,68 +115,13 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
             {
                 brain._animator.SetBool("IsMoving", true);
             }
-            //重力
-            //brain._velocity.y += brain._gravity * Time.deltaTime;
-
-            //建築切り替え
-            if (brain._inputProvider.GetButtonArchitectureToggle())
-            {
-                brain._architectureCreator.EnableToggle();
-            }
 
             //攻撃
             if (brain._inputProvider.GetButtonAttack())
             {
-                //建築操作が有効なら建築
-                if (brain._architectureCreator && brain._architectureCreator._enable == true)
-                {
-                    brain._architectureCreator.Create();
-                }
-                else
-                //建築操作が無効なら攻撃
-                {
-                    brain._animator.SetTrigger("DoAttack");
+                brain._animator.SetTrigger("DoAttack");
 
-                    if (brain._parameter.Name == "Player")
-                    {
-                        //VirtualカメラよりAimカメラの方が優先度が低かったらカメラ方向に撃つ
-                        if (brain._aimCamera.Priority < brain._virtualCamera.Priority)
-                        {
-                            // カメラの方向から、X-Z平面の単位ベクトルを取得
-                            Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
-                            //入力した方向に回転
-                            Quaternion rotation = Quaternion.LookRotation(cameraForward, Vector3.up);
-                            //キャラクターの回転にlerpして回転
-                            brain.transform.rotation = rotation;
-                        }
-                    }
-
-                }
-            }
-
-            if (brain._parameter.Name == "Player")
-            {
-                //プレイヤーの向き
-                brain.PlayerRotation(new Vector3(0, 0, 0), 0.0f);
-            }
-            else
-            {
-                float axisPower = axisL.magnitude;
-
-                Vector3 forward = new Vector3(axisL.x, 0, axisL.y);
-                if (axisPower > 0.01f)
-                {
-                    //入力した方向に回転
-                    Quaternion rotation = Quaternion.LookRotation(forward, Vector3.up);
-
-                    //キャラクターの回転にlerpして回転
-                    brain.transform.rotation = Quaternion.RotateTowards
-                         (
-                         brain.transform.rotation,   //変化前の回転
-                         rotation,                   //変化後の回転
-                         720 * Time.deltaTime        //変化する角度
-                         );
-                }
+                return;
             }
 
             //ジャンプ
@@ -329,47 +166,13 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
 
             var brain = StateMgr.CharaBrain;
 
-            //建築切り替え
-            if (brain._inputProvider.GetButtonArchitectureToggle())
-            {
-                brain._architectureCreator.EnableToggle();
-            }
-
             //決定ボタン
             if (brain._inputProvider.GetButtonAttack())
             {
-                //建築操作が有効なら建築
-                if (brain._architectureCreator && brain._architectureCreator._enable == true)
-                {
-                    brain._architectureCreator.Create();
-                }
-                else
-                //建築操作が無効なら攻撃
-                {
-                    brain._animator.SetTrigger("DoAttack");
 
-                    //プレイヤーと見方だけ判定
-                    if (brain._parameter.Name != "Enemy")
-                    {
+                brain._animator.SetTrigger("DoAttack");
 
-                        //攻撃時動かないようにした
-                        //brain._velocity.x = 0;
-                        //brain._velocity.z = 0;
-
-                        //VirtualカメラよりAimカメラの方が優先度が低かったらカメラ方向に撃つ
-                        if (brain._aimCamera.Priority < brain._virtualCamera.Priority&& brain._parameter.Name == "Player")
-                        {
-                            // カメラの方向から、X-Z平面の単位ベクトルを取得
-                            Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
-                            //入力した方向に回転
-                            Quaternion rotation = Quaternion.LookRotation(cameraForward, Vector3.up);
-                            //キャラクターの回転にlerpして回転
-                            brain.transform.rotation = rotation;
-
-                            return;
-                        }
-                    }
-                }
+                return;
             }
 
             Vector2 axisL = brain._inputProvider.GetAxisL();
@@ -393,31 +196,6 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
             float axisPower = axisL.magnitude;
 
             Vector3 forward = new Vector3(axisL.x, 0, axisL.y);
-
-            //--------------
-            //向き
-            //--------------
-            if (brain._parameter.Name == "Player")
-            {
-                //プレイヤーの向き
-                brain.PlayerRotation(forward, axisPower);
-            }
-            else
-            {
-                if (axisPower > 0.01f)
-                {
-                    //入力した方向に回転
-                    Quaternion rotation = Quaternion.LookRotation(forward, Vector3.up);
-
-                    //キャラクターの回転にlerpして回転
-                    brain.transform.rotation = Quaternion.RotateTowards
-                         (
-                         brain.transform.rotation,   //変化前の回転
-                         rotation,                   //変化後の回転
-                         720 * Time.deltaTime        //変化する角度
-                         );
-                }
-            }
 
             if (brain.transform.name == "PreEnemy")
             {

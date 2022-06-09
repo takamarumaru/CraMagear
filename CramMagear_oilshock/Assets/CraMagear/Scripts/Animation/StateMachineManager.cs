@@ -28,6 +28,8 @@ namespace GameStateMachine
         //アニメーターへの参照
         Animator _animator;
 
+        public Animator Animator => _animator;
+
         //ゲッター
         public StateMachineManager StateMgr => _stateMgr;
 

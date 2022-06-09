@@ -41,11 +41,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _state:
-    rid: 4719476895250120705
+    rid: 7277397166291419140
   references:
     version: 2
     RefIds:
-    - rid: 4719476895250120705
+    - rid: 7277397166291419140
       type: {class: CharacterBrain/ASStand, ns: , asm: Assembly-CSharp}
       data:
         _date: 0
@@ -196,11 +196,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _state:
-    rid: 4719477008121462784
+    rid: 7277397166291419143
   references:
     version: 2
     RefIds:
-    - rid: 4719477008121462784
+    - rid: 7277397166291419143
       type: {class: CharacterBrain/ASJump, ns: , asm: Assembly-CSharp}
       data:
         _date: 0
@@ -267,11 +267,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _state:
-    rid: 4719476895250120704
+    rid: 7277397166291419141
   references:
     version: 2
     RefIds:
-    - rid: 4719476895250120704
+    - rid: 7277397166291419141
       type: {class: CharacterBrain/ASWalk, ns: , asm: Assembly-CSharp}
       data:
         _date: 0
@@ -281,7 +281,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AC_Toko
+  m_Name: AC_CharaBrain
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: MoveSpeed
@@ -289,31 +289,31 @@ AnimatorController:
     m_DefaultFloat: 1
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsMoving
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: DoAttack
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsJump
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: DoStagger
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -445,11 +445,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _state:
-    rid: 4719476939686150144
+    rid: 7277397166291419142
   references:
     version: 2
     RefIds:
-    - rid: 4719476939686150144
+    - rid: 7277397166291419142
       type: {class: CharacterBrain/ASAttack, ns: , asm: Assembly-CSharp}
       data:
         _date: 0

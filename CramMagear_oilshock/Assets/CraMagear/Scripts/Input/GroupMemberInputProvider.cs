@@ -12,6 +12,11 @@ public class GroupMemberInputProvider : InputProvider
 
     [SerializeField] private LookAtTarget lookAtTarget;
 
+    //AIからセットされるデータ
+    public Vector2 AxisL { get; set; }
+    public Vector2 AxisR { get; set; }
+    public bool Attack { get; set; } = false;
+
     private void Awake()
     {
         //_navMeshAgent.updatePosition = false;
