@@ -92,7 +92,7 @@ public class GamePlayInputProvider : InputProvider
                 //キャラクターの回転にlerpして回転
                 playerTrans.rotation = Quaternion.RotateTowards
                      (
-                     transform.rotation,   //変化前の回転
+                     transform.rotation,         //変化前の回転
                      rotation,                   //変化後の回転
                      720 * Time.deltaTime        //変化する角度
                      );

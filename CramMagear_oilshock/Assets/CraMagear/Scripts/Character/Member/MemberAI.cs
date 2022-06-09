@@ -80,14 +80,12 @@ public class MemberAIStateChase : GameStateMachine.StateNodeBase
 
             Animator.SetTrigger("DoAttack");
 
-            // カメラの方向から、X-Z平面の単位ベクトルを取得
-            Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
-            //入力した方向に回転
-            Quaternion rotation = Quaternion.LookRotation(cameraForward, Vector3.up);
-            //キャラクターの回転にlerpして回転
-            StateMgr.CharaBrain.transform.rotation = rotation;
-
-            return;
+            //// カメラの方向から、X-Z平面の単位ベクトルを取得
+            //Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+            ////入力した方向に回転
+            //Quaternion rotation = Quaternion.LookRotation(cameraForward, Vector3.up);
+            ////キャラクターの回転にlerpして回転
+            //StateMgr.CharaBrain.transform.rotation = rotation;
         }
 
         Vector2 axisL = input.GetAxisL();
@@ -117,7 +115,19 @@ public class MemberAIStateChase : GameStateMachine.StateNodeBase
         //--------------
         if (axisPower > 0.01f)
         {
-            input.RotateAxis(forward, StateMgr.transform);
+            //入力した方向に回転
+            Quaternion rotation = Quaternion.LookRotation(forward, Vector3.up);
+
+            //変化前の回転
+            Quaternion prevRotation = StateMgr.transform.rotation;
+
+            //キャラクターの回転にlerpして回転
+            StateMgr.transform.rotation = Quaternion.RotateTowards
+                         (
+                         prevRotation,               //変化前の回転
+                         rotation,                   //変化後の回転
+                         720 * Time.deltaTime        //変化する角度
+                         );
         }
 
         //--------------

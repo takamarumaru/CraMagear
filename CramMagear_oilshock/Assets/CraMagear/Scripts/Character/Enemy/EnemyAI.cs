@@ -27,6 +27,8 @@ public class EnemyAIStateIdle : GameStateMachine.StateNodeBase
         if (input.GetButtonAttack())
         {
             Animator.SetTrigger("DoAttack");
+
+            return;
         }
 
         float axisPower = axisL.magnitude;
@@ -62,6 +64,8 @@ public class EnemyAIStateChase : GameStateMachine.StateNodeBase
         if (input.GetButtonAttack())
         {
             Animator.SetTrigger("DoAttack");
+
+            return;
         }
 
         Vector2 axisL = input.SearchTargetDirection();
@@ -84,7 +88,19 @@ public class EnemyAIStateChase : GameStateMachine.StateNodeBase
         //--------------
         if (axisPower > 0.01f)
         {
-            input.RotateAxis(forward, StateMgr.transform);
+            //“ü—Í‚µ‚½•ûŒü‚É‰ñ“]
+            Quaternion rotation = Quaternion.LookRotation(forward, Vector3.up);
+
+            //•Ï‰»‘O‚Ì‰ñ“]
+            Quaternion prevRotation = StateMgr.transform.rotation;
+
+            //ƒLƒƒƒ‰ƒNƒ^[‚Ì‰ñ“]‚Élerp‚µ‚Ä‰ñ“]
+            StateMgr.transform.rotation = Quaternion.RotateTowards
+                         (
+                         prevRotation,               //•Ï‰»‘O‚Ì‰ñ“]
+                         rotation,                   //•Ï‰»Œã‚Ì‰ñ“]
+                         720 * Time.deltaTime        //•Ï‰»‚·‚éŠp“x
+                         );
         }
 
 
