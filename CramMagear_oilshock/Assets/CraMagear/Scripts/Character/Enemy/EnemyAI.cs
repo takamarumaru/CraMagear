@@ -36,7 +36,7 @@ public class EnemyAIStateIdle : GameStateMachine.StateNodeBase
         Vector3 forward = new Vector3(axisL.x, 0, axisL.y);
         if (axisPower > 0.01f)
         {
-            input.RotateAxis(forward, StateMgr.transform);
+            input.RotateAxis(forward, StateMgr.CharaBrain.transform);
         }
     }
     public override void OnFixedUpdate()
@@ -92,10 +92,10 @@ public class EnemyAIStateChase : GameStateMachine.StateNodeBase
             Quaternion rotation = Quaternion.LookRotation(forward, Vector3.up);
 
             //•Ï‰»‘O‚Ì‰ñ“]
-            Quaternion prevRotation = StateMgr.transform.rotation;
+            Quaternion prevRotation = StateMgr.CharaBrain.transform.rotation;
 
             //ƒLƒƒƒ‰ƒNƒ^[‚Ì‰ñ“]‚Élerp‚µ‚Ä‰ñ“]
-            StateMgr.transform.rotation = Quaternion.RotateTowards
+            StateMgr.CharaBrain.transform.rotation = Quaternion.RotateTowards
                          (
                          prevRotation,               //•Ï‰»‘O‚Ì‰ñ“]
                          rotation,                   //•Ï‰»Œã‚Ì‰ñ“]
