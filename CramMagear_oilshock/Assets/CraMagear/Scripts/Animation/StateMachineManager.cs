@@ -55,6 +55,11 @@ namespace GameStateMachine
         //現在のステート
         StateNodeBase _nowState;
 
+        private void Awake()
+        {
+            Debug.Assert(_charaBrain != null, "StateMachineManagerにCharacterBrainが設定されていません。");
+        }
+
         //ステート変更
         public void ChangeState(StateNodeBase state)
         {

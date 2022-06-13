@@ -17,10 +17,9 @@ public class RandomBorn : MonoBehaviour
     //時間
     float Timer = 0;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-
+        Debug.Assert(PrefabChara != null, "RandomBornにキャラクターが設定されていません。");
     }
 
     // Update is called once per frame

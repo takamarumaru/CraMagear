@@ -37,6 +37,8 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
 
     private void Awake()
     {
+        Debug.Assert(_animator != null, "CharacterBrainにアニメーターが設定されていません。");
+
         //_transform = transform;
         _charaCtrl = GetComponent<OpenCharacterController>();
 

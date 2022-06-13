@@ -40,6 +40,8 @@ public class GameAadministrator : MonoBehaviour
 
     private void Start()
     {
+        Debug.Assert(_enemyCreator != null, "GameAadministratorに敵を生成するオブジェクトが設定されていません。");
+
         EnterFirstPhase();
     }
 
