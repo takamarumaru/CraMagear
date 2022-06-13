@@ -23,6 +23,16 @@ public class VFX_Common : MonoBehaviour
         _effect.playRate = rate;
     }
 
+    public void SetFloat(float vol, string name = "float")
+    {
+        _effect.SetFloat(name, vol);
+    }
+
+    public float GetFloat(string name = "Float")
+    {
+        return _effect.GetFloat(name);
+    }
+
     public void SetVector3(Vector3 vec, string name = "Vector3")
     {
         _effect.SetVector3(name, vec);
@@ -36,5 +46,10 @@ public class VFX_Common : MonoBehaviour
     public void SetGradient(Gradient gradient, string name = "Gradient")
     {
         _effect.SetGradient(name, gradient);
+    }
+
+    public void SetTexture(Texture texture, string name = "Texture")
+    {
+        _effect.SetTexture(name, texture);
     }
 }
