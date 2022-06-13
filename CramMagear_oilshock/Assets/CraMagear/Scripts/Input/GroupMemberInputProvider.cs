@@ -19,6 +19,9 @@ public class GroupMemberInputProvider : InputProvider
 
     private void Awake()
     {
+        Debug.Assert(_targetTransform != null, "GroupMember‚ÉTargetTransform‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB");
+        Debug.Assert(_navMeshAgent != null, "GroupMember‚ÉNavMeshAgent‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB");
+        Debug.Assert(lookAtTarget != null, "GroupMember‚ÉLookAtTarget‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB");
         //_navMeshAgent.updatePosition = false;
         //_navMeshAgent.updateRotation = false;
     }

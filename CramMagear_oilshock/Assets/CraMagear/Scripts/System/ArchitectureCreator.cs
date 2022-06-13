@@ -21,6 +21,11 @@ public class ArchitectureCreator : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Assert(_architectureGuide != null, "ArchitectureCreatorにObjectが設定されていません。");
+        Debug.Assert(_architecturePrefab != null, "ArchitectureCreatorにPrefabObjectが設定されていません。");
+        Debug.Assert(_center != null, "ArchitectureCreatorにPlayerが設定されていません。");
+        Debug.Assert(_membersAdministrator != null, "ArchitectureCreatorにMembersAdministratorが設定されていません。");
+       
         _guide = Instantiate(_architectureGuide);
         _guide.gameObject.SetActive(_enable);
     }

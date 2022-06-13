@@ -46,6 +46,11 @@ public class DamageApplicant : MonoBehaviour
 
     [SerializeField] GameObject _prefabHitEffectObject;
 
+    private void Awake()
+    {
+        Debug.Assert(_parameter != null, "DamageApplicantにMainObjectParameterが設定されていません。");
+        Debug.Assert(_prefabHitEffectObject != null, "DamageApplicantに攻撃時のエフェクトが設定されていません。");
+    }
     public void Update()
     {
         //寿命

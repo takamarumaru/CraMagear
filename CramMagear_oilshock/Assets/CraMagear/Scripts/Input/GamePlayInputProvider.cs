@@ -20,6 +20,14 @@ public class GamePlayInputProvider : InputProvider
     [Header("[--建築--]")]
     [SerializeField] public ArchitectureCreator _architectureCreator;
 
+    private void Awake()
+    {
+        Debug.Assert(_virtualCamera != null, "GamePlayInputProviderにCinemachineVirtualCameraが設定されていません。");
+        Debug.Assert(_aimCamera != null, "GamePlayInputProviderにAimCameraが設定されていません。");
+        Debug.Assert(_reticleObject != null, "GamePlayInputProviderにReticleObjectが設定されていません。");
+        Debug.Assert(_architectureCreator != null, "GamePlayInputProviderにArchitectureCreatorが設定されていません。");
+    }
+
     //AIからセットされるデータ
     public Vector2 AxisL { get; set; }
     public Vector2 AxisR { get; set; }

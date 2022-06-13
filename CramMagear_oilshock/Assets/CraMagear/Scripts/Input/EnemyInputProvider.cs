@@ -26,6 +26,8 @@ public class EnemyInputProvider : InputProvider
 
     private void Awake()
     {
+        Debug.Assert(_targetTransform != null, "EnemyInputProvider‚ÉTargetTransform‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB");
+        Debug.Assert(_lookAtTarget != null, "EnemyInputProvider‚ÉLookAtTarget‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB");
         _navMeshAgent = GetComponentInParent<NavMeshAgent>();
         _navMeshAgent.updatePosition = false;
         _navMeshAgent.updateRotation = false;

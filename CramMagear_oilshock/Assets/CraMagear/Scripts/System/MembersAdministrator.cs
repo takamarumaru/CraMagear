@@ -23,6 +23,8 @@ public class MembersAdministrator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Assert(_createMember != null, "MembersAdministrator‚ÉTransform‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB");
+
         for (int i = 0; i < _createNum; i++) 
         {
             //ƒƒ“ƒo[‚ğ¶¬
