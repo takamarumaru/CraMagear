@@ -35,6 +35,10 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
     //速度（ベクトルなど）
     Vector3 _velocity;
 
+    //仮（電撃のAnimationになったことをStateに通知する）
+    bool _isElectricShock = false;
+    public bool IsElectricShock => _isElectricShock;
+
     private void Awake()
     {
         Debug.Assert(_animator != null, "CharacterBrainにアニメーターが設定されていません。");
@@ -86,8 +90,15 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
             _animator.SetTrigger("DoStagger");
         }
 
+        //電撃を食らっっていたら
+        if (param.BlitzDamage)
+        {
+            _isElectricShock = true;
+            _animator.SetBool("IsElectricShock", true);
+        }
+
         _parameter.hp -= param.DamageValue;
-        Debug.Log("Hit" + _parameter.name);
+        //Debug.Log("Hit" + _parameter.name);
         return true;
     }
 
@@ -287,6 +298,39 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
             if (brain._charaCtrl.isGrounded)
             {
                 brain._animator.SetBool("IsJump", false);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 電撃状態クラス
+    /// </summary>
+    [System.Serializable]
+    public class ASElectricShock : GameStateMachine.StateNodeBase
+    {
+        public override void OnEnter()
+        {
+            base.OnEnter();
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+        }
+        public override void OnUpdate()
+        {
+            base.OnUpdate();
+
+            var brain = StateMgr.CharaBrain;
+
+            brain._velocity.x = 0;
+            brain._velocity.z = 0;
+
+            //仮（五秒で解ける）
+            if (0 >= (5 - Time.time))
+            {
+                brain._isElectricShock = false;
+                brain._animator.SetBool("IsElectricShock", false);
             }
         }
     }

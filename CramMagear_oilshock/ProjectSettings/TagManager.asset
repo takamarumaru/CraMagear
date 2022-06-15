@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Architecture
   - Bullet
+  - BlitzAttack
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - Damage
   - Attack
   - MiniMap
-  - 
+  - BlitzAttack
   - 
   - 
   - 

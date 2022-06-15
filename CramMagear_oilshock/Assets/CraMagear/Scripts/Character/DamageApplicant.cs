@@ -10,6 +10,8 @@ public struct DamageParam
 
     public bool Ret_IsGround;           //防御したよ
     public int Ret_ReflectDamageValue;  //反射ダメージ
+
+    public bool BlitzDamage;            //電撃ダメージ
 }
 
 
@@ -55,7 +57,7 @@ public class DamageApplicant : MonoBehaviour
     {
         //寿命
         _lifespan -= Time.deltaTime;
-        if(_lifespan <= 0.0f)
+        if (_lifespan <= 0.0f)
         {
             Destroy(gameObject);
         }
@@ -63,19 +65,19 @@ public class DamageApplicant : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        foreach(var contact in collision.contacts)
+        foreach (var contact in collision.contacts)
         {
             var rigidbody = collision.rigidbody;
             if (rigidbody == null)
             {
-                Debug.Log("aaa");
-                Debug.Log(collision.gameObject.name);
+                //Debug.Log("aaa");
+                //Debug.Log(collision.gameObject.name);
 
                 continue;
             }
 
             var dmgApp = rigidbody.GetComponent<IDamageApplicable>();
-            if(dmgApp != null)
+            if (dmgApp != null)
             {
                 if (_parameter.TeamID == dmgApp.MainObjectParam.TeamID) continue;
                 DamageParam param = new DamageParam();
@@ -83,7 +85,14 @@ public class DamageApplicant : MonoBehaviour
                 param.HitStopDuration = 0;
                 param.Blow = new Vector3();
 
-                if(dmgApp.ApplyDamage(ref param))
+                //電撃攻撃かどうか
+                if (gameObject.tag == "BlitzAttack")
+                {
+                    param.BlitzDamage = true;
+                    Debug.Log("電撃ダメージ");
+                }
+
+                if (dmgApp.ApplyDamage(ref param))
                 {
                     //当たった時にやりたい処理
                     Instantiate(_prefabHitEffectObject, contact.point, transform.rotation);
