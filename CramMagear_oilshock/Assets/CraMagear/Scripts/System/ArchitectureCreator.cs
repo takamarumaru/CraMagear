@@ -4,30 +4,65 @@ using UnityEngine;
 
 public class ArchitectureCreator : MonoBehaviour
 {
-    [SerializeField] private Transform _architectureGuide;
-    [SerializeField] private Transform _architecturePrefab;
+    //建築するオブジェクトの情報リスト
+    [System.Serializable]
+    struct CreateArchitecture
+    {
+        public Transform guide;
+        public Transform product;
+    }
+    [SerializeField] private List<CreateArchitecture> _createArchitectureList = new();
+    private int _selectIdx = 0;
 
+    //ガイドオブジェクト格納用
+    private Transform _guide;
+
+    //建築できるCollisionレイヤー
     [SerializeField] private LayerMask _collisionLayer;
 
+    //建築可能範囲設定
     [SerializeField] private Transform _center;
     [SerializeField] private float _architectureRange;
 
+    //隊員管理
     [SerializeField] private MembersAdministrator _membersAdministrator;
-
-
-    private Transform _guide;
 
     public bool _enable { get; private set; }
 
     private void Awake()
     {
-        Debug.Assert(_architectureGuide != null, "ArchitectureCreatorにObjectが設定されていません。");
-        Debug.Assert(_architecturePrefab != null, "ArchitectureCreatorにPrefabObjectが設定されていません。");
+        Debug.Assert(_createArchitectureList.Count != 0, "ArchitectureCreatorの_createArchitectureListが空です。");
         Debug.Assert(_center != null, "ArchitectureCreatorにPlayerが設定されていません。");
         Debug.Assert(_membersAdministrator != null, "ArchitectureCreatorにMembersAdministratorが設定されていません。");
        
-        _guide = Instantiate(_architectureGuide);
+        //最初のガイドオブジェクトを生成
+        _guide = Instantiate(_createArchitectureList[_selectIdx].guide);
         _guide.gameObject.SetActive(_enable);
+    }
+
+    public void Update()
+    {
+        if(PlayerInputManager.Instance.GamePlay_GetListSwitchingLeft())
+        {
+            Switching(-1);
+        }
+        if (PlayerInputManager.Instance.GamePlay_GetListSwitchingRight())
+        {
+            Switching(1);
+        }
+    }
+
+    public void Switching(int difference)
+    {
+        int newIdx = _selectIdx + difference;
+        //範囲制限
+        if (newIdx < 0) newIdx = _createArchitectureList.Count - 1;
+        _selectIdx = newIdx % _createArchitectureList.Count;
+
+        //ガイドオブジェクトの再生成
+        Vector3 guidePostion = _guide.transform.position;
+        DestroyImmediate(_guide.gameObject);
+        _guide = Instantiate(_createArchitectureList[_selectIdx].guide, guidePostion, Quaternion.identity);
     }
 
     public void ShowGuide()
@@ -40,7 +75,6 @@ public class ArchitectureCreator : MonoBehaviour
         if (Physics.Raycast(ray, out hit, Mathf.Infinity,_collisionLayer))
         {
             _guide.position = hit.point;
-            
         }
 
         //当たった座標が範囲内ならガイドオブジェクトを表示
@@ -60,7 +94,7 @@ public class ArchitectureCreator : MonoBehaviour
         if (_guide.gameObject.activeSelf == false) return false;
 
         //建築物を生成
-        Transform transform = Instantiate(_architecturePrefab, _guide.position, _guide.rotation).transform;
+        Transform transform = Instantiate(_createArchitectureList[_selectIdx].product, _guide.position, _guide.rotation).transform;
         //memberを建築物の場所に派遣する
         if(_membersAdministrator.Dispatch(3,transform)==false)
         {
