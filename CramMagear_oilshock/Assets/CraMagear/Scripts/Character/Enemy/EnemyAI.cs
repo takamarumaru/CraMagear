@@ -22,11 +22,13 @@ public class EnemyAIStateIdle : GameStateMachine.StateNodeBase
         {
             Animator.SetBool("IsMoving", true);
         }
+        Debug.Log("EnemyAI");
 
         //電撃かどうか
-        if(StateMgr.CharaBrain.IsElectricShock)
+        if (StateMgr.CharaBrain.CharacterAnimator.GetBool("IsElectricShock"))
         {
             Animator.SetBool("IsElectricShock", true);
+            Debug.Log("スタン");
         }
 
         //攻撃
@@ -67,9 +69,10 @@ public class EnemyAIStateChase : GameStateMachine.StateNodeBase
         var input = StateMgr.GetComponent<EnemyInputProvider>();
 
         //電撃かどうか
-        if (StateMgr.CharaBrain.IsElectricShock)
+        if (StateMgr.CharaBrain.CharacterAnimator.GetBool("IsElectricShock"))
         {
             Animator.SetBool("IsElectricShock", true);
+            Debug.Log("スタン");
             return;
         }
 
@@ -150,7 +153,7 @@ public class EnemyAIStateAttack : GameStateMachine.StateNodeBase
         base.OnUpdate();
 
         //電撃かどうか
-        if (StateMgr.CharaBrain.IsElectricShock)
+        if (StateMgr.CharaBrain.CharacterAnimator.GetBool("IsElectricShock"))
         {
             Animator.SetBool("IsElectricShock", true);
         }
@@ -176,7 +179,7 @@ public class EnemyAIElectricShock : GameStateMachine.StateNodeBase
         base.OnUpdate();
 
         //電撃かどうか
-        if (!StateMgr.CharaBrain.IsElectricShock)
+        if (!StateMgr.CharaBrain.CharacterAnimator.GetBool("IsElectricShock"))
         {
             Animator.SetBool("IsElectricShock", false);
         }

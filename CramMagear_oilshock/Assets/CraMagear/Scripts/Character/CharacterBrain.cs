@@ -25,6 +25,10 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
 
     [Header("[--Component参照--]")]
     [SerializeField] Animator _animator;
+    public Animator CharacterAnimator => _animator;
+
+    //電撃時間
+    [SerializeField] float electricShockTime = 0.0f;
 
     MainObjectParameter _parameter;
     public MainObjectParameter MainObjectParam => _parameter;
@@ -34,10 +38,6 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
 
     //速度（ベクトルなど）
     Vector3 _velocity;
-
-    //仮（電撃のAnimationになったことをStateに通知する）
-    bool _isElectricShock = false;
-    public bool IsElectricShock => _isElectricShock;
 
     private void Awake()
     {
@@ -93,7 +93,6 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
         //電撃を食らっっていたら
         if (param.BlitzDamage)
         {
-            _isElectricShock = true;
             _animator.SetBool("IsElectricShock", true);
         }
 
@@ -308,6 +307,9 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
     [System.Serializable]
     public class ASElectricShock : GameStateMachine.StateNodeBase
     {
+        //仮
+        float count = 0;
+
         public override void OnEnter()
         {
             base.OnEnter();
@@ -326,10 +328,12 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
             brain._velocity.x = 0;
             brain._velocity.z = 0;
 
+            count += Time.deltaTime;
+
             //仮（五秒で解ける）
-            if (0 >= (5 - Time.time))
+            if (count > brain.electricShockTime)
             {
-                brain._isElectricShock = false;
+                count = 0;
                 brain._animator.SetBool("IsElectricShock", false);
             }
         }

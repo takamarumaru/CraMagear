@@ -38,6 +38,8 @@ public class DamageApplicant : MonoBehaviour
     [Header("ヒットストップ")]
     [SerializeField] float _hitDuration = 0.5f;
 
+    [Header("電撃攻撃かどうか")]
+    [SerializeField] bool _blitzAttack = false;
 
     [Header("ヒットスロー")]
     [SerializeField] float _hitSlow = 1.0f;
@@ -86,9 +88,9 @@ public class DamageApplicant : MonoBehaviour
                 param.Blow = new Vector3();
 
                 //電撃攻撃かどうか
-                if (gameObject.tag == "BlitzAttack")
+                if (_blitzAttack)
                 {
-                    param.BlitzDamage = true;
+                    param.BlitzDamage = _blitzAttack;
                     Debug.Log("電撃ダメージ");
                 }
 
