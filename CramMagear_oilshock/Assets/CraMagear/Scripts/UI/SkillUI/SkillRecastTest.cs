@@ -11,7 +11,7 @@ public class SkillRecastTest : MonoBehaviour
     public Image SkillMaskImage;
 
     [SerializeField]
-    public float SkillRecastTime;
+    private float SkillRecastTime;
     bool pushFlag = false;
     private float time;
     //

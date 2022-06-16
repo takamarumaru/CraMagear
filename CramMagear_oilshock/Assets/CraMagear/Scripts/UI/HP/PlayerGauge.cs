@@ -18,9 +18,9 @@ public class PlayerGauge : MonoBehaviour
     //private Tween greenGaugeTween;
 
     [SerializeField]
-    public int life;
+    private int life;
     [SerializeField]
-    public  int maxLife;
+    private  int maxLife;
 
     private int _prevFrameLife = 0;
 

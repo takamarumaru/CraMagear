@@ -66,6 +66,8 @@ public class MembersAdministrator : MonoBehaviour
     public bool Dispatch(int dispatchNum,Transform dispatchTransform)
     {
         var architectureGuideManager = dispatchTransform.GetComponent<ArchitectureWhenMembersCome>();
+        if(architectureGuideManager==null)return true;
+
         int createCount = 0;
         for (int memberIdx = 0 ; createCount < dispatchNum; memberIdx++)
         {

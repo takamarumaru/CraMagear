@@ -41,6 +41,11 @@ public class PlayerInputManager : MonoBehaviour
 
     public bool GamePlay_GetButtonArchitectureToggle() => _actionMapGamePlay["ArchitectureToggle"].WasPerformedThisFrame();
 
+    //ƒŠƒXƒg‚Ì¶‰EØ‚è‘Ö‚¦
+    public bool GamePlay_GetListSwitchingRight() => _actionMapGamePlay["ListSwitchingRight"].WasPerformedThisFrame();
+    public bool GamePlay_GetListSwitchingLeft() => _actionMapGamePlay["ListSwitchingLeft"].WasPerformedThisFrame();
+
+
     public bool GamePlay_GetButtonMenu() => _actionMapUI["Menu"].WasPerformedThisFrame();
 
 }
