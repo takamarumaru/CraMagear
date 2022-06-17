@@ -19,17 +19,35 @@ public class BulletShot : MonoBehaviour
     [Tooltip("弾の最大距離の場所")]
     private GameObject MaxShotPoint;
 
-    [SerializeField]
-    [Tooltip("弾")]
-    private GameObject bullet;
 
-    [SerializeField]
-    [Tooltip("マズルフラッシュ")]
-    private GameObject effect;
+    [System.Serializable]
+    struct CreateBullet
+    {
+        public Transform bullet;
+        public Transform muzzleflash;
+    }
+    [Tooltip("発射する弾情報のリスト")]
+    [SerializeField] private List<CreateBullet> _createBulletList = new();
+    private int _selectIdx = 0;
 
-    /// <summary>
-    /// 弾の発射
-    /// </summary>
+    private void Awake()
+    {
+        Debug.Assert(_createBulletList.Count != 0, "BulletShotの_createBulletListが空です。");
+    }
+    public void Update()
+    {
+        //デバッグ用の仮の処理、本来はPlayerのState等でSwitching()を呼び出す
+        if (PlayerInputManager.Instance.GamePlay_GetListSwitchingLeft())
+        {
+            Switching(-1);
+        }
+        if (PlayerInputManager.Instance.GamePlay_GetListSwitchingRight())
+        {
+            Switching(1);
+        }
+    }
+
+    // 弾の発射
     public void LauncherShot()
     {
         Vector3 offset = new Vector3();
@@ -55,9 +73,18 @@ public class BulletShot : MonoBehaviour
         }
 
         // 上で取得した場所に、"bullet"のPrefabを出現させる
-        Instantiate(bullet, bulletPosition, shotRot);
+        Instantiate(_createBulletList[_selectIdx].bullet.gameObject ,bulletPosition, shotRot);
 
         // bulletPositionから位置を調整してマズルフラッシュを出す
-        Instantiate(effect, bulletPosition, shotRot);
+        Instantiate(_createBulletList[_selectIdx].muzzleflash.gameObject, bulletPosition, shotRot);
+    }
+
+    //弾切り替え
+    public void Switching(int difference)
+    {
+        int newIdx = _selectIdx + difference;
+        //範囲制限
+        if (newIdx < 0) newIdx = _createBulletList.Count - 1;
+        _selectIdx = newIdx % _createBulletList.Count;
     }
 }

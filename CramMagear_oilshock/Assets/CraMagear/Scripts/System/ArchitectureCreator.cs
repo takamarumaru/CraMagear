@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ArchitectureCreator : MonoBehaviour
 {
     //建築するオブジェクトの情報リスト
     [System.Serializable]
-    struct CreateArchitecture
+    public class CreateArchitecture
     {
         public Transform guide;
         public Transform product;
     }
     [SerializeField] private List<CreateArchitecture> _createArchitectureList = new();
     private int _selectIdx = 0;
+
+    //[System.Serializable]
+    //public class CreateArchitectureEvent : UnityEvent<CreateArchitecture> { }
+    //[SerializeField] UnityEvent uEvent;
 
     //ガイドオブジェクト格納用
     private Transform _guide;
@@ -42,7 +47,8 @@ public class ArchitectureCreator : MonoBehaviour
 
     public void Update()
     {
-        if(PlayerInputManager.Instance.GamePlay_GetListSwitchingLeft())
+        //デバッグ用の仮の処理、本来はPlayerのState等でSwitching()を呼び出す
+        if (PlayerInputManager.Instance.GamePlay_GetListSwitchingLeft())
         {
             Switching(-1);
         }
@@ -63,6 +69,14 @@ public class ArchitectureCreator : MonoBehaviour
         Vector3 guidePostion = _guide.transform.position;
         DestroyImmediate(_guide.gameObject);
         _guide = Instantiate(_createArchitectureList[_selectIdx].guide, guidePostion, Quaternion.identity);
+    }
+
+    //public void AddArchitecture(Transform guide,Transform architecture)
+    public void AddArchitecture(CreateArchitecture architecture)
+    {
+        //createArchitecture.guide = guide;
+        //createArchitecture.product = architecture;
+        _createArchitectureList.Add(architecture);
     }
 
     public void ShowGuide()
