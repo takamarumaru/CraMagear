@@ -38,6 +38,9 @@ public class DamageApplicant : MonoBehaviour
     [Header("ヒットストップ")]
     [SerializeField] float _hitDuration = 0.5f;
 
+
+    [Header("電撃範囲オブジェクト")]
+    [SerializeField] GameObject _blitzRangeObject;
     [Header("電撃攻撃かどうか")]
     [SerializeField] bool _blitzAttack = false;
 
@@ -53,7 +56,6 @@ public class DamageApplicant : MonoBehaviour
     private void Awake()
     {
         Debug.Assert(_parameter != null, "DamageApplicantにMainObjectParameterが設定されていません。");
-        Debug.Assert(_prefabHitEffectObject != null, "DamageApplicantに攻撃時のエフェクトが設定されていません。");
     }
     public void Update()
     {
@@ -87,15 +89,29 @@ public class DamageApplicant : MonoBehaviour
                 param.HitStopDuration = 0;
                 param.Blow = new Vector3();
 
+                var brain = collision.gameObject.GetComponent<CharacterBrain>();
+
                 //電撃攻撃かどうか
-                if (_blitzAttack)
+                if (_blitzAttack && !brain.CharacterAnimator.GetBool("IsElectricShock"))
                 {
+                    if (_blitzRangeObject == null)
+                    {
+                        Debug.Assert(_blitzRangeObject != null, "DamageApplicantに電撃範囲オブジェクトが設定されていません。");
+                        return;
+                    }
+
                     param.BlitzDamage = _blitzAttack;
+
+                    //当たった場所に電撃の範囲を生成
+                    Instantiate(_blitzRangeObject, collision.gameObject.transform.position, collision.gameObject.transform.rotation);
+
                     Debug.Log("電撃ダメージ");
                 }
 
                 if (dmgApp.ApplyDamage(ref param))
                 {
+                    Debug.Assert(_prefabHitEffectObject != null, "DamageApplicantに攻撃時のエフェクトが設定されていません。");
+
                     //当たった時にやりたい処理
                     Instantiate(_prefabHitEffectObject, contact.point, transform.rotation);
 
