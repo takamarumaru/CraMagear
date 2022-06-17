@@ -25,6 +25,10 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
 
     [Header("[--Component参照--]")]
     [SerializeField] Animator _animator;
+    public Animator CharacterAnimator => _animator;
+
+    //電撃時間
+    [SerializeField] float electricShockTime = 0.0f;
 
     MainObjectParameter _parameter;
     public MainObjectParameter MainObjectParam => _parameter;
@@ -86,8 +90,14 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
             _animator.SetTrigger("DoStagger");
         }
 
+        //電撃を食らっっていたら
+        if (param.BlitzDamage)
+        {
+            _animator.SetBool("IsElectricShock", true);
+        }
+
         _parameter.hp -= param.DamageValue;
-        Debug.Log("Hit" + _parameter.name);
+        //Debug.Log("Hit" + _parameter.name);
         return true;
     }
 
@@ -287,6 +297,44 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
             if (brain._charaCtrl.isGrounded)
             {
                 brain._animator.SetBool("IsJump", false);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 電撃状態クラス
+    /// </summary>
+    [System.Serializable]
+    public class ASElectricShock : GameStateMachine.StateNodeBase
+    {
+        //仮
+        float count = 0;
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+        }
+        public override void OnUpdate()
+        {
+            base.OnUpdate();
+
+            var brain = StateMgr.CharaBrain;
+
+            brain._velocity.x = 0;
+            brain._velocity.z = 0;
+
+            count += Time.deltaTime;
+
+            //仮（五秒で解ける）
+            if (count > brain.electricShockTime)
+            {
+                count = 0;
+                brain._animator.SetBool("IsElectricShock", false);
             }
         }
     }
