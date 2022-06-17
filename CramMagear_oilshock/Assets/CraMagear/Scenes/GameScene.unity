@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028396, g: 0.22571427, b: 0.30692327, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028364, g: 0.22571364, b: 0.306922, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3950,8 +3950,11 @@ MonoBehaviour:
   firingPoint: {fileID: 50320163}
   firingPointOffset: {x: 0, y: 0, z: 0}
   MaxShotPoint: {fileID: 0}
-  bullet: {fileID: 3021037291751278087, guid: 874791c56c38e7342b612dd2654f9360, type: 3}
-  effect: {fileID: 4530951753886053254, guid: 207c914d88ca69447a3bf1bd823e22ed, type: 3}
+  _createBulletList:
+  - bullet: {fileID: 3021037291751278088, guid: 874791c56c38e7342b612dd2654f9360,
+      type: 3}
+    muzzleflash: {fileID: 4530951753886053255, guid: 207c914d88ca69447a3bf1bd823e22ed,
+      type: 3}
 --- !u!1773428102 &264243734
 ParentConstraint:
   m_ObjectHideFlags: 0
@@ -4107,7 +4110,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.7277644, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -4189,8 +4192,19 @@ MonoBehaviour:
   firingPoint: {fileID: 853258138}
   firingPointOffset: {x: 0, y: -0.05, z: 0.2}
   MaxShotPoint: {fileID: 1396844524}
-  bullet: {fileID: 3021037291751278087, guid: 6a098affc83a52549b3269493ffb742b, type: 3}
-  effect: {fileID: 4530951753886053254, guid: 207c914d88ca69447a3bf1bd823e22ed, type: 3}
+  _createBulletList:
+  - bullet: {fileID: 3021037291751278088, guid: 6a098affc83a52549b3269493ffb742b,
+      type: 3}
+    muzzleflash: {fileID: 4530951753886053255, guid: 207c914d88ca69447a3bf1bd823e22ed,
+      type: 3}
+  - bullet: {fileID: 6822799985342197619, guid: ae040ae06ebf08544b7f4a0331ee17c6,
+      type: 3}
+    muzzleflash: {fileID: 6822799985342197619, guid: ae040ae06ebf08544b7f4a0331ee17c6,
+      type: 3}
+  - bullet: {fileID: 5856858181157451955, guid: cdcb40564d62a994fbcab5fb233b58eb,
+      type: 3}
+    muzzleflash: {fileID: 2660679472432803060, guid: b43255dcf01301c4db3a1f65adeea298,
+      type: 3}
 --- !u!1773428102 &302217025
 ParentConstraint:
   m_ObjectHideFlags: 0
@@ -10175,7 +10189,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.7277644, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -10192,7 +10206,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1027554361}
   m_LocalRotation: {x: -0.16418684, y: 0, z: 0, w: 0.9864293}
-  m_LocalPosition: {x: 0.03962185, y: -0.078451864, z: -4.637896}
+  m_LocalPosition: {x: 0.038507182, y: -0.078451864, z: -4.637896}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12822,6 +12836,7 @@ MonoBehaviour:
   _jumpPower: 0.075
   _charaCtrl: {fileID: 0}
   _animator: {fileID: 391291102}
+  electricShockTime: 0
 --- !u!195 &1265539011
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -13456,7 +13471,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1342480651}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 112.241325}
+  m_LocalPosition: {x: 0, y: 0, z: 111.30435}
   m_LocalScale: {x: 0.39999995, y: 0.39999995, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13465,7 +13480,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.14030166, y: -0.000017126667}
+  m_AnchoredPosition: {x: 0.13913044, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1343832557
@@ -17245,6 +17260,7 @@ MonoBehaviour:
   _jumpPower: 0.075
   _charaCtrl: {fileID: 1771569705}
   _animator: {fileID: 2024654906}
+  electricShockTime: 0
 --- !u!114 &1771569705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19187,7 +19203,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2032280007}
   m_LocalRotation: {x: -0.16418684, y: 0, z: 0, w: 0.9864293}
-  m_LocalPosition: {x: 0.03962185, y: -0.078451864, z: -4.637896}
+  m_LocalPosition: {x: 0.038507182, y: -0.078451864, z: -4.637896}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19314,6 +19330,7 @@ MonoBehaviour:
   _damageRate: 0.1
   _hitInterval: 0.1
   _hitDuration: 0.5
+  _blitzAttack: 0
   _hitSlow: 1
   _hitSlowDuration: 0.5
   _hitSlowStartDelayTime: 0
@@ -19444,6 +19461,7 @@ MonoBehaviour:
   _jumpPower: 0
   _charaCtrl: {fileID: 0}
   _animator: {fileID: 1333000682}
+  electricShockTime: 0
 --- !u!195 &2045687360
 NavMeshAgent:
   m_ObjectHideFlags: 0
