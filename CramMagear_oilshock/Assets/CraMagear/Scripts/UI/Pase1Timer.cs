@@ -21,7 +21,7 @@ public class Pase1Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TextCountDown.text = string.Format("Phase1:{0:00:00}", CountDownTime);
+        TextCountDown.text = string.Format("Phase1  {0:00:00}", CountDownTime);
 	    //countDownImage.fillAmount = CountDownTime % 1.0f;
 
 	    CountDownTime -= Time.deltaTime;

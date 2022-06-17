@@ -17,9 +17,14 @@ public class CastleHpGauge : MonoBehaviour
     private MainObjectParameter _CastleParameter;
 
     [SerializeField]
+    private Text HalfAlertText;
+
+    [SerializeField]
     private int life;
     [SerializeField]
     private int maxLife;
+    [SerializeField]
+    private int DivisionValue;
 
     private int _prevFrameLife = 0;
 
@@ -34,7 +39,14 @@ public class CastleHpGauge : MonoBehaviour
 
     float CheckAglee = -0.9f;
 
+    private float UpDownTime = 0.2f;
+
+    private float delayTime = 3.0f;
+
+    private bool isCalledOnce = true;
+
     RectTransform rect;
+    
     
 
     void Start()
@@ -44,6 +56,8 @@ public class CastleHpGauge : MonoBehaviour
             GreenGage.enabled = false;
             RedGage.enabled = false;
         }
+
+        HalfAlertText.enabled = false;
 
         _camera = _camera.gameObject.GetComponent<Transform>();
 
@@ -72,14 +86,6 @@ public class CastleHpGauge : MonoBehaviour
 
         _prevFrameLife = _CastleParameter.hp;
 
-        //カメラのレイ判定
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //RaycastHit hit;
-        //LayerMask mask = LayerMask.GetMask("StageMap");
-
-        //内積取得
-        //float angle = GetAngle(targetPlayer.position, _CastleParameter.transform.position);
-
         //城からカメラの方向へ正規化したベクトルを作成
         Vector3 CastleToCameraDir = (_camera.position - _CastleParameter.transform.position).normalized;
         //正規化したベクトルの内積が一定以下なら見たことにする
@@ -90,20 +96,27 @@ public class CastleHpGauge : MonoBehaviour
             {
                 GreenGage.enabled = true;
                 RedGage.enabled = true;
-                Invoke("Easing", 0.2f);
-
-            }
+                Invoke("Easing", UpDownTime);
+            }   
+        }
+        else if(life <= maxLife/2)
+        {
+            BelowCertainValue();
         }
         else
         {
+
             rect.transform.DOLocalMoveY(275.0f, 0.2f).SetEase(Ease.Linear);
 
             _active = false;
             if (_active == false)
             {
-                Invoke("FalseActive", 0.2f);
+                Invoke("FalseActive", UpDownTime);
             }
+
         }
+        
+        
     }
     public void GaugeReduction(float reducationValue = 0.0f, float time = 1.0f)
     {
@@ -138,5 +151,33 @@ public class CastleHpGauge : MonoBehaviour
     void Easing()
     {
         rect.transform.DOLocalMoveY(180.0f, 0.2f).SetEase(Ease.Linear);
+    }
+
+    void BelowCertainValue()
+    {
+        if(isCalledOnce == true)
+        {
+            _active = true;
+            if (_active == true)
+            {
+                GreenGage.enabled = true;
+                RedGage.enabled = true;
+                HalfAlertText.enabled = true;
+                Invoke("Easing", UpDownTime);
+                delayTime -= Time.deltaTime;
+            }
+        }
+        if(delayTime < 0.0f)
+        {
+            isCalledOnce = false;
+            rect.transform.DOLocalMoveY(275.0f, 0.2f).SetEase(Ease.Linear);
+
+            _active = false;
+            if(_active == false)
+            {
+                HalfAlertText.enabled = false;
+                Invoke("FalseActive", UpDownTime);
+            }
+        }
     }
 }
