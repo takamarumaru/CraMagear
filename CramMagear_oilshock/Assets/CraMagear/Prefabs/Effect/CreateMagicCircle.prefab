@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4952407003231829125}
   - component: {fileID: 4952407003231829122}
+  - component: {fileID: -8016609385816278841}
   m_Layer: 0
   m_Name: CreateMagicCircle
   m_TagString: Untagged
@@ -402,3 +403,18 @@ MonoBehaviour:
     offsetAngle: 0
     angleRange: 47.5
     offsetAngleSpeed: -20
+  _adjustment: 0.4
+--- !u!114 &-8016609385816278841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4952407003231829123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65aa92ef146f88041b752dce5178e94f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MaxScale: 20
+  _rotateSpeed: 10

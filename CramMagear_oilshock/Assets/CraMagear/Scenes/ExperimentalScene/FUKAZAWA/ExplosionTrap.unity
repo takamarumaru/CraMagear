@@ -4601,7 +4601,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 332740137}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3.164, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4620,7 +4620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80b283053632054daaf1621ad9d2e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefabHitEffectObject: {fileID: 540426668353790990, guid: c24af3b7519a30549b5e635b75ffd4bf,
+  _prefabHitEffectObject: {fileID: 4952407003231829123, guid: c5d8d843fccd66f44b5308562e91cbb4,
     type: 3}
 --- !u!4 &335243570 stripped
 Transform:
