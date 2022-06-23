@@ -12,6 +12,9 @@ public class TurretController : MonoBehaviour
     [Tooltip("生成する弾")]
     [SerializeField] private GameObject _bulletPrefab;
 
+    [Tooltip("発射オブジェクトを親にするか")]
+    [SerializeField] private bool _isObjParent = false;
+
     [Tooltip("マズルフラッシュ")]
     [SerializeField] private GameObject _effect;
 
@@ -39,10 +42,20 @@ public class TurretController : MonoBehaviour
         count += Time.deltaTime;
         if (count > _createInterval)
         {
-            Instantiate(_bulletPrefab, transform.position, transform.rotation);
+            if (_isObjParent == false)
+            {
+                Instantiate(_bulletPrefab, transform.position, transform.rotation);
+            }
+            else
+            {
+                Instantiate(_bulletPrefab, parent:transform);
+            }
 
             // マズルフラッシュを出す
-            Instantiate(_effect, transform.position + offset, transform.rotation);
+            if (_effect)
+            {
+                Instantiate(_effect, transform.position + offset, transform.rotation);
+            }
             count = 0.0f;
         }
     }
