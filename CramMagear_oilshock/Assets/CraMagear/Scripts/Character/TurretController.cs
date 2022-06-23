@@ -42,7 +42,10 @@ public class TurretController : MonoBehaviour
             Instantiate(_bulletPrefab, transform.position, transform.rotation);
 
             // マズルフラッシュを出す
-            Instantiate(_effect, transform.position + offset, transform.rotation);
+            if (_effect)
+            {
+                Instantiate(_effect, transform.position + offset, transform.rotation);
+            }
             count = 0.0f;
         }
     }
