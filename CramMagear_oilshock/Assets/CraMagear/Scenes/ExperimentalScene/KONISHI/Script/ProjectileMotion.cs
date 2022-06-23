@@ -32,6 +32,9 @@ public class ProjectileMotion : MonoBehaviour
     [SerializeField]
     Vector3 _forward = Vector3.forward;
 
+    [SerializeField, Header("銃口の位置調整")]
+    Vector3 _offsetPos;
+
     [Header("デバッグ用")]
     [SerializeField]
     bool _isDrawHitCheckLine = true;
@@ -106,12 +109,17 @@ public class ProjectileMotion : MonoBehaviour
     {
         middlePoses = new List<Vector3>();
 
+        GameObject obj = new GameObject();
+        obj.transform.position = _offsetPos;
+        obj.transform.RotateAround(Vector3.zero, Vector3.up, _player.transform.localEulerAngles.y);
+        //DebugLine.DrawWireSphere(_player.transform.position + obj.transform.position, 0.1f, Color.red);
+
         for (int i = 0; i < maxRayNum; i++)
         {
             float X = deltaTime * i;
             float radius = _velocity * X * Mathf.Cos(angleX);
 
-            Vector3 tmpPos = _player.transform.position;
+            Vector3 tmpPos = _player.transform.position + obj.transform.position;
             tmpPos.x += radius * Mathf.Cos(angleY);
             tmpPos.y += -0.5f * _gravity * X * X + _velocity * X * Mathf.Sin(angleX);
             tmpPos.z += radius * Mathf.Sin(angleY);
@@ -174,7 +182,10 @@ public class ProjectileMotion : MonoBehaviour
 
     void CalculateAttackRay()
     {
-        Vector3 playerPos = _player.transform.position;
+        GameObject obj = new GameObject();
+        obj.transform.position = _offsetPos;
+        obj.transform.RotateAround(Vector3.zero, Vector3.up, _player.transform.localEulerAngles.y);
+        Vector3 playerPos = _player.transform.position + obj.transform.position;
 
         for (int i = _attackRayDuration * (_hitIndex - 1); i < _attackRayDuration * _hitIndex; i++)
         {
