@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class BlitzRange : MonoBehaviour
 {
-
-    private void Update()
-    {
-        //Destroy(gameObject, 5);
-    }
-
     //Editer‚©‚ç‚Ì‚İÀs‚³‚ê‚éAGizmo•`‰æê—pŠÖ”
     private void OnDrawGizmos()
     {

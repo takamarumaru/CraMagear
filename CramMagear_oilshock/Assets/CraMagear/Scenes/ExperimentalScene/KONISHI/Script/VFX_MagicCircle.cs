@@ -61,16 +61,17 @@ public class VFX_MagicCircle : MonoBehaviour
 
         float angle = (_offsetAngle + _angle) * Mathf.Deg2Rad;
         Vector3 pos = new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * Mathf.Abs(_vfxCommon.GetFloat("Radius"));
-        _vfxCommon.transform.position = pos;
+        //_vfxCommon.transform.position = pos;
+        _vfxCommon.SetVector3(pos, "LocalPos");
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            SetScele(2.0f);
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            SetScele(0.5f);
-        }
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    SetScele(2.0f);
+        //}
+        //if (Input.GetKeyDown(KeyCode.D))
+        //{
+        //    SetScele(0.5f);
+        //}
     }
 
     void SetScele(float s)

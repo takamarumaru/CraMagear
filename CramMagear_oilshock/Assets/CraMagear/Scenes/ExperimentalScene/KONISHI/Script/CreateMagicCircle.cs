@@ -20,31 +20,41 @@ public class CreateMagicCircle : MonoBehaviour
     [SerializeField, Header("円形の文字列")]
     List<MagicCircleString> _magicCircleStrings;
 
-    private int instanceCount = 0;
+    [SerializeField, Header("魔法陣食い込まないための数値")]
+    float _adjustment = 1.0f;
 
     void Awake()
     {
-
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Create();
-        }
-    }
-
-    public void Create()
-    {
         // 魔法陣を構成する全ての親オブジェクト
-        var parentObj = new GameObject("MagicCircle " + ++instanceCount);
+        //var parentObj = new GameObject("MagicCircle");
+        var parentObj = new GameObject("MagicCircle");
+
+        //当たった場所に出現させるため
+        var changeScaleRotatePosition = parentObj.AddComponent<ChangeScaleRotate>();
+
+        //魔法陣設置のため微調整
+        changeScaleRotatePosition._popPosition = new Vector3(transform.position.x, transform.position.y + _adjustment, transform.position.z);
+
+        //parentObj.transform.position = new Vector3(0, 1.0f, 0);
 
         MagicCircle(ref parentObj);
 
         Aura(ref parentObj);
 
         Text(ref parentObj);
+
+        //エフェクトを作成した後は自身を削除する
+        Destroy(gameObject);
+    }
+
+    void Update()
+    {
+        //  Create();
+    }
+
+    public void Create()
+    {
+
     }
 
     void MagicCircle(ref GameObject magicCircleParentObj)
