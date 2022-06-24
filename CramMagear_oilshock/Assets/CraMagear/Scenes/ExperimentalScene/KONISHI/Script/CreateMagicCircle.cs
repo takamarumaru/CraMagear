@@ -23,19 +23,32 @@ public class CreateMagicCircle : MonoBehaviour
     [SerializeField, Header("魔法陣食い込まないための数値")]
     float _adjustment = 1.0f;
 
-    void Awake()
+    //コンポーネント内の数値コピー用
+    ChangeScaleRotate _changeScaleRotate;
+
+    private void Awake()
     {
+        _changeScaleRotate = GetComponent<ChangeScaleRotate>();
+
         // 魔法陣を構成する全ての親オブジェクト
         //var parentObj = new GameObject("MagicCircle");
         var parentObj = new GameObject("MagicCircle");
 
+        //作成したマジックサークルに数値コピー=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
         //当たった場所に出現させるため
         var changeScaleRotatePosition = parentObj.AddComponent<ChangeScaleRotate>();
+
+        //スケールの最大値と回転のスピードをセット
+        changeScaleRotatePosition.SetCopyMaxScaleAndRotateSpeed(_changeScaleRotate.MaxScale, _changeScaleRotate.RotateSpeed);
+
+        //爆発範囲オブジェクトセット
+        changeScaleRotatePosition.SetCopyGameObject(_changeScaleRotate.ExplosionRangeObj);
 
         //魔法陣設置のため微調整
         changeScaleRotatePosition._popPosition = new Vector3(transform.position.x, transform.position.y + _adjustment, transform.position.z);
 
-        //parentObj.transform.position = new Vector3(0, 1.0f, 0);
+        //=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
         MagicCircle(ref parentObj);
 
@@ -43,18 +56,7 @@ public class CreateMagicCircle : MonoBehaviour
 
         Text(ref parentObj);
 
-        //エフェクトを作成した後は自身を削除する
         Destroy(gameObject);
-    }
-
-    void Update()
-    {
-        //  Create();
-    }
-
-    public void Create()
-    {
-
     }
 
     void MagicCircle(ref GameObject magicCircleParentObj)
