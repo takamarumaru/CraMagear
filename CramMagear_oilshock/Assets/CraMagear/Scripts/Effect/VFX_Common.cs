@@ -52,4 +52,9 @@ public class VFX_Common : MonoBehaviour
     {
         _effect.SetTexture(name, texture);
     }
+
+    public void SetMesh(Mesh mesh, string name = "Mesh")
+    {
+        _effect.SetMesh(name, mesh);
+    }
 }
