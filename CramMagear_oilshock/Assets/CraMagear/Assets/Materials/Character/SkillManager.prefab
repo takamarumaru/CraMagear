@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8159823176432521326
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8159823176432521327}
+  - component: {fileID: 8159823176432521324}
+  m_Layer: 0
+  m_Name: SkillManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8159823176432521327
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159823176432521326}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.280827, y: -3.689662, z: 20.508043}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8159823176432521324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159823176432521326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf4a32e1e9c78694a9c2c49f89f79a5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skillList:
+  - rid: 6250824271772778503
+  - rid: 6250824271772778504
+  - rid: 6250824271772778505
+  - rid: 6250824271772778506
+  - rid: 6250824271772778507
+  references:
+    version: 2
+    RefIds:
+    - rid: 6250824271772778503
+      type: {class: Skill_AddArchitecture, ns: , asm: Assembly-CSharp}
+      data:
+        Name: Laser Turret
+        isActive: 1
+        _architectureCreator: {fileID: 0}
+        _addarchitecture:
+          guide: {fileID: 44437126103813024, guid: f101787b185897b4ebd7038e6102693a,
+            type: 3}
+          product: {fileID: 9066443606132706417, guid: 6846f2ca081ee9d4c9811bfac5258a4e,
+            type: 3}
+    - rid: 6250824271772778504
+      type: {class: Skill_AddArchitecture, ns: , asm: Assembly-CSharp}
+      data:
+        Name: Explosion Trap
+        isActive: 1
+        _architectureCreator: {fileID: 0}
+        _addarchitecture:
+          guide: {fileID: 7933901086233824280, guid: 4cebc55ebf2985544aa17a716c0587c1,
+            type: 3}
+          product: {fileID: 7933901086233824280, guid: f9040d3eacf24d84da5ebf587abc3349,
+            type: 3}
+    - rid: 6250824271772778505
+      type: {class: Skill_AddBullet, ns: , asm: Assembly-CSharp}
+      data:
+        Name: Electric Bullet
+        isActive: 0
+        _bulletManager: {fileID: 0}
+        _bullet:
+          bullet: {fileID: 0}
+          muzzleflash: {fileID: 0}
+    - rid: 6250824271772778506
+      type: {class: Skill_AddBullet, ns: , asm: Assembly-CSharp}
+      data:
+        Name: Warp Bullet
+        isActive: 0
+        _bulletManager: {fileID: 0}
+        _bullet:
+          bullet: {fileID: 0}
+          muzzleflash: {fileID: 0}
+    - rid: 6250824271772778507
+      type: {class: Skill_AddMember, ns: , asm: Assembly-CSharp}
+      data:
+        Name: Add Member
+        isActive: 1
+        _membersAdministrator: {fileID: 0}
+        _addMemberNum: 1

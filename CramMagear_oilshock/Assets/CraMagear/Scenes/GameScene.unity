@@ -1445,6 +1445,7 @@ Transform:
   - {fileID: 864211060}
   - {fileID: 1596345498}
   - {fileID: 644015400}
+  - {fileID: 5180503869847544337}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3819,6 +3820,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1176194568}
     m_Modifications:
+    - target: {fileID: 102031168856843420, guid: 74724a298ead62e45a9ccd56f6196f4d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 102031168856843421, guid: 74724a298ead62e45a9ccd56f6196f4d,
         type: 3}
       propertyPath: m_RootOrder
@@ -3903,6 +3909,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ProjectileMotion
+      objectReference: {fileID: 0}
+    - target: {fileID: 102031168856843423, guid: 74724a298ead62e45a9ccd56f6196f4d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74724a298ead62e45a9ccd56f6196f4d, type: 3}
@@ -4204,7 +4215,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.8313649, y: 1}
+    m_SensorSize: {x: 1.921916, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -4297,14 +4308,6 @@ MonoBehaviour:
   - bullet: {fileID: 3021037291751278088, guid: 6a098affc83a52549b3269493ffb742b,
       type: 3}
     muzzleflash: {fileID: 4530951753886053255, guid: 207c914d88ca69447a3bf1bd823e22ed,
-      type: 3}
-  - bullet: {fileID: 6822799985342197619, guid: ae040ae06ebf08544b7f4a0331ee17c6,
-      type: 3}
-    muzzleflash: {fileID: 6822799985342197619, guid: ae040ae06ebf08544b7f4a0331ee17c6,
-      type: 3}
-  - bullet: {fileID: 5856858181157451955, guid: cdcb40564d62a994fbcab5fb233b58eb,
-      type: 3}
-    muzzleflash: {fileID: 2660679472432803060, guid: b43255dcf01301c4db3a1f65adeea298,
       type: 3}
 --- !u!1773428102 &302217025
 ParentConstraint:
@@ -9118,7 +9121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c48e3644acb2d74384ae7de423da887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _createNum: 3
   _createMember: {fileID: 1265539008}
 --- !u!4 &864211060
 Transform:
@@ -10428,7 +10430,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.8313649, y: 1}
+    m_SensorSize: {x: 1.921916, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -10452,7 +10454,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1027554361}
   m_LocalRotation: {x: -0.16418684, y: 0, z: 0, w: 0.9864293}
-  m_LocalPosition: {x: 0.040816158, y: -0.078451864, z: -4.637896}
+  m_LocalPosition: {x: 0.042834297, y: -0.078451864, z: -4.637896}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19460,7 +19462,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 101431
+    m_Bits: 363575
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -19480,7 +19482,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2032280007}
   m_LocalRotation: {x: -0.16418684, y: 0, z: 0, w: 0.9864293}
-  m_LocalPosition: {x: 0.040816158, y: -0.078451864, z: -4.637896}
+  m_LocalPosition: {x: 0.042834297, y: -0.078451864, z: -4.637896}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19739,7 +19741,7 @@ MonoBehaviour:
   _jumpPower: 0
   _charaCtrl: {fileID: 0}
   _animator: {fileID: 1333000682}
-  electricShockTime: 0
+  electricShockTime: 5
 --- !u!195 &2045687360
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -20152,6 +20154,108 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e2accafa3a5f1b40ba86cf39bcb49a7, type: 3}
+--- !u!1 &5180503869847544336
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5180503869847544337}
+  - component: {fileID: 5180503869847544338}
+  m_Layer: 0
+  m_Name: SkillManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5180503869847544337
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5180503869847544336}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.280827, y: -3.689662, z: 20.508043}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 112690067}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5180503869847544338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5180503869847544336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf4a32e1e9c78694a9c2c49f89f79a5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skillList:
+  - rid: 6250824271772778503
+  - rid: 6250824271772778504
+  - rid: 6250824271772778505
+  - rid: 6250824271772778506
+  - rid: 6250824271772778507
+  references:
+    version: 2
+    RefIds:
+    - rid: 6250824271772778503
+      type: {class: Skill_AddArchitecture, ns: , asm: Assembly-CSharp}
+      data:
+        Name: Laser Turret
+        isActive: 1
+        _architectureCreator: {fileID: 7924674304205582056}
+        _addarchitecture:
+          guide: {fileID: 44437126103813024, guid: f101787b185897b4ebd7038e6102693a,
+            type: 3}
+          product: {fileID: 9066443606132706417, guid: 6846f2ca081ee9d4c9811bfac5258a4e,
+            type: 3}
+    - rid: 6250824271772778504
+      type: {class: Skill_AddArchitecture, ns: , asm: Assembly-CSharp}
+      data:
+        Name: Explosion Trap
+        isActive: 1
+        _architectureCreator: {fileID: 7924674304205582056}
+        _addarchitecture:
+          guide: {fileID: 7933901086233824280, guid: 4cebc55ebf2985544aa17a716c0587c1,
+            type: 3}
+          product: {fileID: 7933901086233824280, guid: f9040d3eacf24d84da5ebf587abc3349,
+            type: 3}
+    - rid: 6250824271772778505
+      type: {class: Skill_AddBullet, ns: , asm: Assembly-CSharp}
+      data:
+        Name: Electric Bullet
+        isActive: 1
+        _bulletManager: {fileID: 302217024}
+        _bullet:
+          bullet: {fileID: 6884972214661402874, guid: 7f5d176348252c14592092d823503d65,
+            type: 3}
+          muzzleflash: {fileID: 4530951753886053255, guid: 207c914d88ca69447a3bf1bd823e22ed,
+            type: 3}
+    - rid: 6250824271772778506
+      type: {class: Skill_AddBullet, ns: , asm: Assembly-CSharp}
+      data:
+        Name: Warp Bullet
+        isActive: 0
+        _bulletManager: {fileID: 302217024}
+        _bullet:
+          bullet: {fileID: 0}
+          muzzleflash: {fileID: 0}
+    - rid: 6250824271772778507
+      type: {class: Skill_AddMember, ns: , asm: Assembly-CSharp}
+      data:
+        Name: Add Member
+        isActive: 1
+        _membersAdministrator: {fileID: 864211059}
+        _addMemberNum: 1
 --- !u!1 &7924674304205582054
 GameObject:
   m_ObjectHideFlags: 0
@@ -20184,12 +20288,6 @@ MonoBehaviour:
   _createArchitectureList:
   - guide: {fileID: 44437126103813024, guid: 099d38e3b819d544aaefd190cd301800, type: 3}
     product: {fileID: 44437126103813024, guid: 6ed19fc68d785c448bf90632841cd813, type: 3}
-  - guide: {fileID: 44437126103813024, guid: f101787b185897b4ebd7038e6102693a, type: 3}
-    product: {fileID: 9066443606132706417, guid: 6846f2ca081ee9d4c9811bfac5258a4e,
-      type: 3}
-  - guide: {fileID: 7933901086233824280, guid: 4cebc55ebf2985544aa17a716c0587c1, type: 3}
-    product: {fileID: 7933901086233824280, guid: f9040d3eacf24d84da5ebf587abc3349,
-      type: 3}
   _collisionLayer:
     serializedVersion: 2
     m_Bits: 2048
