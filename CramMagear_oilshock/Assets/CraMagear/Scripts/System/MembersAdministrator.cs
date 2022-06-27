@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class MembersAdministrator : MonoBehaviour
 {
-    [SerializeField] private int _createNum = 0;
+    private int _createNum = 0;
 
     [SerializeField] private Transform _createMember;
 
@@ -19,6 +19,11 @@ public class MembersAdministrator : MonoBehaviour
     }
 
     private List<MemberInfo> _memberInfo = new ();
+
+    public void AddMamber(int addNum)
+    {
+        _createNum += addNum;
+    }
 
     // Start is called before the first frame update
     void Start()
