@@ -21,7 +21,7 @@ public class BulletShot : MonoBehaviour
 
 
     [System.Serializable]
-    struct CreateBullet
+    public class CreateBullet
     {
         public Transform bullet;
         public Transform muzzleflash;
@@ -87,4 +87,10 @@ public class BulletShot : MonoBehaviour
         if (newIdx < 0) newIdx = _createBulletList.Count - 1;
         _selectIdx = newIdx % _createBulletList.Count;
     }
+
+    public void AddBullet(CreateBullet newBullet)
+    {
+        _createBulletList.Add(newBullet);
+    }
+
 }
