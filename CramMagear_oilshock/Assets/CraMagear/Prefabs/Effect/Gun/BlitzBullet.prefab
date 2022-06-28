@@ -153,7 +153,8 @@ MonoBehaviour:
   _hitSlow: 1
   _hitSlowDuration: 0.5
   _hitSlowStartDelayTime: 0
-  _prefabHitEffectObject: {fileID: 0}
+  _prefabHitEffectObject: {fileID: 4530951753886053254, guid: 207c914d88ca69447a3bf1bd823e22ed,
+    type: 3}
 --- !u!54 &-7928193802060610152
 Rigidbody:
   m_ObjectHideFlags: 0

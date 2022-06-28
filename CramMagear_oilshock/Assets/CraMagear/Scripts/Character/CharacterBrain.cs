@@ -13,10 +13,10 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
 
     //[Tooltip("[--性能のパラメータ--]")]
     [Header("[--性能のパラメータ--]")]
-    [Tooltip("速度")][SerializeField] float _moveSpeed = 1.0f;
-    [Tooltip("重力")][SerializeField] float _gravity = -9.8f;
-    [Tooltip("減衰")][SerializeField] float _attenuation = 0.85f;
-    [Tooltip("ジャンプ力")][SerializeField] float _jumpPower = 4.0f;
+    [Tooltip("速度")] [SerializeField] float _moveSpeed = 1.0f;
+    [Tooltip("重力")] [SerializeField] float _gravity = -9.8f;
+    [Tooltip("減衰")] [SerializeField] float _attenuation = 0.85f;
+    [Tooltip("ジャンプ力")] [SerializeField] float _jumpPower = 4.0f;
 
     public OpenCharacterController _charaCtrl;
 
@@ -28,6 +28,7 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
     public Animator CharacterAnimator => _animator;
 
     //電撃時間
+    [SerializeField] SkinnedMeshToMesh _skinnedMeshToMesh;
     [SerializeField] float electricShockTime = 0.0f;
 
     MainObjectParameter _parameter;
@@ -310,20 +311,32 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
         //仮
         float count = 0;
 
+        GameObject effectObj;
+
         public override void OnEnter()
         {
             base.OnEnter();
+
+            var brain = StateMgr.CharaBrain;
+
+            effectObj = brain.transform.Find("Electric").gameObject;
+            effectObj.SetActive(true);
         }
 
         public override void OnExit()
         {
             base.OnExit();
+
+            effectObj.SetActive(false);
         }
         public override void OnUpdate()
         {
             base.OnUpdate();
 
             var brain = StateMgr.CharaBrain;
+
+            // 頂点座標は更新しなくてもいい
+            //brain._skinnedMeshToMesh.UpdateSkinnedMeshVFX();
 
             brain._velocity.x = 0;
             brain._velocity.z = 0;
