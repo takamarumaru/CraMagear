@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Architecture
   - Bullet
+  - BlitzAttack
+  - Effect
   layers:
   - Default
   - TransparentFX

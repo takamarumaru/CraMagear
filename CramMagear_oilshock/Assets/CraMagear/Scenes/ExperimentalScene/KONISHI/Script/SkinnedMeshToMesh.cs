@@ -20,10 +20,6 @@ public class SkinnedMeshToMesh : MonoBehaviour
         Mesh mesh = new Mesh();
         _skinedMesh.BakeMesh(mesh);
 
-        Vector3[] vertices = mesh.vertices;
-        Mesh mesh2 = new Mesh();
-        mesh2.vertices = vertices;
-
-        _vfxCommon.SetMesh(mesh2);
+        _vfxCommon.SetMesh(mesh);
     }
 }
