@@ -26,6 +26,13 @@ public class CastleHpGauge : MonoBehaviour
     [SerializeField]
     private int DivisionValue;
 
+    [SerializeField]
+    float _startPositionY;
+    [SerializeField]
+    float _endPositionY;
+    [SerializeField]
+    float _easeTime;
+
     private int _prevFrameLife = 0;
 
     [SerializeField]
@@ -62,7 +69,7 @@ public class CastleHpGauge : MonoBehaviour
         _camera = _camera.gameObject.GetComponent<Transform>();
 
         rect = GetComponent<RectTransform>();
-        rect.anchoredPosition = new Vector3(0, 275, 0);
+        rect.anchoredPosition = new Vector3(0, _startPositionY, 0);
 
     }
 
@@ -106,7 +113,7 @@ public class CastleHpGauge : MonoBehaviour
         else
         {
 
-            rect.transform.DOLocalMoveY(275.0f, 0.2f).SetEase(Ease.Linear);
+            rect.transform.DOLocalMoveY(_startPositionY, _easeTime).SetEase(Ease.Linear);
 
             _active = false;
             if (_active == false)
@@ -150,7 +157,7 @@ public class CastleHpGauge : MonoBehaviour
 
     void Easing()
     {
-        rect.transform.DOLocalMoveY(180.0f, 0.2f).SetEase(Ease.Linear);
+        rect.transform.DOLocalMoveY(_endPositionY, _easeTime).SetEase(Ease.Linear);
     }
 
     void BelowCertainValue()
@@ -170,7 +177,7 @@ public class CastleHpGauge : MonoBehaviour
         if(delayTime < 0.0f)
         {
             isCalledOnce = false;
-            rect.transform.DOLocalMoveY(275.0f, 0.2f).SetEase(Ease.Linear);
+            rect.transform.DOLocalMoveY(_startPositionY, _easeTime).SetEase(Ease.Linear);
 
             _active = false;
             if(_active == false)
