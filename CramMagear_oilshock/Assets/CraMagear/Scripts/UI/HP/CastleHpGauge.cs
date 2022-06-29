@@ -46,8 +46,6 @@ public class CastleHpGauge : MonoBehaviour
 
     float CheckAglee = -0.9f;
 
-    private float UpDownTime = 0.2f;
-
     private float delayTime = 3.0f;
 
     private bool isCalledOnce = true;
@@ -103,7 +101,8 @@ public class CastleHpGauge : MonoBehaviour
             {
                 GreenGage.enabled = true;
                 RedGage.enabled = true;
-                Invoke("Easing", UpDownTime);
+                //Invoke("Easing", 0.2f);
+                Easing();
             }   
         }
         else if(life <= maxLife/2)
@@ -118,7 +117,8 @@ public class CastleHpGauge : MonoBehaviour
             _active = false;
             if (_active == false)
             {
-                Invoke("FalseActive", UpDownTime);
+                //Invoke("FalseActive", 0.2f);
+                //FalseActive();
             }
 
         }
@@ -170,7 +170,7 @@ public class CastleHpGauge : MonoBehaviour
                 GreenGage.enabled = true;
                 RedGage.enabled = true;
                 HalfAlertText.enabled = true;
-                Invoke("Easing", UpDownTime);
+                Invoke("Easing", _easeTime);
                 delayTime -= Time.deltaTime;
             }
         }
@@ -183,7 +183,7 @@ public class CastleHpGauge : MonoBehaviour
             if(_active == false)
             {
                 HalfAlertText.enabled = false;
-                Invoke("FalseActive", UpDownTime);
+                //Invoke("FalseActive", _easeTime);
             }
         }
     }

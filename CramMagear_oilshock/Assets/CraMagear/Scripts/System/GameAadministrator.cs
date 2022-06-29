@@ -11,7 +11,7 @@ public class GameAadministrator : MonoBehaviour
     { 
         FirstPhase,
         SecondPhase,
-        ThirdPhase,
+        FinalPhase,
         Clear,
         GameOver,
     }
@@ -23,6 +23,9 @@ public class GameAadministrator : MonoBehaviour
     [SerializeField] private float _firstPhaseTime;
     [Tooltip("Phase2の時間")]
     [SerializeField] private float _secondPhaseTime;
+
+    [Tooltip("Phase2の時間")]
+    [SerializeField] private int _randomSpawnInterval;
 
     public float PhaseCount { get; private set; }
     [Tooltip("敵を生成するオブジェクト")]
@@ -45,6 +48,14 @@ public class GameAadministrator : MonoBehaviour
     {
         Debug.Assert(_enemyCreator != null, "GameAadministratorに敵を生成するオブジェクトが設定されていません。");
 
+        //指定オブジェクトの子供リストを作る
+        for (int childIdx = 0; childIdx < _enemyCreator.childCount; childIdx++)
+        {
+            Transform child = _enemyCreator.GetChild(childIdx);
+            child.gameObject.SetActive(false);
+            _enemyCreatorList.Add(child);
+        }
+
         EnterFirstPhase();
     }
 
@@ -54,7 +65,7 @@ public class GameAadministrator : MonoBehaviour
         {
             case GameState.FirstPhase   :  FirstPhaseUpdate(); break;
             case GameState.SecondPhase  :  SecondPhaseUpdate(); break;
-            case GameState.ThirdPhase   :  ThirdPhaseUpdate(); break;
+            case GameState.FinalPhase   :  FinalPhaseUpdate(); break;
             case GameState.Clear        :  SceneManager.LoadScene(_clearScene); break;
             case GameState.GameOver     :  SceneManager.LoadScene(_gameOverScene); break;
             default:break;
@@ -62,22 +73,38 @@ public class GameAadministrator : MonoBehaviour
     }
 
 
+    //敵出現の処理----------------------------------------------------------------------
+
+    void EnemyRandomSpawn()
+    {
+        //有効になる敵湧き地点を決定
+        _enableIdx = Random.Range(0, _enemyCreatorList.Count);
+        //敵生成オブジェクトを無効に
+        EnemySpawnAllDisable();
+        //有効になった敵生成オブジェクトを有効化
+        EnableEnemyCreator().gameObject.SetActive(true);
+    }
+
+    void EnemySpawnAllEnable()
+    {
+        foreach(Transform enemyCreator in _enemyCreatorList)
+        {
+            enemyCreator.gameObject.SetActive(true);
+        }
+    }
+    void EnemySpawnAllDisable()
+    {
+        foreach (Transform enemyCreator in _enemyCreatorList)
+        {
+            enemyCreator.gameObject.SetActive(false);
+        }
+    }
+
     //1stPhaseの処理--------------------------------------------------------------------
     void EnterFirstPhase()
     {
         //カウンターに時間をセット
         PhaseCount = _firstPhaseTime;
-
-        //指定オブジェクトの子供リストを作る
-        for (int childIdx = 0; childIdx < _enemyCreator.childCount; childIdx++)
-        {
-            Transform child = _enemyCreator.GetChild(childIdx);
-            child.gameObject.SetActive(false);
-            _enemyCreatorList.Add(child);
-        }
-
-        //有効になる敵湧き地点を決定
-        _enableIdx = Random.Range(0, _enemyCreatorList.Count);
 
         State = GameState.FirstPhase;
     }
@@ -95,31 +122,36 @@ public class GameAadministrator : MonoBehaviour
     //2ndPhaseの処理--------------------------------------------------------------------
     void EnterSecondPhase()
     {
+        State = GameState.SecondPhase;
         //カウンターに時間をセット
         PhaseCount = _secondPhaseTime;
 
-        _enemyCreatorList[_enableIdx].gameObject.SetActive(true);
-
-        State = GameState.SecondPhase;
     }
     void SecondPhaseUpdate()
     {
+
+        //n秒ごとにランダムで敵の出現位置を変更
+        if (((int)PhaseCount)% _randomSpawnInterval == 0)
+        {
+            EnemyRandomSpawn();
+        }
+
         PhaseCount -= Time.deltaTime;
         if (PhaseCount <= 0.0f)
         {
             PhaseCount = 0.0f;
-            EnterThirdPhase();
+            EnterFinalPhase();
         }
     }
 
     //3rdPhaseの処理--------------------------------------------------------------------
-    void EnterThirdPhase()
+    void EnterFinalPhase()
     {
-        _enemyCreatorList[_enableIdx].gameObject.SetActive(true);
-
-        State = GameState.ThirdPhase;
+        State = GameState.FinalPhase;
+        //全ての場所から敵を出現
+        EnemySpawnAllEnable();
     }
-    void ThirdPhaseUpdate()
+    void FinalPhaseUpdate()
     {
 
     }

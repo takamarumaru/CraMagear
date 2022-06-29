@@ -6561,7 +6561,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'PhaseCount
 
-    00:00'
+    0'
 --- !u!222 &555031032
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7023,7 +7023,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _firstPhaseTime: 5
-  _secondPhaseTime: 60
+  _secondPhaseTime: 180
+  _randomSpawnInterval: 20
   _enemyCreator: {fileID: 1344828133}
   _clearScene: PreClearScene
   _gameOverScene: PreGameOverScene
@@ -13339,7 +13340,7 @@ MonoBehaviour:
   DivisionValue: 0
   _startPositionY: 242
   _endPositionY: 180
-  _easeTime: 0.1
+  _easeTime: 0.2
   _camera: {fileID: 2032280010}
 --- !u!1001 &1270307656
 PrefabInstance:

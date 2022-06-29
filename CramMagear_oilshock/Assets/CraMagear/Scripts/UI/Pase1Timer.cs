@@ -13,7 +13,7 @@ public class Pase1Timer : MonoBehaviour
 
     void Update()
     {
-        TextCountDown.text = string.Format(CountLimitTime.State.ToString() + "\n{0:00:00}", CountLimitTime.PhaseCount);
+        TextCountDown.text = string.Format(CountLimitTime.State.ToString() + "\n" + ((int)CountLimitTime.PhaseCount).ToString());
 	    //countDownImage.fillAmount = CountDownTime % 1.0f;
     }
 }
