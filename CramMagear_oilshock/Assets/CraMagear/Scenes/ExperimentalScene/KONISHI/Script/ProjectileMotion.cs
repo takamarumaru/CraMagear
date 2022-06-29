@@ -61,6 +61,22 @@ public class ProjectileMotion : MonoBehaviour
     List<Vector3> _hitCheckRayMiddlePoses = new List<Vector3>();
     List<Vector3> _attackRayMiddlePoses = new List<Vector3>();
 
+    public void GetParameters(out Vector3 appearPos, out float angleX, out float angleY, out float velocity, out float gravity, out float takeTime)
+    {
+        GameObject obj = new GameObject();
+        obj.transform.position = _offsetPos;
+        obj.transform.RotateAround(Vector3.zero, Vector3.up, _player.transform.localEulerAngles.y);
+
+        appearPos = _player.transform.position + obj.transform.position;
+        angleX = _cameraAngleX;
+        angleY = _playerAngleY;
+        velocity = _velocity;
+        gravity = _gravity;
+        takeTime = _attackDeltaTime * _attackActiveIndex;
+
+        Destroy(obj);
+    }
+
     private void Awake()
     {
         _vfxCommon = transform.GetComponent<VFX_Common>();
@@ -117,15 +133,21 @@ public class ProjectileMotion : MonoBehaviour
         for (int i = 0; i < maxRayNum; i++)
         {
             float X = deltaTime * i;
-            float radius = _velocity * X * Mathf.Cos(angleX);
 
             Vector3 tmpPos = _player.transform.position + obj.transform.position;
-            tmpPos.x += radius * Mathf.Cos(angleY);
-            tmpPos.y += -0.5f * _gravity * X * X + _velocity * X * Mathf.Sin(angleX);
-            tmpPos.z += radius * Mathf.Sin(angleY);
+            tmpPos += Calculate(X, angleX, angleY, _velocity, _gravity);
 
             middlePoses.Add(tmpPos);
         }
+
+        Destroy(obj);
+    }
+
+    public Vector3 Calculate(float time, float angleX, float angleY, float velocity, float gravity)
+    {
+        float radius = velocity * time * Mathf.Cos(angleX);
+
+        return new Vector3(radius * Mathf.Cos(angleY), -0.5f * gravity * time * time + velocity * time * Mathf.Sin(angleX), radius * Mathf.Sin(angleY));
     }
 
     void DrawRay(
@@ -197,6 +219,8 @@ public class ProjectileMotion : MonoBehaviour
                 }
             }
         }
+
+        Destroy(obj);
     }
 
     /// <summary>
