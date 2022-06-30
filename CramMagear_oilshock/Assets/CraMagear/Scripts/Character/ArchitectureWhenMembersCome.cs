@@ -15,7 +15,11 @@ public class ArchitectureWhenMembersCome : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_memberInfo.Count == 0) return;
+        if (_memberInfo.Count == 0)
+        {
+            Create();
+            return;
+        }
 
         bool isArrival = true;
         foreach (MembersAdministrator.MemberInfo info in _memberInfo)
@@ -24,12 +28,17 @@ public class ArchitectureWhenMembersCome : MonoBehaviour
         }
         if(isArrival)
         {
-            Transform architectureTransform = Instantiate(_architecturePrefab,transform.position, transform.rotation);
-            for (int memberIdx = 0; memberIdx < _memberInfo.Count; memberIdx++)
-            {
-                _memberInfo[memberIdx]._input.TargetTransform = architectureTransform;
-            }
-            Destroy(this.gameObject);
+            Create();
         }
+    }
+
+    void Create()
+    {
+        Transform architectureTransform = Instantiate(_architecturePrefab, transform.position, transform.rotation);
+        for (int memberIdx = 0; memberIdx < _memberInfo.Count; memberIdx++)
+        {
+            _memberInfo[memberIdx]._input.TargetTransform = architectureTransform;
+        }
+        Destroy(this.gameObject);
     }
 }
