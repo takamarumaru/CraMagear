@@ -49,7 +49,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5426046783330140298}
   - component: {fileID: 9158241200413812462}
-  - component: {fileID: 1368608628091442377}
   - component: {fileID: -2384948230286490458}
   m_Layer: 0
   m_Name: ArchitecturePrefab 1
@@ -90,20 +89,7 @@ MonoBehaviour:
   _createTime: 5
   _createObjPrefab: {fileID: 44437126103813024, guid: 6ed19fc68d785c448bf90632841cd813,
     type: 3}
-  _isCreateDestroy: 0
---- !u!114 &1368608628091442377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8966049500394703808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be5c669f7a6d1924981fe7f08e4b0853, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _aliveTime: 10.1
+  _isCreateDestroy: 1
 --- !u!208 &-2384948230286490458
 NavMeshObstacle:
   m_ObjectHideFlags: 0
