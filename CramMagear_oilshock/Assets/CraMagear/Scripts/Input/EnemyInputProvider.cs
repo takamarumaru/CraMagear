@@ -11,6 +11,7 @@ public class EnemyInputProvider : InputProvider
     public bool Attack { get; set; } = false;
 
     [SerializeField] private Transform _targetTransform;
+    public Transform TargetTransform { set { _targetTransform = value; } }
 
     //
     [Header("‹’“_‚ÉUŒ‚‚ğŠJn‚·‚é‚Ü‚Å‚Ì‹——£")]
