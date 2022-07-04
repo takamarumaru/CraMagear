@@ -86,6 +86,8 @@ public class EnemyInputProvider : InputProvider
             return true;
         }
 
+        if (_targetTransform == null) { return false; }
+
         //拠点までのベクトル
         Vector3 vectorToTheTarget = _targetTransform.position - transform.position;
         vectorToTheTarget.y = 0.0f;
