@@ -10676,7 +10676,7 @@ MonoBehaviour:
   - {fileID: 8926484042661616306}
   m_ExposedName: ParticleAppearDelay
   m_Exposed: 1
-  m_Order: 18
+  m_Order: 16
   m_Category: Particle
   m_Min:
     m_Type:
@@ -13085,7 +13085,7 @@ MonoBehaviour:
   - {fileID: 8926484042661616399}
   m_ExposedName: ParticleLifetime
   m_Exposed: 1
-  m_Order: 20
+  m_Order: 18
   m_Category: Particle
   m_Min:
     m_Type:
@@ -13636,7 +13636,7 @@ MonoBehaviour:
   - {fileID: 8926484042661616428}
   m_ExposedName: UVSpeed
   m_Exposed: 1
-  m_Order: 12
+  m_Order: 10
   m_Category: Laser
   m_Min:
     m_Type:
@@ -23661,7 +23661,7 @@ MonoBehaviour:
   - {fileID: 8926484042661616975}
   m_ExposedName: SparkleSpeed
   m_Exposed: 1
-  m_Order: 13
+  m_Order: 11
   m_Category: Sparkle
   m_Min:
     m_Type:
@@ -23749,7 +23749,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617017}
   m_ExposedName: SparkleAnimationCurve
   m_Exposed: 1
-  m_Order: 16
+  m_Order: 14
   m_Category: Sparkle
   m_Min:
     m_Type:
@@ -25389,7 +25389,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617234}
   m_ExposedName: SparkleScale
   m_Exposed: 1
-  m_Order: 19
+  m_Order: 17
   m_Category: Sparkle
   m_Min:
     m_Type:
@@ -25992,7 +25992,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617376}
   m_ExposedName: InnerLaserGradient
   m_Exposed: 1
-  m_Order: 9
+  m_Order: 8
   m_Category: Laser
   m_Min:
     m_Type:
@@ -26134,7 +26134,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617383}
   m_ExposedName: EnableInnerLaser
   m_Exposed: 1
-  m_Order: 8
+  m_Order: 7
   m_Category: Laser
   m_Min:
     m_Type:
@@ -29783,7 +29783,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617651}
   m_ExposedName: LaserLifetimeEnd
   m_Exposed: 0
-  m_Order: 14
+  m_Order: 12
   m_Category: Laser
   m_Min:
     m_Type:
@@ -33927,7 +33927,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617941}
   m_ExposedName: Vector3Right
   m_Exposed: 0
-  m_Order: 10
+  m_Order: 9
   m_Category: Constant
   m_Min:
     m_Type:
@@ -34101,7 +34101,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617946}
   m_ExposedName: Vector3Up
   m_Exposed: 0
-  m_Order: 15
+  m_Order: 13
   m_Category: Constant
   m_Min:
     m_Type:
@@ -34315,7 +34315,7 @@ MonoBehaviour:
   - {fileID: 8926484042661617951}
   m_ExposedName: Vector3Forward
   m_Exposed: 0
-  m_Order: 17
+  m_Order: 15
   m_Category: Constant
   m_Min:
     m_Type:
@@ -39570,7 +39570,7 @@ MonoBehaviour:
   - {fileID: 8926484042661618227}
   m_ExposedName: EnableStartPos
   m_Exposed: 1
-  m_Order: 21
+  m_Order: 19
   m_Category: Debug
   m_Min:
     m_Type:
@@ -39650,7 +39650,7 @@ MonoBehaviour:
   - {fileID: 8926484042661618229}
   m_ExposedName: EnableEndPos
   m_Exposed: 1
-  m_Order: 22
+  m_Order: 20
   m_Category: Debug
   m_Min:
     m_Type:
@@ -39730,7 +39730,7 @@ MonoBehaviour:
   - {fileID: 8926484042661618231}
   m_ExposedName: EnableSparklePos
   m_Exposed: 1
-  m_Order: 23
+  m_Order: 21
   m_Category: Debug
   m_Min:
     m_Type:

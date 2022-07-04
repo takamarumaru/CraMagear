@@ -23,7 +23,17 @@ public class VFX_Common : MonoBehaviour
         _effect.playRate = rate;
     }
 
-    public void SetFloat(float vol, string name = "float")
+    public void SetBool(bool flag, string name = "Bool")
+    {
+        _effect.SetBool(name, flag);
+    }
+
+    public bool GetBool(string name = "Bool")
+    {
+        return _effect.GetBool(name);
+    }
+
+    public void SetFloat(float vol, string name = "Float")
     {
         _effect.SetFloat(name, vol);
     }
@@ -41,6 +51,26 @@ public class VFX_Common : MonoBehaviour
     public Vector3 GetVector3(string name = "Vector3")
     {
         return _effect.GetVector3(name);
+    }
+
+    public void SetVector4(Vector3 vec, string name = "Vector4")
+    {
+        _effect.SetVector4(name, vec);
+    }
+
+    public Vector4 GetVector4(string name = "Vector4")
+    {
+        return _effect.GetVector4(name);
+    }
+
+    public void SetColor(Vector4 vec, string name = "Color")
+    {
+        _effect.SetVector4(name, vec);
+    }
+
+    public Color GetColor(string name = "Color")
+    {
+        return _effect.GetVector4(name);
     }
 
     public void SetGradient(Gradient gradient, string name = "Gradient")
