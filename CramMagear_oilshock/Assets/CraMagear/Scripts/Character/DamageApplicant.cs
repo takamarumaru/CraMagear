@@ -110,12 +110,16 @@ public class DamageApplicant : MonoBehaviour
 
                 if (dmgApp.ApplyDamage(ref param))
                 {
-                    Debug.Assert(_prefabHitEffectObject != null, "DamageApplicantに攻撃時のエフェクトが設定されていません。");
+                    if (_prefabHitEffectObject)
+                    {
+                        //Debug.Assert(_prefabHitEffectObject != null, "DamageApplicantに攻撃時のエフェクトが設定されていません。");
 
-                    //当たった時にやりたい処理
-                    Instantiate(_prefabHitEffectObject, contact.point, transform.rotation);
+                        //当たった時にやりたい処理
+                        Instantiate(_prefabHitEffectObject, contact.point, transform.rotation, dmgApp.MainObjectParam.gameObject.transform);
 
-                    Destroy(transform.parent.gameObject);
+                        //敵の攻撃にエフェクトつけたら敵が消えたから要改良
+                        //Destroy(transform.parent.gameObject);
+                    }
                 }
             }
         }
