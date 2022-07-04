@@ -76,7 +76,11 @@ public class TurretChaseEnemyAIStateChase : GameStateMachine.StateNodeBase
         var collisionInfo = input.GetComponentInChildren<TargetSearcher>();
         if (collisionInfo.GetClosestTarget().HasValue)
         {
-            input.TargetTransform = collisionInfo.GetClosestTarget().Value.MainObjectParameter.gameObject.transform;
+            MainObjectParameter targetParam = collisionInfo.GetClosestTarget().Value.MainObjectParameter;
+            if (targetParam)
+            {
+                input.TargetTransform = targetParam.gameObject.transform;
+            }
         }
         Vector2 axisL = input.SearchTargetDirection();
 

@@ -50,7 +50,7 @@ public class TargetSearcher : MonoBehaviour
         //Collider[] colliders = Physics.OverlapSphere(transform.position, _radus, _layerMasks);
         _numColliders = Physics.OverlapSphereNonAlloc(transform.position, _radus,_tempColliders, _layerMasks);
 
-        Debug.Log(_numColliders);
+        //Debug.Log(_numColliders);
         //foreach(Collider collider in colliders)
         for (int i=0;i<_numColliders;i++)
         {

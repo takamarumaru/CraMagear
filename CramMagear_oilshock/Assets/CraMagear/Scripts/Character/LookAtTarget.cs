@@ -51,7 +51,7 @@ public class LookAtTarget : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(vLook, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, _followingSpeed * Time.deltaTime);
 
-        Debug.Log(vLook.magnitude);
+        //Debug.Log(vLook.magnitude);
         //•W“I‚Æ‚µ‚Ä‚¢‚éTransform‚ª”ÍˆÍŠO‚ÉˆÚ“®‚µ‚½‚çnull‚É
         isInTheRange = (vLook.magnitude <= _sphereCollider.radius);
         if (isInTheRange == false)

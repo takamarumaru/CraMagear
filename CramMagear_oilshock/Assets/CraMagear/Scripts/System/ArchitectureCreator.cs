@@ -11,13 +11,10 @@ public class ArchitectureCreator : MonoBehaviour
     {
         public Transform guide;
         public Transform product;
+        public IngredientsManager.IngredientsInfo needIngredients;
     }
     [SerializeField] private List<CreateArchitecture> _createArchitectureList = new();
     private int _selectIdx = 0;
-
-    //[System.Serializable]
-    //public class CreateArchitectureEvent : UnityEvent<CreateArchitecture> { }
-    //[SerializeField] UnityEvent uEvent;
 
     //ガイドオブジェクト格納用
     private Transform _guide;
@@ -31,6 +28,9 @@ public class ArchitectureCreator : MonoBehaviour
 
     //隊員管理
     [SerializeField] private MembersAdministrator _membersAdministrator;
+    //素材管理
+    [SerializeField] private IngredientsManager _ingredientsManager;
+
 
     public bool _enable { get; private set; }
 
@@ -74,8 +74,6 @@ public class ArchitectureCreator : MonoBehaviour
     //public void AddArchitecture(Transform guide,Transform architecture)
     public void AddArchitecture(CreateArchitecture architecture)
     {
-        //createArchitecture.guide = guide;
-        //createArchitecture.product = architecture;
         _createArchitectureList.Add(architecture);
     }
 
@@ -106,6 +104,11 @@ public class ArchitectureCreator : MonoBehaviour
     {
         //ガイドオブジェクトが非アクティブなら実行しない
         if (_guide.gameObject.activeSelf == false) return false;
+
+        if(_ingredientsManager.UseIngredients(_createArchitectureList[_selectIdx].needIngredients) == false)
+        {
+            return false;
+        }
 
         //建築物を生成
         Transform transform = Instantiate(_createArchitectureList[_selectIdx].product, _guide.position, _guide.rotation).transform;
