@@ -72,7 +72,7 @@ public class ProjectileMotion : MonoBehaviour
         angleY = _playerAngleY;
         velocity = _velocity;
         gravity = _gravity;
-        takeTime = _attackDeltaTime * _attackActiveIndex;
+        takeTime = _attackDeltaTime * (_attackActiveIndex - 1);
 
         Destroy(obj);
     }
