@@ -3611,7 +3611,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &176708430
 Transform:
   m_ObjectHideFlags: 0
@@ -10461,7 +10461,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1028856222}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 9}
+  m_LocalPosition: {x: 0, y: 1, z: 10}
   m_LocalScale: {x: 3, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22527,6 +22527,9 @@ MonoBehaviour:
             type: 3}
           product: {fileID: 5426046783330140298, guid: b845fdb6c5c18414081b89a79b936d79,
             type: 3}
+          needIngredients:
+            ancientGear: 0
+            electronicBoard: 0
     - rid: 6250824271772778504
       type: {class: Skill_AddArchitecture, ns: , asm: Assembly-CSharp}
       data:
@@ -22538,6 +22541,9 @@ MonoBehaviour:
             type: 3}
           product: {fileID: 5426046783330140298, guid: 375ce50c96683624a91edf9be3b5cbbb,
             type: 3}
+          needIngredients:
+            ancientGear: 0
+            electronicBoard: 0
     - rid: 6250824271772778505
       type: {class: Skill_AddBullet, ns: , asm: Assembly-CSharp}
       data:
@@ -22598,12 +22604,16 @@ MonoBehaviour:
   - guide: {fileID: 44437126103813024, guid: 099d38e3b819d544aaefd190cd301800, type: 3}
     product: {fileID: 5426046783330140298, guid: 07c7738b85d23ba4b88816e29d46937b,
       type: 3}
+    needIngredients:
+      ancientGear: 0
+      electronicBoard: 0
   _collisionLayer:
     serializedVersion: 2
     m_Bits: 2048
   _center: {fileID: 1771569703}
   _architectureRange: 10
   _membersAdministrator: {fileID: 864211059}
+  _ingredientsManager: {fileID: 0}
 --- !u!4 &7924674304205582057
 Transform:
   m_ObjectHideFlags: 0
