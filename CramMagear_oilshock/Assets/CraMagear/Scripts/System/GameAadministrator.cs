@@ -26,6 +26,7 @@ public class GameAadministrator : MonoBehaviour
 
     [Tooltip("Phase2の時間")]
     [SerializeField] private int _randomSpawnInterval;
+    private float _randomspawnCount;
 
     public float PhaseCount { get; private set; }
     [Tooltip("敵を生成するオブジェクト")]
@@ -96,7 +97,8 @@ public class GameAadministrator : MonoBehaviour
     {
         foreach (Transform enemyCreator in _enemyCreatorList)
         {
-            enemyCreator.gameObject.SetActive(false);
+            //enemyCreator.gameObject.SetActive(false);
+            enemyCreator.GetComponent<VFX_EnemySpawn>().CangeState(VFX_EnemySpawn.GateState.Disappear);            
         }
     }
 
@@ -126,15 +128,19 @@ public class GameAadministrator : MonoBehaviour
         //カウンターに時間をセット
         PhaseCount = _secondPhaseTime;
 
+        EnemyRandomSpawn();
+
     }
     void SecondPhaseUpdate()
     {
 
         //n秒ごとにランダムで敵の出現位置を変更
-        if (((int)PhaseCount)% _randomSpawnInterval == 0)
+        if (_randomspawnCount >= _randomSpawnInterval)
         {
             EnemyRandomSpawn();
+            _randomspawnCount = 0;
         }
+        _randomspawnCount += Time.deltaTime;
 
         PhaseCount -= Time.deltaTime;
         if (PhaseCount <= 0.0f)

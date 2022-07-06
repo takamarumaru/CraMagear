@@ -38,13 +38,18 @@ public class VFX_EnemySpawn : MonoBehaviour
     float _rimLightTakeTime = 2;    // リムライトに掛かる時間
     float _rimLightProgress = 0;
 
-    private enum GateState
+    public enum GateState
     {
         Appear,
         Open,
         Disappear
     }
-    GateState _nowState = new GateState();
+    private GateState _nowState = new GateState();
+
+    public void CangeState(GateState gateState)
+    {
+        _nowState = gateState;
+    }
 
     void Awake()
     {
@@ -64,6 +69,11 @@ public class VFX_EnemySpawn : MonoBehaviour
         // リムライトは最初は透明
         Color color = new Color();
         _vfxCommon.SetColor(color, "RimLightColor");
+    }
+
+    private void OnEnable()
+    {
+        _nowState = GateState.Appear;
     }
 
     void Update()
@@ -128,7 +138,23 @@ public class VFX_EnemySpawn : MonoBehaviour
 
         if (_dissolveThreshold >= 1.0f)
         {
-            Destroy(gameObject);
+
+            _sphereSize = 0;
+            _vfxCommon.SetFloat(_sphereSize, "SphereSize");
+            _electricitySize = 0;
+            _vfxCommon.SetFloat(_electricitySize, "ElectricitySize");
+            _dissolveThreshold = 1;
+            _vfxCommon.SetFloat(_dissolveThreshold, "DissolveThreshold");
+            _electricityProgress = 0;
+            _rimLightProgress = 0;
+
+            _vfxCommon.SetBool(false, "IsRimLight");
+
+            // リムライトは最初は透明
+            Color color = new Color();
+            _vfxCommon.SetColor(color, "RimLightColor");
+
+            gameObject.SetActive(false);
             return;
         }
 

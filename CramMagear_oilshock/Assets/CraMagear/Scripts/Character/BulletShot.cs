@@ -25,6 +25,7 @@ public class BulletShot : MonoBehaviour
     {
         public Transform bullet;
         public Transform muzzleflash;
+
     }
     [Tooltip("”­Ë‚·‚é’eî•ñ‚ÌƒŠƒXƒg")]
     [SerializeField] private List<CreateBullet> _createBulletList = new();
