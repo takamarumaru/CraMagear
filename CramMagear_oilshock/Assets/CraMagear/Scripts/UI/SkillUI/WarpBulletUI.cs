@@ -25,7 +25,7 @@ public class WarpBulletUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_BulletChangeCount.count == 4)
+        if (m_BulletChangeCount.count == 3)
         {
             WarpBullet.enabled = true;
             WarpMask.enabled = true;

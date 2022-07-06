@@ -33,6 +33,7 @@ public class PlayerInputManager : MonoBehaviour
     public Vector2 GamePlay_GetMouse() => _actionMapGamePlay["Camera"].ReadValue<Vector2>();
 
     public bool GamePlay_GetButtonAttack() => _actionMapGamePlay["Attack"].WasPerformedThisFrame();
+    public bool GamePlay_GetButtonPressedAttack() => _actionMapGamePlay["Attack"].IsPressed();
 
     public bool GamePlay_GetButtonAim() => _actionMapGamePlay["Aim"].WasPerformedThisFrame();
     public bool GamePlay_GetButtonPressedAim() => _actionMapGamePlay["Aim"].IsPressed();

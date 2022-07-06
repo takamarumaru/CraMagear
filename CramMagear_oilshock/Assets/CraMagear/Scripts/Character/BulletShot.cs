@@ -25,6 +25,8 @@ public class BulletShot : MonoBehaviour
     {
         public Transform bullet;
         public Transform muzzleflash;
+        public float recastTime;
+        [HideInInspector] public float recastCount;
 
     }
     [Tooltip("発射する弾情報のリスト")]
@@ -46,11 +48,25 @@ public class BulletShot : MonoBehaviour
         {
             Switching(1);
         }
+
+        foreach(CreateBullet bullet in _createBulletList)
+        {
+            bullet.recastCount += Time.deltaTime;
+        }
     }
 
     // 弾の発射
     public void LauncherShot()
     {
+        //リキャスト時間が経つまで入ってこない
+        CreateBullet nowBullet = _createBulletList[_selectIdx];
+        if (nowBullet.recastCount < nowBullet.recastTime)
+        {
+            return;
+        }
+        nowBullet.recastCount = 0;
+
+        //オフセット設定
         Vector3 offset = new Vector3();
         offset += firingPoint.transform.right * firingPointOffset.x;
         offset += firingPoint.transform.up * firingPointOffset.y;

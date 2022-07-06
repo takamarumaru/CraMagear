@@ -97,8 +97,10 @@ public class GameAadministrator : MonoBehaviour
     {
         foreach (Transform enemyCreator in _enemyCreatorList)
         {
-            //enemyCreator.gameObject.SetActive(false);
-            enemyCreator.GetComponent<VFX_EnemySpawn>().CangeState(VFX_EnemySpawn.GateState.Disappear);            
+            if (enemyCreator != _enemyCreatorList[_enableIdx])
+            {
+                enemyCreator.GetComponent<VFX_EnemySpawn>().CangeState(VFX_EnemySpawn.GateState.Disappear);
+            }
         }
     }
 

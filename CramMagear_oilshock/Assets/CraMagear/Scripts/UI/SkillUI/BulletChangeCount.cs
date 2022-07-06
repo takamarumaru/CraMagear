@@ -17,7 +17,7 @@ public class BulletChangeCount : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             count++;
-            if (count > 4)
+            if (count > 3)
             {
                 count = 1;
             }
@@ -28,7 +28,7 @@ public class BulletChangeCount : MonoBehaviour
             count--;
             if (count < 1)
             {
-                count = 4;
+                count = 3;
             }
         }
     }
