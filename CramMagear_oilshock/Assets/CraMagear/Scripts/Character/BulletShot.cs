@@ -26,12 +26,16 @@ public class BulletShot : MonoBehaviour
         public Transform bullet;
         public Transform muzzleflash;
         public float recastTime;
+        public bool isCurveBullet;
         [HideInInspector] public float recastCount;
 
     }
     [Tooltip("î≠éÀÇ∑ÇÈíeèÓïÒÇÃÉäÉXÉg")]
     [SerializeField] private List<CreateBullet> _createBulletList = new();
     private int _selectIdx = 0;
+
+    [Tooltip("ã»éÀUI")]
+    [SerializeField] private GameObject _curveBulletUIObject;
 
     private void Awake()
     {
@@ -52,6 +56,10 @@ public class BulletShot : MonoBehaviour
         foreach(CreateBullet bullet in _createBulletList)
         {
             bullet.recastCount += Time.deltaTime;
+        }
+        if (_curveBulletUIObject)
+        {
+            _curveBulletUIObject.SetActive(_createBulletList[_selectIdx].isCurveBullet);
         }
     }
 

@@ -32,7 +32,7 @@ public class WarpBulletUI : MonoBehaviour
             //WarpBullet.color = new Color(1, 1, 1, 1);
             //WarpMask.color = new Color(1, 1, 1, 1);
 
-            if (!Input.GetKeyDown(KeyCode.Z))
+            if (!PlayerInputManager.Instance.GamePlay_GetButtonAttack())
             {
                 WarpMask.fillAmount -= 1.0f / SkillRecastTime * Time.deltaTime;
             }
@@ -51,7 +51,7 @@ public class WarpBulletUI : MonoBehaviour
             WarpMask.enabled = false;
             //WarpBullet.color = new Color(1, 1, 1, 0);
             //WarpMask.color = new Color(1, 1, 1, 0);
-            if (!Input.GetKeyDown(KeyCode.Z))
+            if (!PlayerInputManager.Instance.GamePlay_GetButtonAttack())
             {
                 WarpMask.fillAmount -= 1.0f / SkillRecastTime * Time.deltaTime;
             }

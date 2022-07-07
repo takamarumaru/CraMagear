@@ -259,7 +259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parameter: {fileID: 2370985519064125180}
   _lifespan: 1
-  _damage: 100
+  _damage: 25
   _damageRate: 0.1
   _hitInterval: 0.1
   _hitDuration: 0.5

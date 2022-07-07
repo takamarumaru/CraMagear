@@ -50,10 +50,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parameter: {fileID: 8609054622410252504}
   _lifespan: 2
-  _damage: 15
+  _damage: 10
   _damageRate: 0.1
   _hitInterval: 0.1
   _hitDuration: 0.5
+  _blitzRangeObject: {fileID: 0}
+  _blitzAttack: 0
   _hitSlow: 1
   _hitSlowDuration: 0.5
   _hitSlowStartDelayTime: 0

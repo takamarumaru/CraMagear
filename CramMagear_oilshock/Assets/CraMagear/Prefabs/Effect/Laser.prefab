@@ -283,7 +283,7 @@ MonoBehaviour:
   _impactDistanceInterval: 5
   _layerMask:
     serializedVersion: 2
-    m_Bits: 34816
+    m_Bits: 2048
   _impact: {fileID: 6912759650008794367, guid: ef3396b9724e5934ea3fb3bb7650b769, type: 3}
 --- !u!114 &4863036446983857913
 MonoBehaviour:

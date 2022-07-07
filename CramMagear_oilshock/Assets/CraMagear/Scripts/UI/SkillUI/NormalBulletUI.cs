@@ -33,7 +33,7 @@ public class NormalBulletUI : MonoBehaviour
             //NormalBullet.color = new Color(1, 1, 1, 1);
             //NormalMask.color = new Color(1, 1, 1, 1);
 
-            if (!Input.GetKeyDown(KeyCode.Z))
+            if (!PlayerInputManager.Instance.GamePlay_GetButtonAttack())
             {
                 NormalMask.fillAmount -= 1.0f / SkillRecastTime * Time.deltaTime;
             }
@@ -52,7 +52,7 @@ public class NormalBulletUI : MonoBehaviour
             NormalMask.enabled = false;
             //NormalBullet.color = new Color(1, 1, 1, 0);
             //NormalMask.color = new Color(1, 1, 1, 0);
-            if (!Input.GetKeyDown(KeyCode.Z))
+            if (!PlayerInputManager.Instance.GamePlay_GetButtonAttack())
             {
                 NormalMask.fillAmount -= 1.0f / SkillRecastTime * Time.deltaTime;
             }
