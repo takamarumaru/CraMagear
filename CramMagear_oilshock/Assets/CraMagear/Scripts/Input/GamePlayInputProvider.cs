@@ -86,7 +86,7 @@ public class GamePlayInputProvider : InputProvider
         return PlayerInputManager.Instance.GamePlay_GetButtonJump();
     }
 
-    public void PlayerRotation(Vector3 forward, float axisPower,Transform playerTrans)
+    public void PlayerRotation(Vector3 forward, float axisPower, Transform playerTrans)
     {
 
         //VirtualカメラよりAimカメラの方が優先度が低かったらカメラ方向に撃つ
@@ -127,8 +127,8 @@ public class GamePlayInputProvider : InputProvider
             //カメラ制御
             if (_MaxCamRotateY < localAngle.x && localAngle.x < 180)
                 localAngle.x = _MaxCamRotateY;
-            if (_minCamRotateY > localAngle.x && localAngle.x > 180)
-                localAngle.x = _minCamRotateY;
+            if (_minCamRotateY + 360 > localAngle.x && localAngle.x > 180)
+                localAngle.x = _minCamRotateY + 360;
 
             //値を代入する
             _cameraLookPoint.transform.localEulerAngles = localAngle;

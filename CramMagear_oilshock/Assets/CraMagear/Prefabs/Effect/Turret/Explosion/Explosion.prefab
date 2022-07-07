@@ -61,6 +61,7 @@ GameObject:
   - component: {fileID: 5016733731958693444}
   - component: {fileID: 7411230238974830123}
   - component: {fileID: 8196560584158047746}
+  - component: {fileID: 6118456925753257305}
   m_Layer: 16
   m_Name: ExplosionRange
   m_TagString: Untagged
@@ -137,7 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parameter: {fileID: 5016733731958693444}
   _lifespan: 5
-  _damage: 10000
+  _damage: 500
   _damageRate: 0.1
   _hitInterval: 0.1
   _hitDuration: 0.5
@@ -164,3 +165,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &6118456925753257305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3128377451285062766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be5c669f7a6d1924981fe7f08e4b0853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _aliveTime: 0.1

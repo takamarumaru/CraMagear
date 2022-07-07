@@ -33,7 +33,7 @@ public class ThunderBulletUI : MonoBehaviour
             //ThunderBullet.color = new Color(1, 1, 1, 1);
             //ThunderMask.color = new Color(1, 1, 1, 1);
 
-            if (!Input.GetKeyDown(KeyCode.Z))
+            if (!PlayerInputManager.Instance.GamePlay_GetButtonAttack())
             {
                 ThunderMask.fillAmount -= 1.0f / SkillRecastTime * Time.deltaTime;
             }
@@ -52,7 +52,7 @@ public class ThunderBulletUI : MonoBehaviour
             ThunderMask.enabled = false;
             //ThunderBullet.color = new Color(1, 1, 1, 0);
             //ThunderMask.color = new Color(1, 1, 1, 0);
-            if (!Input.GetKeyDown(KeyCode.Z))
+            if (!PlayerInputManager.Instance.GamePlay_GetButtonAttack())
             {
                 ThunderMask.fillAmount -= 1.0f / SkillRecastTime * Time.deltaTime;
             }
