@@ -81,7 +81,7 @@ public class ProjectileMotion : MonoBehaviour
     {
         _vfxCommon = transform.GetComponent<VFX_Common>();
 
-        _parentRayObj = new GameObject("VFXRay");
+        _parentRayObj = gameObject;
 
         _attackRayDuration = (int)(_hitCheckDeltaTime / _attackDeltaTime);
 
