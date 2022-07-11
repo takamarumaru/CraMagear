@@ -24,6 +24,19 @@ public class PlayerInputManager : MonoBehaviour
         _actionMapUI = _input.actions.FindActionMap("UI");
     }
 
+    public enum ActionMapTypes
+    {
+        GamePlay,
+        UI
+    }
+
+    //アクションマップの切り替え
+    public void ChangeActionMap(ActionMapTypes ActionMapName)
+    {
+        _input.SwitchCurrentActionMap(ActionMapName.ToString());
+    }
+
+
     //=============================================
     // ゲームプレイ関係
     //=============================================
@@ -47,6 +60,6 @@ public class PlayerInputManager : MonoBehaviour
     public bool GamePlay_GetListSwitchingLeft() => _actionMapGamePlay["ListSwitchingLeft"].WasPerformedThisFrame();
 
 
-    public bool GamePlay_GetButtonMenu() => _actionMapUI["Menu"].WasPerformedThisFrame();
+    public bool GamePlay_GetButtonMenu() => _actionMapGamePlay["Menu"].WasPerformedThisFrame();
 
 }
