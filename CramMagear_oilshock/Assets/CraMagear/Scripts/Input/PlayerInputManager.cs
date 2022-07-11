@@ -24,6 +24,19 @@ public class PlayerInputManager : MonoBehaviour
         _actionMapUI = _input.actions.FindActionMap("UI");
     }
 
+    public enum ActionMapTypes
+    {
+        GamePlay,
+        UI
+    }
+
+    //アクションマップの切り替え
+    public void ChangeActionMap(ActionMapTypes ActionMapName)
+    {
+        _input.SwitchCurrentActionMap(ActionMapName.ToString());
+    }
+
+
     //=============================================
     // ゲームプレイ関係
     //=============================================
