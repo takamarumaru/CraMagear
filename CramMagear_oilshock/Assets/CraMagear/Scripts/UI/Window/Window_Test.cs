@@ -32,14 +32,14 @@ public class Window_Test : MonoBehaviour
 
         _text.text = windowName;
 
-        await UniTask.Delay(1000);
+        await UniTask.Delay(1);
 
         gameObject.SetActive(true);
 
         //_button1.onClick.AddListener(() => { Debug.Log("ƒ{ƒ^ƒ“‚ð‰Ÿ‚µ‚½"); });
 
         _frametTransform.localScale = Vector3.zero;
-        _frametTransform.DOScale(1.0f, 0.5f).SetEase(Ease.OutElastic).SetUpdate(true);
+        await _frametTransform.DOScale(1.0f, 0.5f).SetEase(Ease.OutElastic).SetUpdate(true);
 
         //_frametTransform.position += new Vector3(Random.Range(-5,5), Random.Range(-5, 5),0);
 

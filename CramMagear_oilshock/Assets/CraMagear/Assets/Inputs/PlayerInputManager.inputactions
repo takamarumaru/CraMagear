@@ -260,9 +260,27 @@
             "id": "3323bc8e-a820-4710-b3e4-51cd3fd45cac",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "Menu",
                     "type": "Button",
-                    "id": "5e6a8e10-baaa-4255-87ec-a2c6c1530b63",
+                    "id": "484d5db7-4470-4c59-aa61-48703f74c21c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchingLeft",
+                    "type": "Button",
+                    "id": "b3292976-8760-4f0c-9a91-fccbcace27fc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchingRight",
+                    "type": "Button",
+                    "id": "b18f0264-156d-4c74-a9f5-3dfc50ca768a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -272,12 +290,34 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "5b7f041f-931b-4eeb-ac0e-9a8e9b533df3",
-                    "path": "",
+                    "id": "8e297449-6166-41a9-86a1-44934251600b",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4ed9bb58-e611-48e9-ba92-96db66a2fb91",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchingRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4d101573-ff06-4e16-bbe5-d6145be5b2c3",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchingLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -80,9 +80,9 @@ namespace WindowSystem
         {
             if(PlayerInputManager.Instance.GamePlay_GetButtonMenu())
             {
-                var wnd = await WindowSystem.WinidowManager.Instance.CreateWindow<Window_Test>("TestWindow");
+                var wnd = await WindowSystem.WinidowManager.Instance.CreateWindow<Window_Menu>("MenuWindow");
 
-                await wnd.Initialize("kobedenshi");
+                await wnd.Initialize();
 
                 await wnd.Execute();
             }
