@@ -35,6 +35,8 @@ public class GamePlayInputProvider : InputProvider
 
     //¶Ž²Žæ“¾
     public override Vector2 GetAxisL() => AxisL;
+    //UŒ‚ó‘Ô‚©‚Ç‚¤‚©
+    public override bool GetAttackState() => Attack;
 
     public Vector2 PlayerMoveCameraDirection()
     {

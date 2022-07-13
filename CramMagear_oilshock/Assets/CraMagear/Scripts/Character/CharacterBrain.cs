@@ -13,10 +13,10 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
 
     //[Tooltip("[--性能のパラメータ--]")]
     [Header("[--性能のパラメータ--]")]
-    [Tooltip("速度")] [SerializeField] float _moveSpeed = 1.0f;
-    [Tooltip("重力")] [SerializeField] float _gravity = -9.8f;
-    [Tooltip("減衰")] [SerializeField] float _attenuation = 0.85f;
-    [Tooltip("ジャンプ力")] [SerializeField] float _jumpPower = 4.0f;
+    [Tooltip("速度")][SerializeField] float _moveSpeed = 1.0f;
+    [Tooltip("重力")][SerializeField] float _gravity = -9.8f;
+    [Tooltip("減衰")][SerializeField] float _attenuation = 0.85f;
+    [Tooltip("ジャンプ力")][SerializeField] float _jumpPower = 4.0f;
 
     public OpenCharacterController _charaCtrl;
 
@@ -127,6 +127,14 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
             if (axisL.magnitude > 0.1f)
             {
                 brain._animator.SetBool("IsMoving", true);
+                return;
+            }
+
+            //建築アニメーションステートに遷移
+            if (brain._inputProvider.GetAttackState())
+            {
+                brain._animator.SetBool("IsAttackState", false);
+                return;
             }
 
             //攻撃
@@ -134,6 +142,73 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
             {
                 brain._animator.SetTrigger("DoAttack");
 
+                return;
+            }
+
+            //ジャンプ
+            if (brain._charaCtrl.isGrounded && brain._inputProvider.GetButtonJump())
+            {
+                brain._animator.SetBool("IsJump", true);
+
+                brain._velocity.y += brain._jumpPower;
+            }
+
+            //重力
+            brain._velocity.y += brain._gravity * Time.deltaTime;
+        }
+        public override void OnFixedUpdate()
+        {
+            base.OnFixedUpdate();
+
+            var brain = StateMgr.GetComponentInParent<CharacterBrain>();
+
+            //減衰
+            if (brain._charaCtrl.isGrounded)
+            {
+                brain._velocity *= brain._attenuation;
+            }
+
+        }
+    }
+
+    /// <summary>
+    /// 建築立ち状態クラス
+    /// </summary>
+    [System.Serializable]
+    public class ASArchitectureCreateStand : GameStateMachine.StateNodeBase
+    {
+        public override void OnExit()
+        {
+            base.OnExit();
+            //Debug.Log("Exit");
+        }
+        public override void OnUpdate()
+        {
+            base.OnUpdate();
+            //Debug.Log("Stand");
+
+            //var brain = StateMgr.GetComponentInParent<CharacterBrain>();
+
+            var brain = StateMgr.CharaBrain;
+
+            Vector2 axisL = brain._inputProvider.GetAxisL();
+
+            if (axisL.magnitude > 0.1f)
+            {
+                brain._animator.SetBool("IsMoving", true);
+            }
+
+            if (brain._inputProvider.GetButtonAttack())
+            {
+                brain._animator.SetTrigger("DoAttack");
+
+                return;
+            }
+
+            //攻撃アニメーションステートに遷移
+            if (!brain._inputProvider.GetAttackState())
+            {
+                brain._animator.SetBool("IsAttackState", true);
                 return;
             }
 
@@ -179,13 +254,106 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
 
             var brain = StateMgr.CharaBrain;
 
-            //決定ボタン
             if (brain._inputProvider.GetButtonAttack())
             {
-
                 brain._animator.SetTrigger("DoAttack");
 
                 return;
+            }
+
+            //建築アニメーションステートに遷移
+            if (brain._inputProvider.GetAttackState())
+            {
+                brain._animator.SetBool("IsAttackState", false);
+            }
+
+            Vector2 axisL = brain._inputProvider.GetAxisL();
+            if (axisL.magnitude < 0.1f)
+            {
+                brain._animator.SetBool("IsMoving", false);
+                return;
+            }
+
+            //ジャンプ
+            if (brain._charaCtrl.isGrounded && brain._inputProvider.GetButtonJump())
+            {
+                brain._animator.SetBool("IsJump", true);
+
+                brain._velocity.y += brain._jumpPower;
+                return;
+            }
+
+            brain._animator.SetFloat("MoveSpeed", axisL.magnitude);
+
+            float axisPower = axisL.magnitude;
+
+            Vector3 forward = new Vector3(axisL.x, 0, axisL.y);
+
+            if (brain.transform.name == "PreEnemy")
+            {
+                Debug.Log(forward);
+            }
+
+            //--------------
+            //移動
+            //--------------
+
+            if (brain._charaCtrl.isGrounded)
+            {
+                //速度設定
+                forward *= axisPower * brain._moveSpeed;
+
+                //移動方向をリアル時間に直してメインの移動に代入
+                brain._velocity += forward * Time.deltaTime;
+            }
+
+            //重力
+            brain._velocity.y += brain._gravity * Time.deltaTime;
+
+        }
+
+        //固定フレームレートで動く更新
+        public override void OnFixedUpdate()
+        {
+            base.OnFixedUpdate();
+
+            var brain = StateMgr.GetComponentInParent<CharacterBrain>();
+
+            //減衰
+            if (brain._charaCtrl.isGrounded)
+            {
+                brain._velocity *= brain._attenuation;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 建築歩き状態クラス
+    /// </summary>
+    [System.Serializable]
+    public class ASArchitectureCreateWalk : GameStateMachine.StateNodeBase
+    {
+        public override void OnEnter()
+        {
+            base.OnEnter();
+        }
+        public override void OnUpdate()
+        {
+            base.OnUpdate();
+
+            var brain = StateMgr.CharaBrain;
+
+            if (brain._inputProvider.GetButtonAttack())
+            {
+                brain._animator.SetTrigger("DoAttack");
+
+                return;
+            }
+
+            //攻撃アニメーションステートに遷移
+            if (!brain._inputProvider.GetAttackState())
+            {
+                brain._animator.SetBool("IsAttackState", true);
             }
 
             Vector2 axisL = brain._inputProvider.GetAxisL();
@@ -298,6 +466,18 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
             if (brain._charaCtrl.isGrounded)
             {
                 brain._animator.SetBool("IsJump", false);
+            }
+
+            //建築アニメーションステートに遷移
+            if (brain._inputProvider.GetAttackState())
+            {
+                brain._animator.SetBool("IsAttackState", false);
+                return;
+            }
+            else
+            {
+                brain._animator.SetBool("IsAttackState", true);
+                return;
             }
         }
     }
