@@ -21,6 +21,14 @@ MonoBehaviour:
     m_Address: TestWindow
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 5021f7205e3e3864dbed356398ddf703
+    m_Address: MenuWindow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f380dc7e93f6e49429f79768e29d298c
+    m_Address: TabletWindow_Test
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 29ad999648580d14c8da8e581a598ef6, type: 2}
   m_SchemaSet:
