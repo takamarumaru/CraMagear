@@ -9,6 +9,9 @@ public class InputProvider : MonoBehaviour
     //右軸取得
     public virtual Vector2 GetAxisR() => Vector2.zero;
 
+    //攻撃できるステートかどうかを取得
+    public virtual bool GetAttackState() => false;
+
     //回転
     public virtual Quaternion GetRotation() => Quaternion.identity;
 

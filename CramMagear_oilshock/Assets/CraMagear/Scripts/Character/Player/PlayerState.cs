@@ -37,6 +37,9 @@ public class PlayerStateIdle : GameStateMachine.StateNodeBase
         if (input.GetButtonArchitectureToggle())
         {
             input._architectureCreator.EnableToggle();
+
+            //UŒ‚‚©Œš’z‚Ìî•ñ‚ªCharaBrain‚É•K—v‚È‚½‚ß
+            input.Attack = !input.Attack;
         }
 
         //UŒ‚
@@ -109,6 +112,9 @@ public class PlayerStateWalk : GameStateMachine.StateNodeBase
         if (input.GetButtonArchitectureToggle())
         {
             input._architectureCreator.EnableToggle();
+
+            //UŒ‚‚©Œš’z‚Ìî•ñ‚ªCharaBrain‚É•K—v‚È‚½‚ß
+            input.Attack = !input.Attack;
         }
 
         //Œˆ’èƒ{ƒ^ƒ“
