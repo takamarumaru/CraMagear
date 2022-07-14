@@ -24,15 +24,4 @@ public class MainObjectParameter : MonoBehaviour
         } 
     }
 
-    private void Update()
-    {
-        if (_name != "Enemy")
-        {
-            if (_hp <= 0)
-            {
-                Destroy(gameObject);
-            }
-        }
-    }
-
 }

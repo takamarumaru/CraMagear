@@ -85,10 +85,19 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
 
     bool IDamageApplicable.ApplyDamage(ref DamageParam param)
     {
+        _parameter.hp -= param.DamageValue;
+
         //攻撃食らったアニメーション
         if (_parameter.Name == "Player")
         {
-            _animator.SetTrigger("DoStagger");
+            if (_parameter.hp <= 0)
+            {
+                _animator.SetBool("IsDeath", true);
+            }
+            else
+            {
+                _animator.SetTrigger("DoStagger");
+            }
         }
 
         //電撃を食らっっていたら
@@ -97,7 +106,6 @@ public class CharacterBrain : MonoBehaviour, IDamageApplicable
             _animator.SetBool("IsElectricShock", true);
         }
 
-        _parameter.hp -= param.DamageValue;
         //Debug.Log("Hit" + _parameter.name);
         return true;
     }

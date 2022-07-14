@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class RandomBorn : MonoBehaviour
 {
+
+    [Header("敵を保管するオブジェクト")]
+    [SerializeField] private Transform _enemyClone;
+
     // 生成するプレハブ格納用
     [Header("ランダム生成するキャラ")]
     [SerializeField] GameObject PrefabChara;
@@ -13,7 +17,6 @@ public class RandomBorn : MonoBehaviour
 
     [Header("何秒毎に出現させるか")]
     [SerializeField] float BornTime = 0;
-
     //時間
     float Timer = 0;
 
@@ -40,7 +43,7 @@ public class RandomBorn : MonoBehaviour
             Timer = 0;
 
             // プレハブを生成
-            Instantiate(PrefabChara, pos, Quaternion.identity);
+            Instantiate(PrefabChara, pos, Quaternion.identity,_enemyClone);
         }
     }
 }

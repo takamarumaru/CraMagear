@@ -59,4 +59,10 @@ public class CharacterAnimationEventReceiver : MonoBehaviour
     {
         Destroy(_brain.transform.gameObject);
     }
+
+    //ゲームオーバー
+    public void GameOver()
+    {
+        GameAadministrator.Instance.State = GameAadministrator.GameState.GameOver;
+    }
 }

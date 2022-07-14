@@ -4206,7 +4206,7 @@ PrefabInstance:
     - target: {fileID: 9185066149181967637, guid: 7fc6b76cccf8721478af6f0e8f1afdfb,
         type: 3}
       propertyPath: _sphereSizeGrowTime
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9185066149181967640, guid: 7fc6b76cccf8721478af6f0e8f1afdfb,
         type: 3}
@@ -5659,9 +5659,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _firstPhaseTime: 5
-  _secondPhaseTime: 180
+  _secondPhaseTime: 0
   _randomSpawnInterval: 60
+  _finalEnemySpawnTime: 60
   _enemyCreator: {fileID: 1344828133}
+  _enemyClone: {fileID: 1575150524}
   _clearScene: PreClearScene
   _gameOverScene: PreGameOverScene
 --- !u!4 &681805104 stripped
@@ -11503,7 +11505,7 @@ Transform:
   - {fileID: 1386283788}
   - {fileID: 1500883771}
   m_Father: {fileID: 1765618140}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1361538970
 PrefabInstance:
@@ -12527,6 +12529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4e2b5490c372a84babba81b326d2411, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyClone: {fileID: 1575150524}
   PrefabChara: {fileID: 1520569311852060524}
   RandRange: 4
   BornTime: 10
@@ -13337,6 +13340,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefab: {fileID: 9369300}
+--- !u!1 &1575150523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1575150524}
+  m_Layer: 0
+  m_Name: EnemyClone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1575150524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575150523}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1765618140}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1596345497
 GameObject:
   m_ObjectHideFlags: 0
@@ -14625,6 +14659,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1771569703}
+  - {fileID: 1575150524}
   - {fileID: 1344828133}
   m_Father: {fileID: 0}
   m_RootOrder: 8
@@ -15511,6 +15546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4e2b5490c372a84babba81b326d2411, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyClone: {fileID: 1575150524}
   PrefabChara: {fileID: 1212244657468257950}
   RandRange: 4
   BornTime: 10

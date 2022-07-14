@@ -19,4 +19,12 @@ public class DamageJudgeCastle : MonoBehaviour, IDamageApplicable
         Debug.Log("Hit" + _parameter.name);
         return true;
     }
+
+    private void Update()
+    {
+        if(_parameter.hp <= 0)
+        {
+            GameAadministrator.Instance.State = GameAadministrator.GameState.GameOver;
+        }
+    }
 }
