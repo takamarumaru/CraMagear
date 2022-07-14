@@ -18,21 +18,38 @@ public class GameAadministrator : MonoBehaviour
     GameState _state = GameState.FirstPhase;
     public GameState State { get => _state; set => _state = value; }
 
+    private void Awake()
+    {
+        if (Instance != null)
+        {            
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
+
 
     [Tooltip("Phase1の時間")]
     [SerializeField] private float _firstPhaseTime;
     [Tooltip("Phase2の時間")]
     [SerializeField] private float _secondPhaseTime;
 
-    [Tooltip("Phase2の時間")]
+    [Tooltip("途中のフェーズで敵が湧く頻度")]
     [SerializeField] private int _randomSpawnInterval;
-    private float _randomspawnCount;
+    private float _spawnCount;
+
+    [Tooltip("最後の敵が湧く時間")]
+    [SerializeField] private int _finalEnemySpawnTime;
 
     public float PhaseCount { get; private set; }
     [Tooltip("敵を生成するオブジェクト")]
     [SerializeField] private Transform _enemyCreator;
     private List<Transform> _enemyCreatorList = new();
     private int _enableIdx = 0;
+
+    [Tooltip("敵を保管するオブジェクト")]
+    [SerializeField] private Transform _enemyClone;
+
     public Transform EnableEnemyCreator()
     {
         if(_enemyCreatorList.Count <= _enableIdx)return null;
@@ -97,7 +114,7 @@ public class GameAadministrator : MonoBehaviour
     {
         foreach (Transform enemyCreator in _enemyCreatorList)
         {
-            if (enemyCreator != _enemyCreatorList[_enableIdx])
+            if (_enableIdx < 0 || enemyCreator != _enemyCreatorList[_enableIdx])
             {
                 enemyCreator.GetComponent<VFX_EnemySpawn>().CangeState(VFX_EnemySpawn.GateState.Disappear);
             }
@@ -137,12 +154,12 @@ public class GameAadministrator : MonoBehaviour
     {
 
         //n秒ごとにランダムで敵の出現位置を変更
-        if (_randomspawnCount >= _randomSpawnInterval)
+        if (_spawnCount >= _randomSpawnInterval)
         {
             EnemyRandomSpawn();
-            _randomspawnCount = 0;
+            _spawnCount = 0;
         }
-        _randomspawnCount += Time.deltaTime;
+        _spawnCount += Time.deltaTime;
 
         PhaseCount -= Time.deltaTime;
         if (PhaseCount <= 0.0f)
@@ -158,9 +175,21 @@ public class GameAadministrator : MonoBehaviour
         State = GameState.FinalPhase;
         //全ての場所から敵を出現
         EnemySpawnAllEnable();
+
+        _spawnCount = 0;
+
+        _enableIdx = -1;
     }
     void FinalPhaseUpdate()
     {
-
+        _spawnCount += Time.deltaTime;
+        if (_spawnCount >= _finalEnemySpawnTime)
+        {
+            EnemySpawnAllDisable();
+            if(_enemyClone.childCount == 0)
+            {
+                State = GameState.Clear;
+            }
+        }
     }
 }
