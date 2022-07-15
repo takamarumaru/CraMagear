@@ -5,6 +5,16 @@ using UnityEngine;
 public class CreateAfterSeconds : MonoBehaviour
 {
     [SerializeField] private float _createTime = 1.0f;
+    public float CreateTime
+    {
+        get => _createTime;
+        set
+        {
+            _createTime = value;
+            if(_createTime < 0.0f)_createTime = 0.0f;
+        }
+    }
+
     [SerializeField] private Transform _createObjPrefab;
 
     [SerializeField] private bool _isCreateDestroy=false;
