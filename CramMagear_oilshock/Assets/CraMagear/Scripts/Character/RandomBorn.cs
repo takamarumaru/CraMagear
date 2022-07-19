@@ -10,7 +10,7 @@ public class RandomBorn : MonoBehaviour
 
     // 生成するプレハブ格納用
     [Header("ランダム生成するキャラ")]
-    [SerializeField] GameObject PrefabChara;
+    [SerializeField] List<SpawnEnemyInfo> PrefabCharaList;
 
     [Header("ランダム出現範囲")]
     [SerializeField] float RandRange = 0;
@@ -20,9 +20,18 @@ public class RandomBorn : MonoBehaviour
     //時間
     float Timer = 0;
 
+    [System.Serializable]
+    struct SpawnEnemyInfo
+    {
+        public GameObject prefab;
+        public float probability;
+    }
+
+
     private void Awake()
     {
-        Debug.Assert(PrefabChara != null, "RandomBornにキャラクターが設定されていません。");
+        Debug.Assert(PrefabCharaList != null, "RandomBornにキャラクターが設定されていません。");
+
     }
 
     // Update is called once per frame
@@ -36,14 +45,22 @@ public class RandomBorn : MonoBehaviour
         {
             // プレハブの位置をランダムで設定
             float range = Random.Range(-RandRange, RandRange);
-            
-            Vector3 pos = new Vector3(range+ transform.position.x, transform.position.y, range+ transform.position.z);
+
+            Vector3 pos = new Vector3(range + transform.position.x, transform.position.y, range + transform.position.z);
 
             //時間リセット
             Timer = 0;
 
+            //確率情報のみのリストを作成
+            List<float> prefabIdxList = new List<float>();
+            foreach (var info in PrefabCharaList)
+            {
+                prefabIdxList.Add(info.probability);
+            }
+            //ランダムで取得
+            int randomIdx = RandomEX.GetIndexFromProbabilityList(prefabIdxList);
             // プレハブを生成
-            Instantiate(PrefabChara, pos, Quaternion.identity,_enemyClone);
+            Instantiate(PrefabCharaList[randomIdx].prefab, pos, Quaternion.identity, _enemyClone);
         }
     }
 }
