@@ -50,7 +50,7 @@ Material:
     - _Blend: 0
     - _CastShadows: 0
     - _Cull: 0
-    - _Dissolve: 0.864
+    - _Dissolve: 0.885
     - _DstBlend: 0
     - _NoizePow: 1
     - _NoizeScl: 50
