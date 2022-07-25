@@ -60,6 +60,8 @@ public class ArchitectureCreator : MonoBehaviour
 
     public void Switching(int difference)
     {
+        if (_enable == false) return;
+
         int newIdx = _selectIdx + difference;
         //”ÍˆÍ§ŒÀ
         if (newIdx < 0) newIdx = _createArchitectureList.Count - 1;

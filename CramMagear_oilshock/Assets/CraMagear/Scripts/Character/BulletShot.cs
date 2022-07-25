@@ -53,7 +53,7 @@ public class BulletShot : MonoBehaviour
             Switching(1);
         }
 
-        foreach(CreateBullet bullet in _createBulletList)
+        foreach (CreateBullet bullet in _createBulletList)
         {
             bullet.recastCount += Time.deltaTime;
         }
