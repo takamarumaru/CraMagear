@@ -119,6 +119,19 @@ public class DamageApplicant : MonoBehaviour
 
                         //敵の攻撃にエフェクトつけたら敵が消えたから要改良
                         //Destroy(transform.parent.gameObject);
+
+                        //ダメージを受けた時に光らせる処理
+                        //攻撃を受けた相手の全ての子オブジェクトを取得
+                        foreach (var child in dmgApp.MainObjectParam.gameObject.GetComponentsInChildren<Transform>())
+                        {
+                            //DamageReactionがアタッチされているものだけ
+                            if (child.GetComponent<DamageReaction>())
+                            {
+                                //メッシュを見つける(1つだけなのでbreakする)
+                                child.GetComponent<DamageReaction>().Play();
+                                break;
+                            }
+                        }
                     }
                 }
             }
